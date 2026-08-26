@@ -12,7 +12,7 @@ This repository contains the source code for the hackathon web interface, featur
 
 ## 📂 Project Structure
 
-``text
+```text
 sih1/
  .vscode/
      launch.json         # VS Code debugging configurations
