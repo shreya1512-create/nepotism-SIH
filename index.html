@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-Driven Scheme Matching Platform for Marginalized Entrepreneurs">
+  <title>Sahāy - Scheme Matching Platform</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- React and ReactDOM -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Leaflet JS for Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- Application Script -->
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+
+    // Supabase Initialization (Placeholder for actual URL and Key)
+    const supabaseUrl = 'https://vqkzmandfmnlknvwtywp.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZxa3ptYW5kZm1ubGtudnd0eXdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3MjAxOTksImV4cCI6MjEwMzI5NjE5OX0.YMS_KTmPkUM1739OPiSSWHxRUPI20kr4MAYHEyhpCuk';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Components
+    const Navbar = ({ currentView, setView, session, onLoginClick }) => {
+      const handleLogout = async () => {
+        await supabase.auth.signOut();
+        setView('home');
+      };
+
+      return (
+        <nav className="navbar">
+          <div className="container navbar-content">
+            <div className="logo" onClick={() => setView('home')} style={{ cursor: 'pointer' }}>
+              <i data-lucide="brain-circuit" style={{ width: 28, height: 28, color: "var(--primary)" }}></i>
+              <span>Sahāy <span style={{ fontWeight: 300, color: 'var(--text-muted)' }}>AI</span></span>
+            </div>
+            <div className="nav-links">
+              <a className={`nav-item ${currentView === 'home' ? 'active' : ''}`} onClick={() => setView('home')}>Home</a>
+              <a className={`nav-item ${currentView === 'wizard' ? 'active' : ''}`} onClick={() => setView('wizard')}>Recommender</a>
+              <a className={`nav-item ${currentView === 'schemes' ? 'active' : ''}`} onClick={() => setView('schemes')}>Schemes</a>
+              <a className={`nav-item ${currentView === 'calculator' ? 'active' : ''}`} onClick={() => setView('calculator')}>Calculator</a>
+              <a className={`nav-item ${currentView === 'locator' ? 'active' : ''}`} onClick={() => setView('locator')}>Partner Locator</a>
+            </div>
+            <div className="nav-links" style={{ marginLeft: 'auto' }}>
+              {session ? (
+                <div className="flex items-center gap-4">
+                  <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}><i data-lucide="user" style={{ width: 16, height: 16, display: 'inline-block', verticalAlign: 'middle' }}></i> {session.user.email}</span>
+                  <button className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '0.9rem' }} onClick={handleLogout}>Logout</button>
+                </div>
+              ) : (
+                <button className="btn btn-primary" style={{ padding: '6px 12px', fontSize: '0.9rem' }} onClick={onLoginClick}>Login</button>
+              )}
+            </div>
+          </div>
+        </nav>
+      );
+    };
+
+    const Home = ({ setView }) => (
+      <div className="container hero">
+        <div className="badge badge-primary mb-4 animate-fade-in stagger-1">SIH 26092 Prototype</div>
+        <h1 className="animate-fade-in stagger-2">
+          Empowering Marginalized Entrepreneurs with <span className="text-gradient">AI-Driven Scheme Matching</span>
+        </h1>
+        <p className="animate-fade-in stagger-3">
+          Sahāy bridges the gap between government initiatives and the people who need them most.
+          Use our conversational AI to discover tailored financial assistance and support schemes instantly.
+        </p>
+        <div className="flex gap-4 animate-fade-in stagger-3 justify-center flex-wrap">
+          <button className="btn btn-primary" onClick={() => setView('wizard')}>
+            <i data-lucide="sparkles" style={{ width: 20, height: 20 }}></i>
+            Smart Scheme Recommender
+          </button>
+          <button className="btn btn-outline" onClick={() => setView('calculator')}>
+            <i data-lucide="calculator" style={{ width: 20, height: 20 }}></i>
+            Financial Calculator
+          </button>
+          <button className="btn btn-outline" onClick={() => setView('locator')}>
+            <i data-lucide="map-pin" style={{ width: 20, height: 20 }}></i>
+            Partner Locator
+          </button>
+          <button className="btn btn-primary" onClick={() => setView('ai-mentor')} style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)' }}>
+            <i data-lucide="bot" style={{ width: 20, height: 20 }}></i>
+            AI Business Mentor
+          </button>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4 mt-6 animate-fade-in" style={{ marginTop: '80px' }}>
+          <div className="glass-card text-center">
+            <i data-lucide="message-square" style={{ width: 32, height: 32, color: "var(--primary)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
+            <h3>Conversational AI</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Multilingual wizard that talks to you to determine eligibility without complex forms.</p>
+          </div>
+          <div className="glass-card text-center">
+            <i data-lucide="brain-circuit" style={{ width: 32, height: 32, color: "var(--secondary)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
+            <h3>Hybrid Match Engine</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Rule-based & AI hybrid system ensuring accurate mapping to government schemes.</p>
+          </div>
+          <div className="glass-card text-center">
+            <i data-lucide="map-pin" style={{ width: 32, height: 32, color: "var(--accent)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
+            <h3>Partner Locator</h3>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Geo-spatial tagging to find nearby NGOs and CSCs for immediate assistance.</p>
+          </div>
+        </div>
+      </div>
+    );
+
+    const Wizard = ({ setView, formData, setFormData }) => {
+      const [step, setStep] = useState(1);
+      const [otpSent, setOtpSent] = useState(false);
+      const [otpInput, setOtpInput] = useState('');
+
+      const sendOtp = () => {
+        if (formData.phone && formData.phone.length >= 10) {
+          setOtpSent(true);
+          alert("Demo Mode: Your OTP is 1234");
+        } else {
+          alert("Please enter a valid 10-digit phone number.");
+        }
+      };
+
+      const verifyOtp = () => {
+        if (otpInput === '1234') {
+          setFormData({ ...formData, isVerified: true });
+          setOtpSent(false);
+        } else {
+          alert("Invalid OTP! Try 1234.");
+        }
+      };
+
+      const handleNext = async (e) => {
+        e.preventDefault();
+        if (step === 1) {
+          if (!formData.isVerified) {
+            alert("Please verify your phone number before proceeding.");
+            return;
+          }
+          setStep(2);
+        }
+        else {
+          try {
+            await supabase.from('user_profiles').insert([{
+              name: formData.name,
+              phone: formData.phone,
+              age: parseInt(formData.age) || null,
+              gender: formData.gender,
+              category: formData.category,
+              loan_type: formData.loanType,
+              income: parseFloat(formData.income) || null,
+              cost: parseFloat(formData.cost) || null
+            }]);
+          } catch (err) {
+            console.error("Error saving profile", err);
+          }
+          setView('schemes');
+        }
+      };
+
+      const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      };
+
+      return (
+        <div className="container">
+          <div className="wizard-container glass animate-fade-in" style={{ padding: '32px', maxWidth: '600px' }}>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="flex items-center gap-2 m-0" style={{ margin: 0 }}>
+                <i data-lucide="file-search" style={{ color: "var(--primary)" }}></i>
+                Application Form
+              </h2>
+              <div className="badge badge-primary">Step {step} of 2</div>
+            </div>
+
+            <form onSubmit={handleNext}>
+              {step === 1 && (
+                <div className="animate-fade-in">
+                  <div className="input-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" className="chat-input" value={formData.name} onChange={handleChange} required />
+                  </div>
+
+                  <div className="input-group mt-2">
+                    <label>Phone Number</label>
+                    <div className="flex gap-2">
+                      <input type="tel" name="phone" className="chat-input" style={{ flex: 1 }} value={formData.phone} onChange={handleChange} required disabled={formData.isVerified} placeholder="10-digit number" />
+                      {!formData.isVerified && !otpSent && (
+                        <button type="button" className="btn btn-primary" onClick={sendOtp}>Send OTP</button>
+                      )}
+                      {formData.isVerified && (
+                        <div className="badge badge-success flex items-center gap-1" style={{ padding: '0 16px' }}>
+                          <i data-lucide="check-circle" style={{ width: 16, height: 16 }}></i> Verified
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {otpSent && !formData.isVerified && (
+                    <div className="input-group mt-2 p-4 glass-card" style={{ borderColor: 'var(--primary)' }}>
+                      <label style={{ color: 'var(--primary)' }}>Enter OTP (Demo: 1234)</label>
+                      <div className="flex gap-2 mt-2">
+                        <input type="text" className="chat-input" style={{ flex: 1 }} value={otpInput} onChange={e => setOtpInput(e.target.value)} placeholder="4-digit OTP" />
+                        <button type="button" className="btn btn-outline" onClick={verifyOtp}>Verify</button>
+                      </div>
+                    </div>
+                  )}
+                  <div className="grid grid-cols-2 gap-4 mt-2">
+                    <div className="input-group">
+                      <label>Age</label>
+                      <input type="number" name="age" className="chat-input" value={formData.age} onChange={handleChange} min="0" required />
+                    </div>
+                    <div className="input-group">
+                      <label>Gender</label>
+                      <select name="gender" className="chat-input" value={formData.gender} onChange={handleChange}>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mt-2 mb-6">
+                    <div className="input-group">
+                      <label>Social Category</label>
+                      <select name="category" className="chat-input" value={formData.category} onChange={handleChange}>
+                        <option>SC</option>
+                        <option>ST</option>
+                        <option>OBC</option>
+                        <option>General</option>
+                      </select>
+                    </div>
+                    <div className="input-group">
+                      <label>Requirement Type</label>
+                      <select name="loanType" className="chat-input" value={formData.loanType} onChange={handleChange}>
+                        <option>Business Loan</option>
+                        <option>Education Loan</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+                    Next Step <i data-lucide="chevron-right" style={{ width: 18, height: 18 }}></i>
+                  </button>
+                </div>
+              )}
+
+              {step === 2 && (
+                <div className="animate-fade-in">
+                  <div className="input-group mt-2">
+                    <label>Annual Family Income (₹)</label>
+                    <input type="number" name="income" className="chat-input" value={formData.income} onChange={handleChange} min="0" required />
+                  </div>
+
+                  <div className="input-group mt-2 mb-6">
+                    <label>Estimated Project/Education Cost (₹)</label>
+                    <input type="number" name="cost" className="chat-input" value={formData.cost} onChange={handleChange} min="0" required />
+                  </div>
+
+                  <div className="flex gap-4">
+                    <button type="button" className="btn btn-outline" onClick={() => setStep(1)} style={{ flex: 1 }}>
+                      Back
+                    </button>
+                    <button type="submit" className="btn btn-primary" style={{ flex: 2 }}>
+                      <i data-lucide="sparkles" style={{ width: 18, height: 18 }}></i> Find Schemes
+                    </button>
+                  </div>
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
+      );
+    };
+
+    const Schemes = ({ setView, formData }) => {
+      const [schemes, setSchemes] = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [selectedScheme, setSelectedScheme] = useState(null);
+
+      useEffect(() => {
+        let query = supabase.from('schemes').select('*');
+
+        // Strict match engine
+        if (formData.category !== 'General') {
+          query = query.or(`target_category.eq.${formData.category},target_category.eq.ALL`);
+        } else {
+          query = query.eq('target_category', 'ALL');
+        }
+
+        if (formData.loanType) {
+          query = query.eq('loan_type', formData.loanType);
+        }
+
+        query.then(({ data, error }) => {
+          setSchemes(data || []);
+          setLoading(false);
+        });
+      }, [formData]);
+
+      useEffect(() => {
+        if (window.lucide && selectedScheme) {
+          window.lucide.createIcons();
+        }
+      }, [selectedScheme]);
+
+      if (loading) {
+        return <div className="container text-center mt-6">Loading schemes...</div>;
+      }
+
+      return (
+        <div className="container animate-fade-in" style={{ paddingTop: '40px' }}>
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <button className="btn btn-outline mb-4" onClick={() => setView('wizard')} style={{ padding: '6px 12px', fontSize: '0.85rem' }}>
+                &larr; Back to Profile
+              </button>
+              <h2>Matched Schemes</h2>
+              <p style={{ color: 'var(--text-muted)' }}>Based on your exact profile, here are the strictly matched schemes.</p>
+            </div>
+            <div className="badge badge-success flex items-center gap-2" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>
+              <i data-lucide="check-circle" style={{ width: 16, height: 16 }}></i> {schemes.length} Found
+            </div>
+          </div>
+
+          {schemes.length === 0 ? (
+            <div className="glass-card text-center" style={{ padding: '40px' }}>
+              <h3>No perfect matches found</h3>
+              <p style={{ color: 'var(--text-muted)' }}>Try adjusting your category or requirement type in your profile.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-4">
+              {schemes.map((scheme, idx) => (
+                <div key={scheme.id} className={`glass-card stagger-${(idx % 3) + 1} animate-fade-in`} style={{ position: 'relative', overflow: 'hidden' }}>
+                  <div style={{
+                    position: 'absolute', top: 0, right: 0,
+                    background: 'linear-gradient(135deg, var(--success), #059669)',
+                    color: 'white', padding: '4px 12px',
+                    borderBottomLeftRadius: '12px', fontWeight: 'bold', fontSize: '0.8rem'
+                  }}>
+                    Eligible
+                  </div>
+                  <h3 className="mt-2">{scheme.name}</h3>
+                  <p className="mb-4 mt-2" style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{scheme.description}</p>
+                  <div className="flex gap-2 mb-4 flex-wrap">
+                    {scheme.tags && scheme.tags.map(tag => (
+                      <span key={tag} className="badge badge-primary">{tag}</span>
+                    ))}
+                  </div>
+                  <button className="btn btn-outline" style={{ width: '100%' }} onClick={() => setSelectedScheme(scheme)}>
+                    View Details & Apply <i data-lucide="chevron-right" style={{ width: 16, height: 16 }}></i>
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {selectedScheme && (
+            <div className="modal-overlay" onClick={() => setSelectedScheme(null)}>
+              <div className="modal-content" onClick={e => e.stopPropagation()}>
+                <button className="modal-close" onClick={() => setSelectedScheme(null)}>
+                  <i data-lucide="x" style={{ width: 24, height: 24 }}></i>
+                </button>
+                <h2 style={{ paddingRight: '32px', marginBottom: '8px' }}>{selectedScheme.name}</h2>
+                <div className="flex gap-2 mb-4 flex-wrap">
+                  {selectedScheme.tags && selectedScheme.tags.map(tag => (
+                    <span key={tag} className="badge badge-primary">{tag}</span>
+                  ))}
+                </div>
+
+                <div className="detail-section">
+                  <h4><i data-lucide="clipboard-list" style={{ width: 18, height: 18 }}></i> Eligibility Criteria</h4>
+                  <p style={{ color: 'var(--text-muted)' }}>{selectedScheme.criteria || selectedScheme.description}</p>
+                </div>
+
+                <div className="detail-section">
+                  <h4><i data-lucide="trending-up" style={{ width: 18, height: 18, color: 'var(--success)' }}></i> Benefits</h4>
+                  <p style={{ color: 'var(--text-muted)' }}>{selectedScheme.benefits || 'Standard concessional rates apply.'}</p>
+                </div>
+
+                <div className="detail-section">
+                  <h4><i data-lucide="alert-circle" style={{ width: 18, height: 18, color: 'var(--warning)' }}></i> Considerations</h4>
+                  <p style={{ color: 'var(--text-muted)' }}>{selectedScheme.disadvantages || 'Funding subject to agency availability.'}</p>
+                </div>
+
+                <div className="detail-section" style={{ background: 'rgba(99, 102, 241, 0.05)', padding: '16px', borderRadius: '8px', border: '1px dashed var(--primary)' }}>
+                  <h4><i data-lucide="file-check" style={{ width: 18, height: 18, color: 'var(--primary)' }}></i> Documents Required (Things to Carry)</h4>
+                  <ul style={{ color: 'var(--text-muted)', margin: '8px 0 0 24px', padding: 0, fontSize: '0.9rem' }}>
+                    <li>Aadhaar Card and PAN Card</li>
+                    <li>Valid Caste Certificate (SC/ST/OBC)</li>
+                    <li>Income Certificate (if applicable)</li>
+                    <li>Detailed Project Report (DPR) or Business Plan</li>
+                    <li>Last 6 months Bank Account Statements</li>
+                  </ul>
+                </div>
+
+                <div style={{ marginTop: '32px', borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
+                  <a href={selectedScheme.apply_link || '#'} target="_blank" className="btn btn-primary" style={{ width: '100%', textDecoration: 'none' }}>
+                    Apply Now on Official Portal <i data-lucide="external-link" style={{ width: 18, height: 18 }}></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const LoanCalculator = () => {
+      const [amount, setAmount] = useState(100000);
+      const [rate, setRate] = useState(6.5); // Concessional rate
+      const [tenure, setTenure] = useState(60); // Months
+      const [emi, setEmi] = useState(0);
+
+      useEffect(() => {
+        // EMI Formula: E = P x R x (1+R)^N / [(1+R)^N-1]
+        const p = parseFloat(amount);
+        const r = parseFloat(rate) / 12 / 100;
+        const n = parseFloat(tenure);
+
+        if (p && r && n) {
+          const e = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+          setEmi(e.toFixed(2));
+        } else {
+          setEmi(0);
+        }
+      }, [amount, rate, tenure]);
+
+      return (
+        <div className="container animate-fade-in" style={{ paddingTop: '40px', maxWidth: '800px' }}>
+          <h2 className="mb-2 flex items-center gap-2">
+            <i data-lucide="calculator" style={{ color: "var(--secondary)" }}></i>
+            Financial Calculator
+          </h2>
+          <p className="mb-6" style={{ color: 'var(--text-muted)' }}>Calculate projected EMIs accounting for specific scheme guidelines (e.g. concessional rates 6.5% - 8%).</p>
+
+          <div className="glass-card grid grid-cols-2 gap-4">
+            <div>
+              <div className="input-group">
+                <label>Loan Amount (₹)</label>
+                <input type="number" className="chat-input" value={amount} onChange={e => setAmount(e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Interest Rate (%) - *Concessional*</label>
+                <input type="number" step="0.1" className="chat-input" value={rate} onChange={e => setRate(e.target.value)} />
+              </div>
+              <div className="input-group">
+                <label>Tenure (Months)</label>
+                <input type="number" className="chat-input" value={tenure} onChange={e => setTenure(e.target.value)} />
+              </div>
+            </div>
+
+            <div className="glass flex flex-col justify-center items-center" style={{ padding: '24px', borderRadius: '12px', background: 'rgba(99, 102, 241, 0.1)' }}>
+              <h3 style={{ color: 'var(--text-muted)', marginBottom: '8px' }}>Estimated Monthly EMI</h3>
+              <h1 className="text-gradient" style={{ fontSize: '3rem' }}>₹{emi}</h1>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '16px' }}>Total Amount Payable: ₹{(emi * tenure).toFixed(2)}</p>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Total Interest: ₹{((emi * tenure) - amount).toFixed(2)}</p>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+      const R = 6371; // km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = 0.5 - Math.cos(dLat) / 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * (1 - Math.cos(dLon)) / 2;
+      return R * 2 * Math.asin(Math.sqrt(a));
+    };
+
+    const LeafletMap = ({ userLoc, partners }) => {
+      const mapRef = useRef(null);
+
+      useEffect(() => {
+        if (!window.L || !mapRef.current || !userLoc) return;
+
+        // Clear previous map if exists
+        if (mapRef.current._leaflet_id) {
+          mapRef.current.innerHTML = "";
+          mapRef.current._leaflet_id = null;
+        }
+
+        const map = window.L.map(mapRef.current).setView([userLoc.lat, userLoc.lng], 5);
+
+        // Google Maps Tile Layer
+        window.L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+          maxZoom: 20,
+          subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        }).addTo(map);
+
+        // User Marker
+        const userIcon = window.L.icon({
+          iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41]
+        });
+        window.L.marker([userLoc.lat, userLoc.lng], { icon: userIcon }).addTo(map)
+          .bindPopup("<b>Your Location</b>").openPopup();
+
+        // Partner Markers
+        const partnerIcon = window.L.icon({
+          iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41]
+        });
+
+        partners.forEach(p => {
+          if (p.lat && p.lng) {
+            window.L.marker([p.lat, p.lng], { icon: partnerIcon }).addTo(map)
+              .bindPopup(`<b>${p.name}</b><br/>${p.distance} away<br/>${p.type}`);
+          }
+        });
+
+        if (partners.length > 0) {
+          const bounds = window.L.latLngBounds([userLoc.lat, userLoc.lng]);
+          partners.forEach(p => {
+            if (p.lat && p.lng) bounds.extend([p.lat, p.lng]);
+          });
+          map.fitBounds(bounds, { padding: [50, 50] });
+        }
+
+        return () => map.remove();
+      }, [userLoc, partners]);
+
+      return <div ref={mapRef} style={{ width: '100%', height: '100%' }} />;
+    };
+
+    const PartnerLocator = () => {
+      const [allPartners, setAllPartners] = useState([]);
+      const [displayedPartners, setDisplayedPartners] = useState([]);
+      const [userLoc, setUserLoc] = useState(null);
+      const [locating, setLocating] = useState(false);
+
+      useEffect(() => {
+        supabase.from('channel_partners').select('*').then(({ data }) => setAllPartners(data || []));
+      }, []);
+
+      const handleLocate = () => {
+        setLocating(true);
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+            setUserLoc({ lat: latitude, lng: longitude });
+            setLocating(false);
+            // Simulate local branches near the user's actual location
+            if (allPartners.length > 0) {
+              const updated = allPartners
+                .map(p => {
+                  const simulatedLat = latitude + (Math.random() - 0.5) * 0.1;
+                  const simulatedLng = longitude + (Math.random() - 0.5) * 0.1;
+                  return {
+                    ...p,
+                    name: p.name.includes('Branch') || p.name.includes('Local') ? p.name : p.name + ' (Local Branch)',
+                    lat: simulatedLat,
+                    lng: simulatedLng,
+                    distance: calculateDistance(latitude, longitude, simulatedLat, simulatedLng).toFixed(1) + ' km'
+                  };
+                })
+                .sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+              setDisplayedPartners(updated);
+            }
+          }, (err) => {
+            console.error(err);
+            alert("Location access denied or failed.");
+            setLocating(false);
+          });
+        } else {
+          alert("Geolocation is not supported by your browser.");
+          setLocating(false);
+        }
+      };
+
+      return (
+        <div className="container animate-fade-in" style={{ paddingTop: '40px' }}>
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h2 className="flex items-center gap-2 m-0">
+                <i data-lucide="map-pin" style={{ color: "var(--accent)" }}></i>
+                Geo-Spatial Partner Locator
+              </h2>
+              <p style={{ color: 'var(--text-muted)' }}>Identify the nearest eligible Channel Partner (SCA/Bank/NBFC-MFI) to route your application.</p>
+            </div>
+            <button className="btn btn-primary" onClick={handleLocate} disabled={locating}>
+              <i data-lucide="navigation" style={{ width: 18, height: 18 }}></i> {locating ? 'Locating...' : 'Locate Me'}
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="glass-card" style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, overflow: 'hidden' }}>
+              {userLoc ? (
+                <LeafletMap userLoc={userLoc} partners={displayedPartners} />
+              ) : (
+                <div style={{ textAlign: 'center', padding: '20px' }}>
+                  <i data-lucide="map" style={{ width: 48, height: 48, color: 'var(--text-muted)', margin: '0 auto 16px', display: 'block' }}></i>
+                  <p style={{ color: 'var(--text-muted)' }}>Click "Locate Me" to view the live interactive map.</p>
+                </div>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {displayedPartners.map((p, idx) => (
+                <div key={idx} className={`glass-card stagger-${idx + 1} animate-fade-in`} style={{ padding: '16px' }}>
+                  <div className="flex justify-between items-center">
+                    <h3>{p.name}</h3>
+                    <span className="badge badge-primary">{p.distance}</span>
+                  </div>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '4px 0' }}>{p.type}</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: p.status === 'Optimal' ? 'var(--success)' : 'var(--warning)' }}></div>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Fund Status: {p.status}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const AiMentor = ({ setView }) => {
+      const [chatHistory, setChatHistory] = useState([
+        { role: 'model', text: 'Hello! I am your AI Business Mentor. Feel free to ask me any questions about your business or government schemes.' }
+      ]);
+      const [input, setInput] = useState('');
+      const [isLoading, setIsLoading] = useState(false);
+      const chatEndRef = useRef(null);
+
+      const handleSend = () => {
+        if (!input.trim()) return;
+
+        const userMsg = input;
+        setInput('');
+        setChatHistory(prev => [...prev, { role: 'user', text: userMsg }]);
+        setIsLoading(true);
+
+        setTimeout(() => {
+          let aiResponse = "I'm a basic assistant. I can help you with schemes like Stand-Up India, Mudra Yojana, or NSFDC loans. What would you like to know?";
+          const lowerInput = userMsg.toLowerCase();
+
+          if (lowerInput.includes('stand') || lowerInput.includes('up')) {
+            aiResponse = "The Stand-Up India scheme facilitates bank loans between ₹10 Lakh and ₹1 Crore to at least one SC/ST borrower and one woman borrower per bank branch for setting up a greenfield enterprise.";
+          } else if (lowerInput.includes('mudra') || lowerInput.includes('pmmy')) {
+            aiResponse = "Pradhan Mantri Mudra Yojana (PMMY) provides loans up to ₹10 Lakhs to non-corporate, non-farm small/micro enterprises. It has three categories: Shishu (up to 50k), Kishor (50k-5L), and Tarun (5L-10L).";
+          } else if (lowerInput.includes('nsfdc')) {
+            aiResponse = "NSFDC provides financial assistance at concessional interest rates for income-generating activities to SC families whose annual income is up to ₹3.00 Lakh.";
+          } else if (lowerInput.includes('nbcfdc') || lowerInput.includes('obc') || lowerInput.includes('backward')) {
+            aiResponse = "For Backward Classes (OBC), NBCFDC offers the Micro Finance Scheme (loans up to ₹1.25L at 5% p.a.) and the Mahila Samriddhi Yojana (loans for women up to ₹1.25L at 4% p.a.). Ensure your annual family income is below ₹3.00 Lakhs.";
+          } else if (lowerInput.includes('education') || lowerInput.includes('study') || lowerInput.includes('overseas') || lowerInput.includes('college')) {
+            aiResponse = "For education, consider the Central Sector Interest Subsidy (CSIS) for studies in India. For OBC students studying abroad, the Dr. Ambedkar Central Sector Scheme provides a 100% interest subsidy on overseas education loans.";
+          } else if (lowerInput.includes('women') || lowerInput.includes('mahila') || lowerInput.includes('female')) {
+            aiResponse = "Women entrepreneurs have exclusive schemes like the NBCFDC Mahila Samriddhi Yojana (up to ₹1.25L at 4% interest for OBC women) and the Stand-Up India scheme for greenfield ventures.";
+          } else if (lowerInput.includes('hello') || lowerInput.includes('hi')) {
+            aiResponse = "Hello there! How can I assist you with finding the right government scheme for your business or education today?";
+          }
+
+          setChatHistory(prev => [...prev, { role: 'model', text: aiResponse }]);
+          setIsLoading(false);
+        }, 800);
+      };
+
+      useEffect(() => {
+        if (window.lucide) window.lucide.createIcons();
+        chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, [chatHistory]);
+
+      return (
+        <div className="container animate-fade-in" style={{ paddingTop: '40px', paddingBottom: '40px', maxWidth: '800px' }}>
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h2 className="flex items-center gap-2 m-0"><i data-lucide="bot" style={{ color: '#f59e0b', width: 28, height: 28 }}></i> Live AI Mentor (Gemini)</h2>
+              <p style={{ color: 'var(--text-muted)' }}>Chat directly with Google Gemini 1.5 Flash for business advice.</p>
+            </div>
+          </div>
+
+
+
+          <div className="glass-card" style={{ height: '500px', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {chatHistory.map((msg, idx) => (
+                <div key={idx} style={{
+                  alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                  background: msg.role === 'user' ? 'var(--primary)' : 'rgba(245, 158, 11, 0.1)',
+                  color: msg.role === 'user' ? '#fff' : 'var(--text-main)',
+                  padding: '12px 16px',
+                  borderRadius: '12px',
+                  border: msg.role === 'model' ? '1px solid rgba(245, 158, 11, 0.3)' : 'none',
+                  maxWidth: '80%',
+                  lineHeight: '1.5',
+                  whiteSpace: 'pre-wrap'
+                }}>
+                  {msg.text}
+                </div>
+              ))}
+              {isLoading && (
+                <div style={{ alignSelf: 'flex-start', color: '#f59e0b', padding: '12px' }}>
+                  <span style={{ animation: 'blink 1s infinite' }}>Assistant is typing...</span>
+                </div>
+              )}
+              <div ref={chatEndRef} />
+            </div>
+
+            <div style={{ padding: '16px', borderTop: '1px solid var(--border)', display: 'flex', gap: '12px' }}>
+              <input
+                type="text"
+                className="chat-input"
+                style={{ flex: 1, margin: 0 }}
+                placeholder="Ask about scheme criteria, business ideas..."
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleSend()}
+                disabled={isLoading}
+              />
+              <button className="btn btn-primary" onClick={handleSend} disabled={isLoading}>
+                <i data-lucide="send" style={{ width: 18, height: 18 }}></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const AuthModal = ({ onClose, onLoginSuccess }) => {
+      const [isSignUp, setIsSignUp] = useState(false);
+      const [email, setEmail] = useState('');
+      const [password, setPassword] = useState('');
+      const [loading, setLoading] = useState(false);
+      const [error, setError] = useState('');
+      const [message, setMessage] = useState('');
+
+      const handleAuth = async () => {
+        setLoading(true);
+        setError('');
+        setMessage('');
+
+        if (isSignUp) {
+          const { data, error } = await supabase.auth.signUp({ email, password });
+          if (error) {
+            setError(error.message);
+          } else {
+            setMessage('Sign up successful! Please check your email to verify your account if required.');
+            if (data.session) onLoginSuccess(data.session);
+          }
+        } else {
+          const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+          if (error) {
+            setError(error.message);
+          } else {
+            onLoginSuccess(data.session);
+          }
+        }
+        setLoading(false);
+      };
+
+      return (
+        <div className="modal-overlay" onClick={onClose}>
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '400px', textAlign: 'center' }}>
+            <button className="modal-close" onClick={onClose}>
+              <i data-lucide="x" style={{ width: 24, height: 24 }}></i>
+            </button>
+            <h2 style={{ marginBottom: '16px' }}>{isSignUp ? 'Create an Account' : 'Login to Sahāy'}</h2>
+            <i data-lucide="shield-check" style={{ width: 48, height: 48, color: 'var(--primary)', margin: '0 auto 16px', display: 'block' }}></i>
+
+            {error && <div style={{ color: '#ef4444', marginBottom: '16px', fontSize: '0.9rem' }}>{error}</div>}
+            {message && <div style={{ color: 'var(--success)', marginBottom: '16px', fontSize: '0.9rem' }}>{message}</div>}
+
+            <div>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '16px' }}>
+                {isSignUp ? 'Enter your email and password to register.' : 'Enter your email and password to access personalized features.'}
+              </p>
+              <input type="email" className="chat-input" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)} style={{ width: '100%', marginBottom: '12px' }} />
+              <input type="password" className="chat-input" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} style={{ width: '100%', marginBottom: '16px' }} />
+
+              <button className="btn btn-primary" style={{ width: '100%', marginBottom: '16px' }} onClick={handleAuth} disabled={loading || !email || !password}>
+                {loading ? 'Processing...' : (isSignUp ? 'Sign Up' : 'Log In')}
+              </button>
+
+              <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
+                <span style={{ color: 'var(--primary)', cursor: 'pointer', textDecoration: 'underline' }} onClick={() => { setIsSignUp(!isSignUp); setError(''); setMessage(''); }}>
+                  {isSignUp ? 'Log In' : 'Sign Up'}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const App = () => {
+      const [currentView, setView] = useState('home');
+      const [session, setSession] = useState(null);
+      const [showAuthModal, setShowAuthModal] = useState(false);
+      const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        isVerified: false,
+        age: '',
+        gender: 'Male',
+        category: 'SC',
+        loanType: 'Business Loan',
+        income: '',
+        cost: ''
+      });
+
+      useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+          setSession(session);
+        });
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+          setSession(session);
+        });
+
+        return () => subscription.unsubscribe();
+      }, []);
+
+      useEffect(() => {
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      }, [currentView, formData, showAuthModal, session]);
+
+      const handleProtectedView = (viewName) => {
+        if (!session && (viewName === 'wizard' || viewName === 'ai-mentor')) {
+          setShowAuthModal(true);
+        } else {
+          setView(viewName);
+        }
+      };
+
+      return (
+        <>
+          <Navbar currentView={currentView} setView={handleProtectedView} session={session} onLoginClick={() => setShowAuthModal(true)} />
+          <main>
+            {currentView === 'home' && <Home setView={handleProtectedView} />}
+            {currentView === 'wizard' && <Wizard setView={handleProtectedView} formData={formData} setFormData={setFormData} />}
+            {currentView === 'schemes' && <Schemes setView={handleProtectedView} formData={formData} />}
+            {currentView === 'calculator' && <LoanCalculator />}
+            {currentView === 'locator' && <PartnerLocator />}
+            {currentView === 'ai-mentor' && <AiMentor setView={handleProtectedView} />}
+          </main>
+
+          {showAuthModal && (
+            <AuthModal
+              onClose={() => setShowAuthModal(false)}
+              onLoginSuccess={(session) => {
+                setShowAuthModal(false);
+              }}
+            />
+          )}
+        </>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+
+  </script>
+</body>
+
+</html>
