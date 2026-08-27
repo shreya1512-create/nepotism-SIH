@@ -17,11 +17,12 @@ Dynamic Financial Calculator: Generates accurate EMI, interest, and moratorium b
 Geo-Spatial Partner Locator: Maps and routes users to the nearest eligible Channel Partner (Bank/SCA/NBFC) based on real-time location and fund availability.
 
 ## 🛠️ Tech Stack
-ComponentTechnologies Used
-Frontend - React / Next.js, Tailwind CSS
-Backend - Node.js / Express / Python
-Database - Supabase (PostgreSQL)
-Hosting - Vercel
+| Component | Technologies Used |
+| :--- | :--- |
+| **Frontend** | React / Next.js, Tailwind CSS |
+| **Backend** | Node.js / Express / Python |
+| **Database** | Supabase (PostgreSQL) |
+| **Hosting** | Vercel |
 
 👥 Team Members
 
