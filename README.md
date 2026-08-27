@@ -1,5 +1,6 @@
 #Team Nepotism
-📌 Problem & Solution
+
+*📌 Problem & Solution
 
 * **The Problem:** Eligible SC beneficiaries struggle to identify suitable concessional loan schemes and locate the correct local Channel Partner among over 100 options, causing application delays and misrouted funds. **Sahay AI** solves this with a multi-lingual platform featuring smart scheme recommendations, instant EMI calculations, and geo-spatial partner routing to streamline financial aid.
 * **Our Solution:** **Sahay AI** eliminates manual fragmentation and application delays through an integrated, three-pillar workflow:
