@@ -19,9 +19,9 @@ Geo-Spatial Partner Locator: Maps and routes users to the nearest eligible Chann
 ## 🛠️ Tech Stack
 | Component | Technologies Used |
 | :--- | :--- |
-| **Frontend** | React / Next.js, Tailwind CSS |
-| **Backend** | Node.js / Express / Python |
-| **Database** | Supabase (PostgreSQL) |
+| **Frontend** | React / VanillaCSS3 / HTML5 |
+| **Backend** | Supabase - APIs, Authentication, Real-time Web sockets |
+| **Database** | PostgreSQL |
 | **Hosting** | Vercel |
 
 👥 Team Members
