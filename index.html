@@ -1288,10 +1288,22 @@ out center 15;`;
     };
 
     const App = () => {
-      const [currentView, setView] = useState('home');
+      const getInitialState = (key, defaultValue) => {
+        const saved = localStorage.getItem(key);
+        if (saved) {
+          try {
+            return JSON.parse(saved);
+          } catch (e) {
+            return defaultValue;
+          }
+        }
+        return defaultValue;
+      };
+
+      const [currentView, setView] = useState(() => getInitialState('sahay_currentView', 'home'));
       const [session, setSession] = useState(null);
       const [showAuthModal, setShowAuthModal] = useState(false);
-      const [formData, setFormData] = useState({
+      const [formData, setFormData] = useState(() => getInitialState('sahay_formData', {
         name: '',
         phone: '',
         isVerified: false,
@@ -1301,7 +1313,15 @@ out center 15;`;
         loanType: 'Business Loan',
         income: '',
         cost: ''
-      });
+      }));
+
+      useEffect(() => {
+        localStorage.setItem('sahay_currentView', JSON.stringify(currentView));
+      }, [currentView]);
+
+      useEffect(() => {
+        localStorage.setItem('sahay_formData', JSON.stringify(formData));
+      }, [formData]);
 
       useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
