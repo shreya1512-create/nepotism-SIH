@@ -145,7 +145,7 @@
                     </span>
                   </span>
                   {showEmail && (
-                    <div className="glass-card" style={{ position: 'absolute', top: '100%', right: '50%', transform: 'translateX(50%)', padding: '10px 16px', zIndex: 100, display: 'flex', alignItems: 'center', boxShadow: '0 8px 20px rgba(0,0,0,0.15)', border: '1px solid var(--border)', whiteSpace: 'nowrap' }}>
+                    <div className="glass-card animate-fade-in" style={{ position: 'absolute', top: '100%', right: '0', marginTop: '8px', padding: '10px 16px', zIndex: 100, display: 'flex', alignItems: 'center', boxShadow: '0 8px 20px rgba(0,0,0,0.15)', border: '1px solid var(--border)', whiteSpace: 'nowrap' }}>
                       <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--text-main)' }}>{session.user.email}</span>
                     </div>
                   )}
@@ -209,9 +209,24 @@
     );
 
     const Wizard = ({ setView, formData, setFormData, session }) => {
-      const [step, setStep] = useState(1);
+      const getInitialStep = () => {
+        const saved = localStorage.getItem('sahay_wizardStep');
+        if (saved) return parseInt(saved) || 1;
+        return 1;
+      };
+
+      const [step, setStep] = useState(getInitialStep);
+
+      useEffect(() => {
+        localStorage.setItem('sahay_wizardStep', step.toString());
+      }, [step]);
       const [otpSent, setOtpSent] = useState(false);
       const [otpInput, setOtpInput] = useState('');
+      const [showHistory, setShowHistory] = useState(false);
+      const [history, setHistory] = useState(() => {
+        const saved = localStorage.getItem('sahay_history');
+        return saved ? JSON.parse(saved) : [];
+      });
 
       const sendOtp = () => {
         const phoneRegex = /^[0-9]{10}$/;
@@ -245,7 +260,7 @@
           let rawIncome = parseFloat(formData.income) || 0;
           // Auto-scale if user typed something like "10" for 10 lakhs or "105" for 1.05 crore
           if (rawIncome > 0 && rawIncome < 1000) rawIncome *= 100000;
-          
+
           if (rawIncome > 10000000) {
             alert("Sorry, This site is not for you");
             return;
@@ -265,7 +280,13 @@
           } catch (err) {
             console.error("Error saving profile", err);
           }
+
+          const newHistory = [formData, ...history.filter(h => h.phone !== formData.phone)].slice(0, 5);
+          setHistory(newHistory);
+          localStorage.setItem('sahay_history', JSON.stringify(newHistory));
+
           setView('schemes');
+          setStep(1); // Reset step after successful submission
         }
       };
 
@@ -276,13 +297,47 @@
       return (
         <div className="container">
           <div className="wizard-container glass animate-fade-in" style={{ padding: '32px', maxWidth: '600px' }}>
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6" style={{ flexWrap: 'wrap', gap: '12px' }}>
               <h2 className="flex items-center gap-2 m-0" style={{ margin: 0 }}>
                 <i data-lucide="file-search" style={{ color: "var(--primary)" }}></i>
                 Application Form
               </h2>
-              <div className="badge badge-primary">Step {step} of 2</div>
+              <div className="flex items-center gap-2">
+                {history.length > 0 && (
+                  <button type="button" onClick={() => setShowHistory(true)} className="btn btn-outline flex items-center gap-1" style={{ width: 'auto', minHeight: 'auto', padding: '6px 12px', fontSize: '0.85rem' }}>
+                    <i data-lucide="history" style={{ width: 14, height: 14 }}></i> History
+                  </button>
+                )}
+                <div className="badge badge-primary" style={{ whiteSpace: 'nowrap' }}>Step {step} of 2</div>
+              </div>
             </div>
+
+            {showHistory && ReactDOM.createPortal(
+              <div className="modal-overlay" style={{ display: 'flex' }} onClick={() => setShowHistory(false)}>
+                <div className="modal-content glass animate-fade-in" onClick={e => e.stopPropagation()} style={{ maxWidth: '500px', width: '90%' }}>
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 style={{ margin: 0 }}>Previous Profiles</h3>
+                    <button className="btn-icon" onClick={() => setShowHistory(false)}>
+                      <i data-lucide="x"></i>
+                    </button>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '400px', overflowY: 'auto', paddingRight: '8px' }}>
+                    {history.map((h, i) => (
+                      <div key={i} className="glass-card flex flex-col gap-2" style={{ padding: '16px', cursor: 'pointer', transition: 'var(--transition)' }} onClick={() => { setFormData(h); setShowHistory(false); setView('schemes'); }}>
+                        <div className="flex justify-between items-start" style={{ gap: '8px', flexWrap: 'wrap' }}>
+                          <strong style={{ fontSize: '1.1rem', wordBreak: 'break-all' }}>{h.phone}</strong>
+                          <span className="badge badge-success" style={{ whiteSpace: 'nowrap' }}>{h.loanType}</span>
+                        </div>
+                        <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                          Age: {h.age} | {h.gender} | {h.category} | Income: ₹{h.income || 0}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>,
+              document.body
+            )}
 
             <form onSubmit={handleNext}>
               {step === 1 && (
@@ -291,18 +346,23 @@
 
                   <div className="input-group mt-2">
                     <label>Phone Number</label>
-                    <div className="flex gap-2">
-                      <div className="chat-input" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px', padding: '0 16px' }}>
+                    <div className="flex gap-4">
+                      <div className="chat-input" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px', padding: '0 16px', overflow: 'hidden' }}>
                         <span style={{ color: 'var(--text-muted)', fontWeight: 'bold' }}>+91</span>
-                        <input type="tel" name="phone" style={{ border: 'none', outline: 'none', background: 'transparent', flex: 1, padding: '14px 0', fontSize: '1rem', color: 'var(--text-main)' }} value={formData.phone} onChange={handleChange} required disabled={formData.isVerified} placeholder="10-digit number" pattern="[0-9]{10}" maxLength="10" title="Please enter a valid 10-digit mobile number" />
+                        <input type="tel" name="phone" style={{ border: 'none', outline: 'none', background: 'transparent', flex: 1, padding: '14px 0', fontSize: '1rem', color: 'var(--text-main)', minWidth: '0' }} value={formData.phone} onChange={handleChange} required disabled={formData.isVerified} placeholder="10-digit number" pattern="[0-9]{10}" maxLength="10" title="Please enter a valid 10-digit mobile number" />
+                        {formData.isVerified && (
+                          <>
+                            <span className="flex items-center gap-1" style={{ color: 'var(--success)', fontSize: '0.8rem', fontWeight: 'bold', whiteSpace: 'nowrap', textTransform: 'uppercase' }}>
+                              <i data-lucide="check-circle" style={{ width: 16, height: 16 }}></i> Verified
+                            </span>
+                            <button type="button" onClick={() => setFormData({ ...formData, isVerified: false, phone: '' })} className="btn-icon" style={{ padding: '4px', marginLeft: '4px', color: 'var(--text-muted)' }} title="Change Number">
+                              <i data-lucide="refresh-cw" style={{ width: 14, height: 14 }}></i>
+                            </button>
+                          </>
+                        )}
                       </div>
                       {!formData.isVerified && !otpSent && (
                         <button type="button" className="btn btn-primary" onClick={sendOtp}>Send OTP</button>
-                      )}
-                      {formData.isVerified && (
-                        <div className="badge badge-success flex items-center gap-1" style={{ padding: '0 16px' }}>
-                          <i data-lucide="check-circle" style={{ width: 16, height: 16 }}></i> Verified
-                        </div>
                       )}
                     </div>
                   </div>
@@ -310,7 +370,7 @@
                   {otpSent && !formData.isVerified && (
                     <div className="input-group mt-2 p-4 glass-card" style={{ borderColor: 'var(--primary)' }}>
                       <label style={{ color: 'var(--primary)' }}>Enter OTP (Demo: 1234)</label>
-                      <div className="flex gap-2 mt-2">
+                      <div className="flex gap-4 mt-2">
                         <input type="text" className="chat-input" style={{ flex: 1 }} value={otpInput} onChange={e => setOtpInput(e.target.value)} placeholder="4-digit OTP" />
                         <button type="button" className="btn btn-outline" onClick={verifyOtp}>Verify</button>
                       </div>
@@ -437,13 +497,13 @@
               if (rawCost > 0 && scheme.benefits) {
                 const searchStr = scheme.benefits.toLowerCase();
                 let foundLimits = [];
-                
+
                 const lakhRegex = /(\d+(\.\d+)?)\s*(lakhs?|lacs?|l\b)/gi;
                 let match;
                 while ((match = lakhRegex.exec(searchStr)) !== null) {
                   foundLimits.push(parseFloat(match[1]));
                 }
-                
+
                 const croreRegex = /(\d+(\.\d+)?)\s*(crores?|cr\b)/gi;
                 while ((match = croreRegex.exec(searchStr)) !== null) {
                   foundLimits.push(parseFloat(match[1]) * 100);
@@ -455,7 +515,7 @@
                     costMatch = false;
                   }
                 }
-                
+
                 const minRegex = /from\s*₹?\s*(\d+(\.\d+)?)\s*(lakhs?|lacs?|l\b)/i;
                 const minMatch = searchStr.match(minRegex);
                 if (minMatch) {
@@ -1242,8 +1302,8 @@ out center 15;`;
           spark.style.background = colors[Math.floor(Math.random() * colors.length)];
           spark.style.boxShadow = `0 0 6px ${spark.style.background}`;
 
-          // Calculate trajectory based on mouse movement with a slight natural spread (+/- 25 degrees)
-          const baseAngle = Math.atan2(dy, dx);
+          // Calculate trajectory based on mouse movement (shoot backwards like a tail)
+          const baseAngle = Math.atan2(-dy, -dx);
           const spread = (Math.random() - 0.5) * (Math.PI / 2); // 90 degree total spread cone
           const angle = baseAngle + spread;
           const distance = Math.random() * 60 + 20;
