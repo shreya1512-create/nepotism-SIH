@@ -154,7 +154,19 @@ h6 {
   padding: 16px 0;
   border-bottom: 2px solid var(--secondary);
   background: rgba(255, 255, 255, 0.95);
+  /* Removed backdrop-filter to prevent trapping position:fixed children on mobile */
+}
+
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: -1;
 }
 
 .navbar-content {
@@ -598,7 +610,7 @@ select.chat-input option {
   .sidebar-menu {
     position: fixed !important;
     top: 0 !important;
-    right: -320px !important;
+    right: 0 !important;
     width: 280px !important;
     height: 100vh !important;
     flex-direction: column !important;
@@ -610,15 +622,15 @@ select.chat-input option {
     border-radius: 0 !important;
     border-left: var(--glass-border) !important;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1) !important;
-    transform: none !important;
-    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform: translateX(100%) !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     z-index: 2000 !important;
     white-space: normal !important;
     gap: 8px !important;
   }
 
   .sidebar-menu.open {
-    right: 0 !important;
+    transform: translateX(0) !important;
   }
 
   .mobile-sidebar-header {
