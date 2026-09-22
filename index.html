@@ -61,11 +61,14 @@
       useEffect(() => {
         if (isMobileMenuOpen) {
           document.body.style.overflow = 'hidden';
+          document.documentElement.style.overflow = 'hidden';
         } else {
           document.body.style.overflow = 'unset';
+          document.documentElement.style.overflow = 'unset';
         }
         return () => {
           document.body.style.overflow = 'unset';
+          document.documentElement.style.overflow = 'unset';
         };
       }, [isMobileMenuOpen]);
 
@@ -129,10 +132,10 @@
             </div>
             {!session ? (
               <>
-                <a href="#benefits" className="nav-item"><i data-lucide="star" style={{ width: 16, height: 16 }}></i> Benefits</a>
-                <a href="#how-it-works" className="nav-item"><i data-lucide="info" style={{ width: 16, height: 16 }}></i> How it Works</a>
-                <a href="#faqs" className="nav-item"><i data-lucide="help-circle" style={{ width: 16, height: 16 }}></i> FAQs</a>
-                <a href="#contact" className="nav-item"><i data-lucide="mail" style={{ width: 16, height: 16 }}></i> Contact</a>
+                <a href="#benefits" onClick={() => setIsMobileMenuOpen(false)} className="nav-item"><i data-lucide="star" style={{ width: 16, height: 16 }}></i> Benefits</a>
+                <a href="#how-it-works" onClick={() => setIsMobileMenuOpen(false)} className="nav-item"><i data-lucide="info" style={{ width: 16, height: 16 }}></i> How it Works</a>
+                <a href="#faqs" onClick={() => setIsMobileMenuOpen(false)} className="nav-item"><i data-lucide="help-circle" style={{ width: 16, height: 16 }}></i> FAQs</a>
+                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="nav-item"><i data-lucide="mail" style={{ width: 16, height: 16 }}></i> Contact</a>
               </>
             ) : (
               <>
@@ -184,87 +187,363 @@
         </nav>
       );
     };
-
     const LandingPage = ({ onLoginClick }) => (
-      <div className="container hero" style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <div style={{ background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)', padding: '6px 16px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
-          <i data-lucide="sparkles" style={{ width: 14, height: 14 }}></i> AI Infrastructure for Schemes
-        </div>
-        <h1 className="animate-fade-in stagger-2" style={{ fontSize: '3.5rem', maxWidth: '900px', lineHeight: '1.2' }}>
-          Welcome to Sahāy AI.<br/>
-          <span className="text-gradient">Discover schemes tailored for you in minutes.</span>
-        </h1>
-        <p className="animate-fade-in stagger-3" style={{ fontSize: '1.2rem', maxWidth: '700px', marginTop: '24px', marginBottom: '40px' }}>
-          Deploy adaptive AI agents that learn your business needs and instantly match you with perfect financial assistance and government support programs.
-        </p>
-        <div className="flex gap-4 animate-fade-in stagger-3 justify-center flex-wrap">
-          <button className="btn btn-primary" onClick={onLoginClick} style={{ padding: '12px 32px', fontSize: '1.1rem', borderRadius: '30px' }}>
-            Start for Free
-          </button>
-          <button className="btn btn-outline" onClick={onLoginClick} style={{ padding: '12px 32px', fontSize: '1.1rem', borderRadius: '30px', background: 'transparent' }}>
-            See it in action
-          </button>
-        </div>
-        <div className="flex mt-6 animate-fade-in" style={{ display: 'flex', gap: '32px', marginTop: '80px', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            <i data-lucide="zap" style={{ width: 16, height: 16, color: 'var(--primary)' }}></i> Central & State Schemes
+      <>
+        <div className="container hero" style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)', padding: '6px 16px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+            <i data-lucide="sparkles" style={{ width: 14, height: 14 }}></i> AI Infrastructure for Schemes
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            <i data-lucide="file-check-2" style={{ width: 16, height: 16, color: 'var(--secondary)' }}></i> Zero Manual Forms
+          <h1 className="animate-fade-in stagger-2" style={{ fontSize: '3.5rem', maxWidth: '900px', lineHeight: '1.2' }}>
+            Welcome to Sahāy AI.<br />
+            <span className="text-gradient">Discover schemes tailored for you in minutes.</span>
+          </h1>
+          <p className="animate-fade-in stagger-3" style={{ fontSize: '1.2rem', maxWidth: '700px', marginTop: '24px', marginBottom: '40px' }}>
+            Deploy adaptive AI agents that learn your business needs and instantly match you with perfect financial assistance and government support programs.
+          </p>
+          <div className="flex gap-4 animate-fade-in stagger-3 justify-center flex-wrap">
+            <button className="btn btn-primary" onClick={onLoginClick} style={{ padding: '12px 32px', fontSize: '1.1rem', borderRadius: '30px' }}>
+              Start for Free
+            </button>
+            <button className="btn btn-outline" onClick={onLoginClick} style={{ padding: '12px 32px', fontSize: '1.1rem', borderRadius: '30px', background: 'transparent' }}>
+              See it in action
+            </button>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-            <i data-lucide="clock" style={{ width: 16, height: 16, color: 'var(--accent)' }}></i> Instant AI Matching
+          <div className="flex mt-6 animate-fade-in" style={{ display: 'flex', gap: '32px', marginTop: '80px', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+              <i data-lucide="zap" style={{ width: 16, height: 16, color: 'var(--primary)' }}></i> Central & State Schemes
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+              <i data-lucide="file-check-2" style={{ width: 16, height: 16, color: 'var(--secondary)' }}></i> Zero Manual Forms
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+              <i data-lucide="clock" style={{ width: 16, height: 16, color: 'var(--accent)' }}></i> Instant AI Matching
+            </div>
           </div>
         </div>
-      </div>
+
+        {/* Benefits Section */}
+        <section id="benefits" className="container" style={{ padding: '100px 16px' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '16px' }}>Why Choose <span className="text-gradient">Sahāy AI</span>?</h2>
+          <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '48px', maxWidth: '700px', margin: '0 auto 48px', fontSize: '1.1rem' }}>We eliminate the friction of bureaucratic paperwork, utilizing intelligent automation to identify and secure your perfect funding match.</p>
+          
+          <div className="grid grid-cols-3 gap-4">
+            <div className="glass-card" style={{ padding: '32px' }}>
+              <i data-lucide="zap" style={{ width: 40, height: 40, color: "var(--primary)", marginBottom: 16 }}></i>
+              <h3 style={{ marginBottom: 12 }}>Instant Eligibility Check</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>Skip reading dense, 50-page government PDFs. Talk to our AI in your regional language, and it will dynamically cross-reference thousands of parameters to return an exact scheme match in seconds.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '32px' }}>
+              <i data-lucide="shield-check" style={{ width: 40, height: 40, color: "var(--success)", marginBottom: 16 }}></i>
+              <h3 style={{ marginBottom: 12 }}>Verified Data & Geo-Targeting</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>Powered by live data integrations and our spatial mapping engine. We don't just find you a scheme; we connect you directly with the exact Nodal Agencies and Banks near you that have available funds.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '32px' }}>
+              <i data-lucide="languages" style={{ width: 40, height: 40, color: "var(--secondary)", marginBottom: 16 }}></i>
+              <h3 style={{ marginBottom: 12 }}>Zero Initial Paperwork</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>Eliminate the initial friction. Our conversational wizard digitizes the qualification phase entirely, saving marginalized entrepreneurs weeks of frustrating bureaucratic runarounds.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section id="how-it-works" style={{ background: 'var(--bg-card)', padding: '100px 16px', borderTop: 'var(--glass-border)', borderBottom: 'var(--glass-border)' }}>
+          <div className="container">
+            <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '16px' }}>How It <span className="text-gradient">Works</span></h2>
+            <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '60px', maxWidth: '700px', margin: '0 auto 60px', fontSize: '1.1rem' }}>From discovery to application in three simple, guided steps.</p>
+            
+            <div className="grid grid-cols-3 gap-6 relative">
+              <div className="glass-card text-center" style={{ padding: '40px 24px', position: 'relative' }}>
+                <div style={{ background: 'var(--bg-main)', width: '70px', height: '70px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', border: 'var(--glass-border)', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--primary)' }}>1</div>
+                <h3 style={{ marginBottom: '12px' }}>Chat & Profile Build</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>Interact with our AI Mentor or use the manual guided wizard to securely establish your business profile, demographics, and financial needs.</p>
+              </div>
+              <div className="glass-card text-center" style={{ padding: '40px 24px' }}>
+                <div style={{ background: 'var(--bg-main)', width: '70px', height: '70px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', border: 'var(--glass-border)', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--secondary)' }}>2</div>
+                <h3 style={{ marginBottom: '12px' }}>AI Matching Engine</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>Our hybrid rule-based and LLM-powered engine immediately maps your unique profile against an expansive database of Central & State schemes.</p>
+              </div>
+              <div className="glass-card text-center" style={{ padding: '40px 24px' }}>
+                <div style={{ background: 'var(--bg-main)', width: '70px', height: '70px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', border: 'var(--glass-border)', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--accent)' }}>3</div>
+                <h3 style={{ marginBottom: '12px' }}>Locate & Apply</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>Once matched, use the Geo-Locator to pinpoint the nearest partner branch (CSC, NGO, or Bank) equipped to process your application.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQs Section */}
+        <section id="faqs" className="container" style={{ padding: '100px 16px' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '16px' }}>Frequently Asked <span className="text-gradient">Questions</span></h2>
+          <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '48px', maxWidth: '600px', margin: '0 auto 48px', fontSize: '1.1rem' }}>Everything you need to know about using Sahāy AI.</p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '850px', margin: '0 auto' }}>
+            <div className="glass-card" style={{ padding: '28px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}><i data-lucide="help-circle" style={{ width: 22, height: 22, color: 'var(--primary)' }}></i> Is Sahāy free to use?</h3>
+              <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.5' }}>Yes, the core scheme discovery, conversational AI mentor, and partner locator features are completely free for all marginalized entrepreneurs. Our goal is accessibility first.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '28px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}><i data-lucide="help-circle" style={{ width: 22, height: 22, color: 'var(--primary)' }}></i> What documents do I need to get started?</h3>
+              <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.5' }}>You can start discovering and matching with schemes with <strong>zero documents</strong>! However, when you are ready to officially apply at a partner location, you will typically need an Aadhaar card, PAN card, and a valid Caste/Income certificate depending on the scheme.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '28px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}><i data-lucide="help-circle" style={{ width: 22, height: 22, color: 'var(--primary)' }}></i> Is my business data secure?</h3>
+              <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.5' }}>Absolutely. Your profile data is encrypted end-to-end and is strictly used to match you with verified government and financial institution schemes. We never sell your data.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '28px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}><i data-lucide="help-circle" style={{ width: 22, height: 22, color: 'var(--primary)' }}></i> Which languages are supported?</h3>
+              <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.5' }}>Sahāy's conversational AI currently supports Hindi, Bengali, and English seamlessly. We are actively working on expanding to more regional languages in the near future.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" style={{ background: 'var(--bg-card)', padding: '100px 16px', borderTop: 'var(--glass-border)' }}>
+          <div className="container" style={{ maxWidth: '900px' }}>
+            <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '16px' }}>Get in <span className="text-gradient">Touch</span></h2>
+            <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '48px', maxWidth: '600px', margin: '0 auto 48px', fontSize: '1.1rem' }}>Have questions or need direct support? We're here to help.</p>
+            
+            <div className="grid grid-cols-2 gap-6">
+              <div className="glass-card" style={{ padding: '40px 32px' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '24px' }}>Contact Information</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                    <div style={{ background: 'rgba(99, 102, 241, 0.1)', padding: '12px', borderRadius: '12px', color: 'var(--primary)' }}>
+                      <i data-lucide="mail" style={{ width: 24, height: 24 }}></i>
+                    </div>
+                    <div>
+                      <strong style={{ display: 'block', marginBottom: '4px', fontSize: '1.1rem' }}>Email Us</strong>
+                      <span style={{ color: 'var(--text-muted)' }}>support@sahay.ai</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                    <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '12px', borderRadius: '12px', color: 'var(--success)' }}>
+                      <i data-lucide="phone" style={{ width: 24, height: 24 }}></i>
+                    </div>
+                    <div>
+                      <strong style={{ display: 'block', marginBottom: '4px', fontSize: '1.1rem' }}>Call Us</strong>
+                      <span style={{ color: 'var(--text-muted)' }}>+91 (800) 123-4567</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                    <div style={{ background: 'rgba(245, 158, 11, 0.1)', padding: '12px', borderRadius: '12px', color: 'var(--accent)' }}>
+                      <i data-lucide="map-pin" style={{ width: 24, height: 24 }}></i>
+                    </div>
+                    <div>
+                      <strong style={{ display: 'block', marginBottom: '4px', fontSize: '1.1rem' }}>Headquarters</strong>
+                      <span style={{ color: 'var(--text-muted)' }}>Innovation Hub, Salt Lake<br/>Kolkata, West Bengal 700091</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="glass-card" style={{ padding: '40px 32px' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '24px' }}>Send a Message</h3>
+                <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} onSubmit={(e) => e.preventDefault()}>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Full Name</label>
+                    <input type="text" className="glass-input" placeholder="Enter your name" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: 'var(--glass-border)', background: 'var(--bg-main)', color: 'var(--text-main)', fontSize: '1rem' }} />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Email Address</label>
+                    <input type="email" className="glass-input" placeholder="Enter your email" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: 'var(--glass-border)', background: 'var(--bg-main)', color: 'var(--text-main)', fontSize: '1rem' }} />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Message</label>
+                    <textarea className="glass-input" placeholder="How can we help you?" rows="4" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: 'var(--glass-border)', background: 'var(--bg-main)', color: 'var(--text-main)', fontSize: '1rem', resize: 'vertical' }}></textarea>
+                  </div>
+                  <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '8px' }}>Send Message</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
     );
-
     const Home = ({ setView }) => (
-      <div className="container hero">
-        <h1 className="animate-fade-in stagger-2">
-          Empowering Marginalized Entrepreneurs with <span className="text-gradient">AI-Driven Scheme Matching</span>
-        </h1>
-        <p className="animate-fade-in stagger-3">
-          Sahāy bridges the gap between government initiatives and the people who need them most.
-          Use our conversational AI to discover tailored financial assistance and support schemes instantly.
-        </p>
-        <div className="flex gap-4 animate-fade-in stagger-3 justify-center flex-wrap">
-          <button className="btn btn-primary" onClick={() => setView('wizard')}>
-            <i data-lucide="sparkles" style={{ width: 20, height: 20 }}></i>
-            Smart Scheme Recommender
-          </button>
-          <button className="btn btn-outline" onClick={() => setView('calculator')}>
-            <i data-lucide="calculator" style={{ width: 20, height: 20 }}></i>
-            Financial Calculator
-          </button>
-          <button className="btn btn-outline" onClick={() => setView('locator')}>
-            <i data-lucide="map-pin" style={{ width: 20, height: 20 }}></i>
-            Partner Locator
-          </button>
-          <button className="btn btn-primary" onClick={() => setView('ai-mentor')} style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)' }}>
-            <i data-lucide="bot" style={{ width: 20, height: 20 }}></i>
-            AI Business Mentor
-          </button>
+      <>
+        <div className="container hero">
+          <h1 className="animate-fade-in stagger-2">
+            Empowering Marginalized Entrepreneurs with <span className="text-gradient">AI-Driven Scheme Matching</span>
+          </h1>
+          <p className="animate-fade-in stagger-3">
+            Sahāy bridges the gap between government initiatives and the people who need them most.
+            Use our conversational AI to discover tailored financial assistance and support schemes instantly.
+          </p>
+          <div className="flex gap-4 animate-fade-in stagger-3 justify-center flex-wrap">
+            <button className="btn btn-primary" onClick={() => setView('wizard')}>
+              <i data-lucide="sparkles" style={{ width: 20, height: 20 }}></i>
+              Smart Scheme Recommender
+            </button>
+            <button className="btn btn-outline" onClick={() => setView('calculator')}>
+              <i data-lucide="calculator" style={{ width: 20, height: 20 }}></i>
+              Financial Calculator
+            </button>
+            <button className="btn btn-outline" onClick={() => setView('locator')}>
+              <i data-lucide="map-pin" style={{ width: 20, height: 20 }}></i>
+              Partner Locator
+            </button>
+            <button className="btn btn-primary" onClick={() => setView('ai-mentor')} style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)' }}>
+              <i data-lucide="bot" style={{ width: 20, height: 20 }}></i>
+              AI Business Mentor
+            </button>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 mt-6 animate-fade-in" style={{ marginTop: '80px' }}>
+            <div className="glass-card text-center">
+              <i data-lucide="message-square" style={{ width: 32, height: 32, color: "var(--primary)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
+              <h3>Conversational AI</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Multilingual wizard that talks to you to determine eligibility without complex forms.</p>
+            </div>
+            <div className="glass-card text-center">
+              <i data-lucide="brain-circuit" style={{ width: 32, height: 32, color: "var(--secondary)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
+              <h3>Hybrid Match Engine</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Rule-based & AI hybrid system ensuring accurate mapping to government schemes.</p>
+            </div>
+            <div className="glass-card text-center">
+              <i data-lucide="map-pin" style={{ width: 32, height: 32, color: "var(--accent)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
+              <h3>Partner Locator</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Geo-spatial tagging to find nearby NGOs and CSCs for immediate assistance.</p>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 mt-6 animate-fade-in" style={{ marginTop: '80px' }}>
-          <div className="glass-card text-center">
-            <i data-lucide="message-square" style={{ width: 32, height: 32, color: "var(--primary)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
-            <h3>Conversational AI</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Multilingual wizard that talks to you to determine eligibility without complex forms.</p>
+        {/* Benefits Section */}
+        <section id="benefits" className="container" style={{ padding: '100px 16px' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '16px' }}>Why Choose <span className="text-gradient">Sahāy AI</span>?</h2>
+          <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '48px', maxWidth: '700px', margin: '0 auto 48px', fontSize: '1.1rem' }}>We eliminate the friction of bureaucratic paperwork, utilizing intelligent automation to identify and secure your perfect funding match.</p>
+          
+          <div className="grid grid-cols-3 gap-4">
+            <div className="glass-card" style={{ padding: '32px' }}>
+              <i data-lucide="zap" style={{ width: 40, height: 40, color: "var(--primary)", marginBottom: 16 }}></i>
+              <h3 style={{ marginBottom: 12 }}>Instant Eligibility Check</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>Skip reading dense, 50-page government PDFs. Talk to our AI in your regional language, and it will dynamically cross-reference thousands of parameters to return an exact scheme match in seconds.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '32px' }}>
+              <i data-lucide="shield-check" style={{ width: 40, height: 40, color: "var(--success)", marginBottom: 16 }}></i>
+              <h3 style={{ marginBottom: 12 }}>Verified Data & Geo-Targeting</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>Powered by live data integrations and our spatial mapping engine. We don't just find you a scheme; we connect you directly with the exact Nodal Agencies and Banks near you that have available funds.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '32px' }}>
+              <i data-lucide="languages" style={{ width: 40, height: 40, color: "var(--secondary)", marginBottom: 16 }}></i>
+              <h3 style={{ marginBottom: 12 }}>Zero Initial Paperwork</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', margin: 0, lineHeight: '1.5' }}>Eliminate the initial friction. Our conversational wizard digitizes the qualification phase entirely, saving marginalized entrepreneurs weeks of frustrating bureaucratic runarounds.</p>
+            </div>
           </div>
-          <div className="glass-card text-center">
-            <i data-lucide="brain-circuit" style={{ width: 32, height: 32, color: "var(--secondary)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
-            <h3>Hybrid Match Engine</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Rule-based & AI hybrid system ensuring accurate mapping to government schemes.</p>
+        </section>
+
+        {/* How It Works Section */}
+        <section id="how-it-works" style={{ background: 'var(--bg-card)', padding: '100px 16px', borderTop: 'var(--glass-border)', borderBottom: 'var(--glass-border)' }}>
+          <div className="container">
+            <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '16px' }}>How It <span className="text-gradient">Works</span></h2>
+            <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '60px', maxWidth: '700px', margin: '0 auto 60px', fontSize: '1.1rem' }}>From discovery to application in three simple, guided steps.</p>
+            
+            <div className="grid grid-cols-3 gap-6 relative">
+              <div className="glass-card text-center" style={{ padding: '40px 24px', position: 'relative' }}>
+                <div style={{ background: 'var(--bg-main)', width: '70px', height: '70px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', border: 'var(--glass-border)', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--primary)' }}>1</div>
+                <h3 style={{ marginBottom: '12px' }}>Chat & Profile Build</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>Interact with our AI Mentor or use the manual guided wizard to securely establish your business profile, demographics, and financial needs.</p>
+              </div>
+              <div className="glass-card text-center" style={{ padding: '40px 24px' }}>
+                <div style={{ background: 'var(--bg-main)', width: '70px', height: '70px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', border: 'var(--glass-border)', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--secondary)' }}>2</div>
+                <h3 style={{ marginBottom: '12px' }}>AI Matching Engine</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>Our hybrid rule-based and LLM-powered engine immediately maps your unique profile against an expansive database of Central & State schemes.</p>
+              </div>
+              <div className="glass-card text-center" style={{ padding: '40px 24px' }}>
+                <div style={{ background: 'var(--bg-main)', width: '70px', height: '70px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', border: 'var(--glass-border)', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--accent)' }}>3</div>
+                <h3 style={{ marginBottom: '12px' }}>Locate & Apply</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>Once matched, use the Geo-Locator to pinpoint the nearest partner branch (CSC, NGO, or Bank) equipped to process your application.</p>
+              </div>
+            </div>
           </div>
-          <div className="glass-card text-center">
-            <i data-lucide="map-pin" style={{ width: 32, height: 32, color: "var(--accent)", margin: "0 auto", display: "block", marginBottom: 16 }}></i>
-            <h3>Partner Locator</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Geo-spatial tagging to find nearby NGOs and CSCs for immediate assistance.</p>
+        </section>
+
+        {/* FAQs Section */}
+        <section id="faqs" className="container" style={{ padding: '100px 16px' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '16px' }}>Frequently Asked <span className="text-gradient">Questions</span></h2>
+          <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '48px', maxWidth: '600px', margin: '0 auto 48px', fontSize: '1.1rem' }}>Everything you need to know about using Sahāy AI.</p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '850px', margin: '0 auto' }}>
+            <div className="glass-card" style={{ padding: '28px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}><i data-lucide="help-circle" style={{ width: 22, height: 22, color: 'var(--primary)' }}></i> Is Sahāy free to use?</h3>
+              <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.5' }}>Yes, the core scheme discovery, conversational AI mentor, and partner locator features are completely free for all marginalized entrepreneurs. Our goal is accessibility first.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '28px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}><i data-lucide="help-circle" style={{ width: 22, height: 22, color: 'var(--primary)' }}></i> What documents do I need to get started?</h3>
+              <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.5' }}>You can start discovering and matching with schemes with <strong>zero documents</strong>! However, when you are ready to officially apply at a partner location, you will typically need an Aadhaar card, PAN card, and a valid Caste/Income certificate depending on the scheme.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '28px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}><i data-lucide="help-circle" style={{ width: 22, height: 22, color: 'var(--primary)' }}></i> Is my business data secure?</h3>
+              <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.5' }}>Absolutely. Your profile data is encrypted end-to-end and is strictly used to match you with verified government and financial institution schemes. We never sell your data.</p>
+            </div>
+            <div className="glass-card" style={{ padding: '28px' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}><i data-lucide="help-circle" style={{ width: 22, height: 22, color: 'var(--primary)' }}></i> Which languages are supported?</h3>
+              <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '1rem', lineHeight: '1.5' }}>Sahāy's conversational AI currently supports Hindi, Bengali, and English seamlessly. We are actively working on expanding to more regional languages in the near future.</p>
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" style={{ background: 'var(--bg-card)', padding: '100px 16px', borderTop: 'var(--glass-border)' }}>
+          <div className="container" style={{ maxWidth: '900px' }}>
+            <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '16px' }}>Get in <span className="text-gradient">Touch</span></h2>
+            <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '48px', maxWidth: '600px', margin: '0 auto 48px', fontSize: '1.1rem' }}>Have questions or need direct support? We're here to help.</p>
+            
+            <div className="grid grid-cols-2 gap-6">
+              <div className="glass-card" style={{ padding: '40px 32px' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '24px' }}>Contact Information</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                    <div style={{ background: 'rgba(99, 102, 241, 0.1)', padding: '12px', borderRadius: '12px', color: 'var(--primary)' }}>
+                      <i data-lucide="mail" style={{ width: 24, height: 24 }}></i>
+                    </div>
+                    <div>
+                      <strong style={{ display: 'block', marginBottom: '4px', fontSize: '1.1rem' }}>Email Us</strong>
+                      <span style={{ color: 'var(--text-muted)' }}>support@sahay.ai</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                    <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '12px', borderRadius: '12px', color: 'var(--success)' }}>
+                      <i data-lucide="phone" style={{ width: 24, height: 24 }}></i>
+                    </div>
+                    <div>
+                      <strong style={{ display: 'block', marginBottom: '4px', fontSize: '1.1rem' }}>Call Us</strong>
+                      <span style={{ color: 'var(--text-muted)' }}>+91 (800) 123-4567</span>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                    <div style={{ background: 'rgba(245, 158, 11, 0.1)', padding: '12px', borderRadius: '12px', color: 'var(--accent)' }}>
+                      <i data-lucide="map-pin" style={{ width: 24, height: 24 }}></i>
+                    </div>
+                    <div>
+                      <strong style={{ display: 'block', marginBottom: '4px', fontSize: '1.1rem' }}>Headquarters</strong>
+                      <span style={{ color: 'var(--text-muted)' }}>Innovation Hub, Salt Lake<br/>Kolkata, West Bengal 700091</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="glass-card" style={{ padding: '40px 32px' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '24px' }}>Send a Message</h3>
+                <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} onSubmit={(e) => e.preventDefault()}>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Full Name</label>
+                    <input type="text" className="glass-input" placeholder="Enter your name" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: 'var(--glass-border)', background: 'var(--bg-main)', color: 'var(--text-main)', fontSize: '1rem' }} />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Email Address</label>
+                    <input type="email" className="glass-input" placeholder="Enter your email" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: 'var(--glass-border)', background: 'var(--bg-main)', color: 'var(--text-main)', fontSize: '1rem' }} />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Message</label>
+                    <textarea className="glass-input" placeholder="How can we help you?" rows="4" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: 'var(--glass-border)', background: 'var(--bg-main)', color: 'var(--text-main)', fontSize: '1rem', resize: 'vertical' }}></textarea>
+                  </div>
+                  <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '8px' }}>Send Message</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
     );
 
     const Wizard = ({ setView, formData, setFormData, session }) => {
@@ -511,7 +790,7 @@
 
       useEffect(() => {
         const fetchSchemes = async () => {
-          const { data: allData, error } = await supabase.from('schemes').select('*');
+          const { data: allData, error } = await supabase.from('nsfdc_schemes').select('*');
           if (error) {
             console.error("Error fetching schemes:", error);
           }
@@ -520,72 +799,54 @@
           if (formData.isVerified && allData) {
             eligibleData = allData.filter(scheme => {
               // Category matching
-              const schemeCat = (scheme.target_category || 'ALL').toLowerCase();
+              const schemeCat = (scheme.category || 'ALL').toLowerCase();
               const userCat = (formData.category || '').toLowerCase();
-              const categoryMatch = !userCat || schemeCat === 'all' || (userCat !== 'general' && schemeCat.includes(userCat));
+              const userGender = (formData.gender || '').toLowerCase();
 
-              // Loan Type matching
-              const schemeLoan = (scheme.loan_type || 'ALL').toLowerCase();
-              const userLoan = (formData.loanType || '').toLowerCase();
-              const loanTypeMatch = !userLoan || schemeLoan === 'all' || schemeLoan.includes(userLoan);
+              let categoryMatch = false;
+              if (schemeCat === 'all') {
+                categoryMatch = true;
+              } else if (schemeCat === userCat) {
+                categoryMatch = true;
+              } else if (schemeCat === userCat + ' female') {
+                categoryMatch = (userGender === 'female');
+              }
 
-              // Smart Income Parsing
+              // Smart Income & Cost Parsing
               let rawIncome = parseFloat(formData.income) || 0;
-              if (rawIncome > 0 && rawIncome < 1000) rawIncome *= 100000; // Auto-correct if user typed "3" instead of "300000"
-              const userIncomeLakhs = rawIncome / 100000;
+              if (rawIncome > 0 && rawIncome < 1000) rawIncome *= 100000;
 
               let incomeMatch = true;
-              if (rawIncome > 0 && scheme.criteria) {
-                const searchStr = scheme.criteria.toLowerCase();
-                const incomeRegex = /income.*?(\d+(\.\d+)?)\s*(lakhs?|lacs?|l\b)/i;
-                const match = searchStr.match(incomeRegex);
-                if (match) {
-                  const limitLakhs = parseFloat(match[1]);
-                  if (userIncomeLakhs > limitLakhs) {
-                    incomeMatch = false;
-                  }
-                }
+              if (scheme.max_family_income && rawIncome > scheme.max_family_income) {
+                incomeMatch = false;
               }
 
-              // Smart Cost/Loan Parsing
               let rawCost = parseFloat(formData.cost) || 0;
-              if (rawCost > 0 && rawCost < 1000) rawCost *= 100000; // Auto-correct if user typed "10" instead of "1000000"
-              const userCostLakhs = rawCost / 100000;
+              if (rawCost > 0 && rawCost < 1000) rawCost *= 100000;
 
               let costMatch = true;
-              if (rawCost > 0 && scheme.benefits) {
-                const searchStr = scheme.benefits.toLowerCase();
-                let foundLimits = [];
-
-                const lakhRegex = /(\d+(\.\d+)?)\s*(lakhs?|lacs?|l\b)/gi;
-                let match;
-                while ((match = lakhRegex.exec(searchStr)) !== null) {
-                  foundLimits.push(parseFloat(match[1]));
-                }
-
-                const croreRegex = /(\d+(\.\d+)?)\s*(crores?|cr\b)/gi;
-                while ((match = croreRegex.exec(searchStr)) !== null) {
-                  foundLimits.push(parseFloat(match[1]) * 100);
-                }
-
-                if (foundLimits.length > 0) {
-                  const maxLimitLakhs = Math.max(...foundLimits);
-                  if (userCostLakhs > maxLimitLakhs) {
-                    costMatch = false;
-                  }
-                }
-
-                const minRegex = /from\s*₹?\s*(\d+(\.\d+)?)\s*(lakhs?|lacs?|l\b)/i;
-                const minMatch = searchStr.match(minRegex);
-                if (minMatch) {
-                  const minLimitLakhs = parseFloat(minMatch[1]);
-                  if (userCostLakhs < minLimitLakhs) {
-                    costMatch = false;
-                  }
-                }
+              if (scheme.max_project_cost && rawCost > scheme.max_project_cost) {
+                costMatch = false;
+              }
+              if (scheme.min_project_cost && rawCost < scheme.min_project_cost) {
+                costMatch = false;
               }
 
-              return categoryMatch && loanTypeMatch && incomeMatch && costMatch;
+              // Age Matching
+              const userAge = parseInt(formData.age) || 0;
+              let ageMatch = true;
+              if (scheme.min_age && userAge < scheme.min_age) ageMatch = false;
+              if (scheme.max_age && userAge > scheme.max_age) ageMatch = false;
+
+              // Loan Type Matching
+              let loanTypeMatch = true;
+              const userLoan = (formData.loanType || '').toLowerCase();
+              const schemeLoan = (scheme.loan_type || '').toLowerCase();
+              if (schemeLoan && userLoan && schemeLoan !== userLoan) {
+                loanTypeMatch = false;
+              }
+
+              return categoryMatch && incomeMatch && costMatch && ageMatch && loanTypeMatch;
             });
           }
 
@@ -599,7 +860,7 @@
         // Realtime subscription for govt updates
         const subscription = supabase
           .channel('schema-db-changes')
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'schemes' }, (payload) => {
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'nsfdc_schemes' }, (payload) => {
             console.log('Real-time scheme change received:', payload);
             fetchSchemes(); // Re-fetch all schemes to ensure we have the latest UI
           })
@@ -628,12 +889,22 @@
               Eligible
             </div>
           )}
-          <h3 className="mt-2">{scheme.name}</h3>
-          <p className="mb-4 mt-2" style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{scheme.description}</p>
+          <h3 className="mt-2">{scheme.scheme_name}</h3>
+          <p className="mb-2 mt-2" style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}><strong>Eligibility:</strong> {scheme.eligibility_criteria}</p>
+          <p className="mb-4 mt-2" style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}><strong>Benefits:</strong> {scheme.benefits_summary}</p>
           <div className="flex gap-2 mb-4 flex-wrap">
-            {scheme.tags && scheme.tags.map(tag => (
-              <span key={tag} className="badge badge-primary">{tag}</span>
-            ))}
+            {scheme.category && (
+              <span className="badge badge-primary">{scheme.category}</span>
+            )}
+            {scheme.loan_type && (
+              <span className="badge badge-primary">{scheme.loan_type}</span>
+            )}
+            {scheme.max_project_cost > 0 && (
+              <span className="badge badge-primary">Up to ₹{scheme.max_project_cost / 100000} Lakhs</span>
+            )}
+            {scheme.interest_rate_pa && (
+              <span className="badge badge-primary">{scheme.interest_rate_pa}% p.a.</span>
+            )}
           </div>
           <button className="btn btn-outline" style={{ width: '100%' }} onClick={() => setSelectedScheme(scheme)}>
             View Details & Apply <i data-lucide="chevron-right" style={{ width: 16, height: 16 }}></i>
@@ -699,37 +970,29 @@
                 <button className="modal-close" onClick={() => setSelectedScheme(null)}>
                   <i data-lucide="x" style={{ width: 24, height: 24 }}></i>
                 </button>
-                <h2 style={{ paddingRight: '32px', marginBottom: '8px' }}>{selectedScheme.name}</h2>
+                <h2 style={{ paddingRight: '32px', marginBottom: '8px' }}>{selectedScheme.scheme_name}</h2>
                 <div className="flex gap-2 mb-4 flex-wrap">
-                  {selectedScheme.tags && selectedScheme.tags.map(tag => (
-                    <span key={tag} className="badge badge-primary">{tag}</span>
-                  ))}
+                  {selectedScheme.category && <span className="badge badge-primary">{selectedScheme.category}</span>}
+                  {selectedScheme.loan_type && <span className="badge badge-primary">{selectedScheme.loan_type}</span>}
+                  {selectedScheme.max_project_cost > 0 && <span className="badge badge-primary">Up to ₹{selectedScheme.max_project_cost / 100000} Lakhs</span>}
+                  {selectedScheme.interest_rate_pa && <span className="badge badge-primary">{selectedScheme.interest_rate_pa}% p.a.</span>}
                 </div>
 
                 <div className="detail-section">
                   <h4><i data-lucide="clipboard-list" style={{ width: 18, height: 18 }}></i> Eligibility Criteria</h4>
-                  <p style={{ color: 'var(--text-muted)' }}>{selectedScheme.criteria || selectedScheme.description}</p>
+                  <p style={{ color: 'var(--text-muted)' }}>{selectedScheme.eligibility_criteria}</p>
                 </div>
 
                 <div className="detail-section">
                   <h4><i data-lucide="trending-up" style={{ width: 18, height: 18, color: 'var(--success)' }}></i> Benefits</h4>
-                  <p style={{ color: 'var(--text-muted)' }}>{selectedScheme.benefits || 'Standard concessional rates apply.'}</p>
-                </div>
-
-                <div className="detail-section">
-                  <h4><i data-lucide="alert-circle" style={{ width: 18, height: 18, color: 'var(--warning)' }}></i> Considerations</h4>
-                  <p style={{ color: 'var(--text-muted)' }}>{selectedScheme.disadvantages || 'Funding subject to agency availability.'}</p>
+                  <p style={{ color: 'var(--text-muted)' }}>{selectedScheme.benefits_summary}</p>
                 </div>
 
                 <div className="detail-section" style={{ background: 'rgba(99, 102, 241, 0.05)', padding: '16px', borderRadius: '8px', border: '1px dashed var(--primary)' }}>
                   <h4><i data-lucide="file-check" style={{ width: 18, height: 18, color: 'var(--primary)' }}></i> Documents Required (Things to Carry)</h4>
-                  <ul style={{ color: 'var(--text-muted)', margin: '8px 0 0 24px', padding: 0, fontSize: '0.9rem' }}>
-                    <li>Aadhaar Card and PAN Card</li>
-                    <li>Valid Caste Certificate (SC/ST/OBC)</li>
-                    <li>Income Certificate (if applicable)</li>
-                    <li>Detailed Project Report (DPR) or Business Plan</li>
-                    <li>Last 6 months Bank Account Statements</li>
-                  </ul>
+                  <p style={{ color: 'var(--text-muted)', margin: '8px 0 0 0', fontSize: '0.9rem' }}>
+                    {selectedScheme.required_documents}
+                  </p>
                 </div>
 
                 <div style={{ marginTop: '32px', borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
@@ -821,10 +1084,10 @@
 
         const map = window.L.map(mapRef.current).setView([userLoc.lat, userLoc.lng], 5);
 
-        // Google Maps Tile Layer
-        window.L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-          maxZoom: 20,
-          subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+        // OpenStreetMap Tile Layer
+        window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: ', OpenStreetMap contributors'
         }).addTo(map);
 
         // User Marker
@@ -851,8 +1114,17 @@
 
         partners.forEach(p => {
           if (p.lat && p.lng) {
+            const popupHtml = `
+              <div style="font-family: inherit;">
+                <strong>${p.name}</strong><br/>
+                <small style="color: #666;">${p.type} • ${p.distance} away</small><br/>
+                <hr style="margin: 6px 0; border: 0; border-top: 1px solid #ddd;" />
+                <small>${p.contact_number}</small><br/>
+                <strong style="color: #059669;">Funds: ₹${p.available_disbursement_limit ? (p.available_disbursement_limit / 10000000).toFixed(2) : 0} Cr</strong>
+              </div>
+            `;
             window.L.marker([p.lat, p.lng], { icon: partnerIcon }).addTo(map)
-              .bindPopup(`<b>${p.name}</b><br/>${p.distance} away<br/>${p.type}`);
+              .bindPopup(popupHtml);
           }
         });
 
@@ -867,7 +1139,7 @@
         return () => map.remove();
       }, [userLoc, partners]);
 
-      return <div ref={mapRef} style={{ width: '100%', height: '100%' }} />;
+      return <div ref={mapRef} style={{ width: '100%', minHeight: '350px', height: '100%', zIndex: 0 }} />;
     };
 
     const PartnerLocator = () => {
@@ -875,6 +1147,7 @@
       const [displayedPartners, setDisplayedPartners] = useState([]);
       const [userLoc, setUserLoc] = useState(null);
       const [locating, setLocating] = useState(false);
+      const [locatingMessage, setLocatingMessage] = useState("");
 
       useEffect(() => {
         supabase.from('channel_partners').select('*').then(({ data }) => setAllPartners(data || []));
@@ -882,141 +1155,95 @@
 
       const handleLocate = () => {
         setLocating(true);
+        setLocatingMessage("Acquiring GPS coordinates...");
+
         if ("geolocation" in navigator) {
           navigator.geolocation.getCurrentPosition(async (position) => {
-            const { latitude, longitude } = position.coords;
+            let { latitude, longitude } = position.coords;
+
+            // Constrain demo to West Bengal (as data is WB-only)
+            const isInsideWB = latitude >= 21.0 && latitude <= 27.5 && longitude >= 85.5 && longitude <= 90.0;
+            if (!isInsideWB) {
+              latitude = 22.5726; // Default to Kolkata
+              longitude = 88.3639;
+            }
             setUserLoc({ lat: latitude, lng: longitude });
 
-            let stateName = "Regional";
-            try {
-              const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-              const data = await res.json();
-              if (data && data.address && data.address.state) {
-                stateName = data.address.state;
-              } else if (data && data.address && data.address.city) {
-                stateName = data.address.city;
-              }
-            } catch (e) {
-              console.error("Reverse geocoding failed", e);
-            }
+            let currentRadius = 20;
+            const maxRadius = 100;
+            let foundPartners = [];
 
-            // Try to fetch REAL nearby locations using Overpass API
-            let realPartners = [];
-            try {
-              const overpassQuery = `[out:json][timeout:15];
-(
-  nwr["amenity"="bank"](around:8000,${latitude},${longitude});
-  nwr["office"="ngo"](around:15000,${latitude},${longitude});
-  nwr["office"="government"](around:15000,${latitude},${longitude});
-);
-out center 15;`;
+            while (currentRadius <= maxRadius && foundPartners.length === 0) {
+              setLocatingMessage(`Scanning ${currentRadius}km radius...`);
+              await new Promise(resolve => setTimeout(resolve, 800)); // UI animation delay
 
-              const res = await fetch("https://overpass-api.de/api/interpreter", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: "data=" + encodeURIComponent(overpassQuery)
+              const calculatedPartners = allPartners.map(p => {
+                const distance = calculateDistance(latitude, longitude, p.latitude, p.longitude);
+                return {
+                  name: p.partner_name,
+                  type: p.partner_type,
+                  status: p.is_fund_eligible ? 'Optimal' : 'Depleted',
+                  lat: p.latitude,
+                  lng: p.longitude,
+                  distance: distance.toFixed(1) + ' km',
+                  rawDistance: distance,
+                  address: p.address,
+                  district: p.district,
+                  state: p.state,
+                  pincode: p.pincode,
+                  contact_number: p.contact_number,
+                  email: p.email,
+                  supported_scheme_categories: p.supported_scheme_categories,
+                  npa_percentage: p.npa_percentage,
+                  available_disbursement_limit: p.available_disbursement_limit,
+                  is_fund_eligible: p.is_fund_eligible
+                };
               });
 
-              if (res.ok) {
-                const data = await res.json();
-                if (data && data.elements && data.elements.length > 0) {
-                  realPartners = data.elements
-                    .filter(el => el.tags && el.tags.name)
-                    .map(el => {
-                      let type = 'Bank/Financial Institution';
-                      if (el.tags.office === 'ngo') type = 'NGO / Partner Agency';
-                      if (el.tags.office === 'government') type = 'Government / SCA Office';
+              foundPartners = calculatedPartners
+                .filter(p => p.rawDistance <= currentRadius)
+                .sort((a, b) => a.rawDistance - b.rawDistance);
 
-                      const lat = el.lat || (el.center && el.center.lat);
-                      const lng = el.lon || (el.center && el.center.lon);
-
-                      return {
-                        name: el.tags.name,
-                        type: type,
-                        status: 'Optimal',
-                        lat: lat,
-                        lng: lng,
-                        distance: calculateDistance(latitude, longitude, lat, lng).toFixed(1) + ' km'
-                      };
-                    }).filter(p => p.lat && p.lng).sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance)).slice(0, 6);
-                }
+              if (foundPartners.length > 0) {
+                break;
               }
-            } catch (e) {
-              console.error("Overpass API failed:", e);
-            }
 
-            // Fallback 1: Try Nominatim Search API if Overpass returned 0
-            if (realPartners.length === 0) {
-              try {
-                const nomRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=bank&lat=${latitude}&lon=${longitude}&limit=5`);
-                if (nomRes.ok) {
-                  const nomData = await nomRes.json();
-                  if (nomData && nomData.length > 0) {
-                    realPartners = nomData.map(place => ({
-                      name: place.name || place.display_name.split(',')[0],
-                      type: 'Bank/Financial Institution',
-                      status: 'Optimal',
-                      lat: parseFloat(place.lat),
-                      lng: parseFloat(place.lon),
-                      distance: calculateDistance(latitude, longitude, parseFloat(place.lat), parseFloat(place.lon)).toFixed(1) + ' km'
-                    })).sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
-                  }
-                }
-              } catch (e) {
-                console.error("Nominatim Search API failed:", e);
+              if (currentRadius < maxRadius) {
+                setLocatingMessage(`No partners found. Expanding search to ${currentRadius + 20}km...`);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                currentRadius += 20;
+              } else {
+                break;
               }
             }
+
+            if (foundPartners.length > 0) {
+              setLocatingMessage("Found nearest partners!");
+            } else {
+              setLocatingMessage("No partners found within 100km.");
+            }
+            await new Promise(resolve => setTimeout(resolve, 800));
 
             setLocating(false);
+            setLocatingMessage("");
 
-            if (realPartners.length > 0) {
-              setDisplayedPartners(realPartners);
-            } else {
-              // Fallback 2: Contextual simulated local branches
-              const dynamicPartners = [
-                {
-                  name: `${stateName} Scheduled Castes Finance and Development Corporation (Local Branch)`,
-                  type: 'SCA',
-                  status: 'Optimal'
-                },
-                {
-                  name: `State Bank of India (${stateName} Main Branch)`,
-                  type: 'Bank',
-                  status: 'Optimal'
-                },
-                {
-                  name: `Dalit Indian Chamber of Commerce & Industry (DICCI) - ${stateName} Chapter`,
-                  type: 'NGO/SCA',
-                  status: 'Optimal'
-                }
-              ];
-
-              const updated = dynamicPartners.map((p, index) => {
-                const pseudoLat = (Math.sin(index * 12.9898 + 1) * 43758.5453 % 1);
-                const pseudoLng = (Math.cos(index * 78.233 + 1) * 43758.5453 % 1);
-                const simulatedLat = latitude + (pseudoLat - 0.5) * 0.08;
-                const simulatedLng = longitude + (pseudoLng - 0.5) * 0.08;
-
-                return {
-                  ...p,
-                  lat: simulatedLat,
-                  lng: simulatedLng,
-                  distance: calculateDistance(latitude, longitude, simulatedLat, simulatedLng).toFixed(1) + ' km'
-                };
-              }).sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
-
-              setDisplayedPartners(updated);
-            }
+            setDisplayedPartners(foundPartners.slice(0, 6)); // Show top 6 closest
           }, (err) => {
             console.error(err);
             alert("Location access denied or failed. Please allow location access.");
             setLocating(false);
+            setLocatingMessage("");
           });
         } else {
           alert("Geolocation is not supported by your browser.");
           setLocating(false);
+          setLocatingMessage("");
         }
       };
+
+      useEffect(() => {
+        if (window.lucide) window.lucide.createIcons();
+      }, [displayedPartners, locatingMessage]);
 
       return (
         <div className="container animate-fade-in" style={{ paddingTop: '40px' }}>
@@ -1029,41 +1256,80 @@ out center 15;`;
               <p style={{ color: 'var(--text-muted)' }}>Identify the nearest eligible Channel Partner (SCA/Bank/NBFC-MFI) to route your application.</p>
             </div>
             <button className="btn btn-primary" onClick={handleLocate} disabled={locating}>
-              <i data-lucide="navigation" style={{ width: 18, height: 18 }}></i> {locating ? 'Locating...' : 'Locate Me'}
+              <i data-lucide={locating ? "loader" : "navigation"} className={locating ? "spin" : ""} style={{ width: 18, height: 18 }}></i>
+              {locating ? 'Locating...' : 'Locate Me'}
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="glass-card" style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, overflow: 'hidden' }}>
-              {userLoc ? (
-                <LeafletMap userLoc={userLoc} partners={displayedPartners} />
-              ) : (
-                <div style={{ textAlign: 'center', padding: '20px' }}>
-                  <i data-lucide="map" style={{ width: 48, height: 48, color: 'var(--text-muted)', margin: '0 auto 16px', display: 'block' }}></i>
-                  <p style={{ color: 'var(--text-muted)' }}>Click "Locate Me" to view the live interactive map.</p>
-                </div>
-              )}
+          <div className="grid grid-cols-2 gap-4" style={{ alignItems: 'start' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', position: 'sticky', top: '90px', zIndex: 10 }}>
+              <div className="glass-card" style={{ height: '350px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, overflow: 'hidden' }}>
+                {userLoc && !locating ? (
+                  <LeafletMap userLoc={userLoc} partners={displayedPartners} />
+                ) : locating ? (
+                  <div style={{ textAlign: 'center', padding: '20px' }} className="animate-fade-in">
+                    <i data-lucide="loader" className="spin" style={{ width: 48, height: 48, color: 'var(--primary)', margin: '0 auto 16px', display: 'block' }}></i>
+                    <p style={{ color: 'var(--primary)', fontWeight: 'bold', fontSize: '1.1rem' }}>{locatingMessage}</p>
+                  </div>
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '20px' }}>
+                    <i data-lucide="map" style={{ width: 48, height: 48, color: 'var(--text-muted)', margin: '0 auto 16px', display: 'block' }}></i>
+                    <p style={{ color: 'var(--text-muted)' }}>Click "Locate Me" to view the live interactive map.</p>
+                  </div>
+                )}
+              </div>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textAlign: 'center', margin: '4px 0' }}>
+                <i data-lucide="info" style={{ width: 12, height: 12, display: 'inline', marginRight: '4px' }}></i>
+                Note: GPS pins are approximate approximations. Use the "Navigate to Branch" option for precise turn-by-turn routing.
+              </p>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {displayedPartners.map((p, idx) => (
-                <div key={idx} className={`glass-card stagger-${idx + 1} animate-fade-in`} style={{ padding: '16px' }}>
-                  <div className="flex justify-between items-center">
-                    <h3>{p.name}</h3>
-                    <span className="badge badge-primary">{p.distance}</span>
+                <div key={idx} className={`glass-card stagger-${idx + 1} animate-fade-in`} style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{p.name}</h3>
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '4px 0 0 0' }}>{p.type} • {p.district}</p>
+                    </div>
+                    <span className="badge badge-primary" style={{ whiteSpace: 'nowrap' }}>{p.distance}</span>
                   </div>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '4px 0' }}>{p.type}</p>
-                  <div className="flex items-center gap-2 mt-2 mb-4">
-                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: p.status === 'Optimal' ? 'var(--success)' : 'var(--warning)' }}></div>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Fund Status: {p.status}</span>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '0.85rem' }}>
+                    <div>
+                      <strong style={{ color: 'var(--text-color)' }}><i data-lucide="map-pin" style={{ width: 14, height: 14, display: 'inline', verticalAlign: 'middle', marginRight: 4 }}></i>Address:</strong>
+                      <p style={{ margin: '2px 0 0 0', color: 'var(--text-muted)' }}>{p.address}, {p.pincode}</p>
+                    </div>
+                    <div>
+                      <strong style={{ color: 'var(--text-color)' }}><i data-lucide="phone" style={{ width: 14, height: 14, display: 'inline', verticalAlign: 'middle', marginRight: 4 }}></i>Contact:</strong>
+                      <p style={{ margin: '2px 0 0 0', color: 'var(--text-muted)' }}>{p.contact_number}<br />{p.email}</p>
+                    </div>
                   </div>
+
+                  <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '10px', borderRadius: '8px', fontSize: '0.85rem' }}>
+                    <strong style={{ color: 'var(--text-color)', display: 'block', marginBottom: 4 }}><i data-lucide="bar-chart-2" style={{ width: 14, height: 14, display: 'inline', verticalAlign: 'middle', marginRight: 4 }}></i>Performance Metrics:</strong>
+                    <div className="flex justify-between">
+                      <span style={{ color: 'var(--text-muted)' }}>NPA Ratio: <span style={{ color: p.npa_percentage > 5 ? 'var(--error)' : 'var(--success)', fontWeight: 'bold' }}>{p.npa_percentage}%</span></span>
+                      <span style={{ color: 'var(--text-muted)' }}>Funds: <span style={{ color: p.is_fund_eligible ? 'var(--success)' : 'var(--error)', fontWeight: 'bold' }}>₹{p.available_disbursement_limit ? (p.available_disbursement_limit / 10000000).toFixed(2) : 0} Cr</span></span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <strong style={{ color: 'var(--text-color)', fontSize: '0.85rem', display: 'block', marginBottom: 6 }}>Supported Schemes:</strong>
+                    <div className="flex flex-wrap gap-2">
+                      {p.supported_scheme_categories && (typeof p.supported_scheme_categories === 'string' ? JSON.parse(p.supported_scheme_categories) : p.supported_scheme_categories).map((cat, i) => (
+                        <span key={i} className="badge" style={{ fontSize: '0.75rem', padding: '2px 8px', background: 'rgba(255,255,255,0.1)' }}>{cat}</span>
+                      ))}
+                    </div>
+                  </div>
+
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + ' near me')}`}
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + ' ' + (p.address || ''))}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline"
-                    style={{ padding: '6px 12px', fontSize: '0.8rem', width: '100%', textDecoration: 'none', display: 'flex', justifyContent: 'center', gap: '8px' }}>
-                    <i data-lucide="map" style={{ width: 14, height: 14 }}></i> Find Genuine Location
+                    style={{ padding: '8px 12px', fontSize: '0.9rem', width: '100%', textDecoration: 'none', display: 'flex', justifyContent: 'center', gap: '8px', marginTop: 'auto' }}>
+                    <i data-lucide="navigation" style={{ width: 16, height: 16 }}></i> Navigate to Branch
                   </a>
                 </div>
               ))}
@@ -1407,6 +1673,7 @@ out center 15;`;
     };
 
     const App = () => {
+      
       const getInitialState = (key, defaultValue) => {
         const saved = localStorage.getItem(key);
         if (saved) {
@@ -1471,7 +1738,7 @@ out center 15;`;
       return (
         <>
           <MouseTrail />
-          <Navbar currentView={currentView} setView={handleProtectedView} session={session} onLoginClick={() => setShowAuthModal(true)} formData={formData} />
+          <Navbar currentView={currentView} setView={handleProtectedView} session={session} onLoginClick={() => setShowAuthModal(true)} formData={formData}  />
           <main>
             {currentView === 'home' && (!session ? <LandingPage onLoginClick={() => setShowAuthModal(true)} /> : <Home setView={handleProtectedView} />)}
             {currentView === 'wizard' && <Wizard setView={handleProtectedView} formData={formData} setFormData={setFormData} session={session} />}
@@ -1489,6 +1756,8 @@ out center 15;`;
               }}
             />
           )}
+
+
         </>
       );
     };
