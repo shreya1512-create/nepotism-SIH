@@ -83,7 +83,7 @@
               <i data-lucide="menu" style={{ width: 28, height: 28 }}></i>
             </button>
 
-            <div className="logo" onClick={() => handleNavClick('home')} style={{ cursor: 'pointer', margin: 0, display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div className="logo" style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '16px' }}>
               <svg width="52" height="52" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ filter: 'drop-shadow(0 6px 12px rgba(0,0,0,0.25))' }}>
                 <defs>
                   <linearGradient id="gradTop" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -120,17 +120,28 @@
           )}
 
           {/* CENTER: ACTION BUTTONS (Sidebar on mobile) */}
-          <div className={`nav-links glass sidebar-menu ${isMobileMenuOpen ? 'open' : ''}`} style={{ display: 'flex', gap: '28px', padding: '12px 40px', borderRadius: '40px', alignItems: 'center', justifyContent: 'center', border: '1px solid #cbd5e1', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.06)', whiteSpace: 'nowrap', flexShrink: 0 }}>
+          <div className={`nav-links sidebar-menu ${isMobileMenuOpen ? 'open' : ''}`} style={{ display: 'flex', gap: '16px', alignItems: 'center', justifyContent: 'center', whiteSpace: 'nowrap', flexShrink: 0 }}>
             <div className="mobile-sidebar-header">
               <h3>Menu</h3>
               <button className="btn-icon" onClick={() => setIsMobileMenuOpen(false)}>
                 <i data-lucide="x" style={{ width: 24, height: 24 }}></i>
               </button>
             </div>
-            <a className={`nav-item ${currentView === 'wizard' ? 'active' : ''}`} onClick={() => handleNavClick('wizard')}>Recommender</a>
-            <a className={`nav-item ${currentView === 'schemes' ? 'active' : ''}`} onClick={() => handleNavClick('schemes')}>Schemes</a>
-            <a className={`nav-item ${currentView === 'calculator' ? 'active' : ''}`} onClick={() => handleNavClick('calculator')}>Calculator</a>
-            <a className={`nav-item ${currentView === 'locator' ? 'active' : ''}`} onClick={() => handleNavClick('locator')}>Partner Locator</a>
+            <a className={`nav-item ${currentView === 'home' ? 'active' : ''}`} onClick={() => handleNavClick('home')}>
+              <i data-lucide="layout-dashboard" style={{ width: 16, height: 16 }}></i> Dashboard
+            </a>
+            <a className={`nav-item ${currentView === 'wizard' ? 'active' : ''}`} onClick={() => handleNavClick('wizard')}>
+              <i data-lucide="sparkles" style={{ width: 16, height: 16 }}></i> AI Match
+            </a>
+            <a className={`nav-item ${currentView === 'schemes' ? 'active' : ''}`} onClick={() => handleNavClick('schemes')}>
+              <i data-lucide="library" style={{ width: 16, height: 16 }}></i> Scheme Vault
+            </a>
+            <a className={`nav-item ${currentView === 'calculator' ? 'active' : ''}`} onClick={() => handleNavClick('calculator')}>
+              <i data-lucide="calculator" style={{ width: 16, height: 16 }}></i> FinCalc
+            </a>
+            <a className={`nav-item ${currentView === 'locator' ? 'active' : ''}`} onClick={() => handleNavClick('locator')}>
+              <i data-lucide="map-pin" style={{ width: 16, height: 16 }}></i> Connect
+            </a>
           </div>
 
           {/* RIGHT: LOGIN/EMAIL */}

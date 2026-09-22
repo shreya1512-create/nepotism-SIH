@@ -158,9 +158,11 @@ h6 {
   top: 0;
   z-index: 100;
   padding: 16px 0;
-  border-bottom: 2px solid var(--secondary);
-  background: rgba(255, 255, 255, 0.95);
-  /* Removed backdrop-filter to prevent trapping position:fixed children on mobile */
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
 .navbar::before {
@@ -202,19 +204,30 @@ h6 {
   transition: var(--transition);
   cursor: pointer;
   padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1.05rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .nav-item:hover {
   color: var(--text-main);
-  background: rgba(0, 0, 128, 0.05);
+  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .nav-item.active {
-  color: var(--primary);
-  background: rgba(0, 0, 128, 0.1);
-  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, var(--primary), #818cf8);
+  border-color: transparent;
+  font-weight: 500;
+  box-shadow: 0 4px 12px var(--primary-glow);
 }
 
 /* Hero Section */
@@ -747,7 +760,8 @@ select.chat-input option {
   }
 
   .container {
-    padding: 0 16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 }
 
