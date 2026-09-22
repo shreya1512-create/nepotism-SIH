@@ -75,9 +75,9 @@
       };
 
       return (
-        <nav className="navbar" style={{ width: '100%', padding: '12px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px', position: 'relative' }}>
+        <nav className="navbar" style={{ width: '100%', padding: '12px 40px', display: 'flex', alignItems: 'center', gap: '20px', position: 'relative' }}>
           {/* LEFT: HAMBURGER (Mobile) + LOGO */}
-          <div className="nav-left" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+          <div className="nav-left" style={{ display: 'flex', flex: 1, alignItems: 'center', gap: '12px', minWidth: 0 }}>
             {/* Hamburger Button for Mobile */}
             <button className="hamburger-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               <i data-lucide="menu" style={{ width: 28, height: 28 }}></i>
@@ -127,25 +127,36 @@
                 <i data-lucide="x" style={{ width: 24, height: 24 }}></i>
               </button>
             </div>
-            <a className={`nav-item ${currentView === 'home' ? 'active' : ''}`} onClick={() => handleNavClick('home')}>
-              <i data-lucide="layout-dashboard" style={{ width: 16, height: 16 }}></i> Dashboard
-            </a>
-            <a className={`nav-item ${currentView === 'wizard' ? 'active' : ''}`} onClick={() => handleNavClick('wizard')}>
-              <i data-lucide="sparkles" style={{ width: 16, height: 16 }}></i> AI Match
-            </a>
-            <a className={`nav-item ${currentView === 'schemes' ? 'active' : ''}`} onClick={() => handleNavClick('schemes')}>
-              <i data-lucide="library" style={{ width: 16, height: 16 }}></i> Scheme Vault
-            </a>
-            <a className={`nav-item ${currentView === 'calculator' ? 'active' : ''}`} onClick={() => handleNavClick('calculator')}>
-              <i data-lucide="calculator" style={{ width: 16, height: 16 }}></i> FinCalc
-            </a>
-            <a className={`nav-item ${currentView === 'locator' ? 'active' : ''}`} onClick={() => handleNavClick('locator')}>
-              <i data-lucide="map-pin" style={{ width: 16, height: 16 }}></i> Connect
-            </a>
+            {!session ? (
+              <>
+                <a href="#benefits" className="nav-item"><i data-lucide="star" style={{ width: 16, height: 16 }}></i> Benefits</a>
+                <a href="#how-it-works" className="nav-item"><i data-lucide="info" style={{ width: 16, height: 16 }}></i> How it Works</a>
+                <a href="#faqs" className="nav-item"><i data-lucide="help-circle" style={{ width: 16, height: 16 }}></i> FAQs</a>
+                <a href="#contact" className="nav-item"><i data-lucide="mail" style={{ width: 16, height: 16 }}></i> Contact</a>
+              </>
+            ) : (
+              <>
+                <a className={`nav-item ${currentView === 'home' ? 'active' : ''}`} onClick={() => handleNavClick('home')}>
+                  <i data-lucide="layout-dashboard" style={{ width: 16, height: 16 }}></i> Dashboard
+                </a>
+                <a className={`nav-item ${currentView === 'wizard' ? 'active' : ''}`} onClick={() => handleNavClick('wizard')}>
+                  <i data-lucide="sparkles" style={{ width: 16, height: 16 }}></i> AI Match
+                </a>
+                <a className={`nav-item ${currentView === 'schemes' ? 'active' : ''}`} onClick={() => handleNavClick('schemes')}>
+                  <i data-lucide="library" style={{ width: 16, height: 16 }}></i> Scheme Vault
+                </a>
+                <a className={`nav-item ${currentView === 'calculator' ? 'active' : ''}`} onClick={() => handleNavClick('calculator')}>
+                  <i data-lucide="calculator" style={{ width: 16, height: 16 }}></i> FinCalc
+                </a>
+                <a className={`nav-item ${currentView === 'locator' ? 'active' : ''}`} onClick={() => handleNavClick('locator')}>
+                  <i data-lucide="map-pin" style={{ width: 16, height: 16 }}></i> Connect
+                </a>
+              </>
+            )}
           </div>
 
           {/* RIGHT: LOGIN/EMAIL */}
-          <div className="nav-right" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', flexShrink: 0, gap: '12px' }}>
+          <div className="nav-right" style={{ display: 'flex', flex: 1, justifyContent: 'flex-end', alignItems: 'center', minWidth: 0, gap: '12px' }}>
             {session ? (
               <div className="flex items-center gap-4">
                 <div className="user-profile-menu" style={{ position: 'relative', display: 'inline-block' }}>
@@ -164,12 +175,49 @@
                 <button className="btn btn-outline" style={{ padding: '8px 16px', fontSize: '0.9rem', borderRadius: '20px' }} onClick={handleLogout}>Logout</button>
               </div>
             ) : (
-              <button className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.95rem', borderRadius: '20px' }} onClick={onLoginClick}>Login</button>
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                <button className="btn btn-outline" style={{ padding: '8px 20px', fontSize: '0.95rem', borderRadius: '20px' }} onClick={onLoginClick}>Log In</button>
+                <button className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.95rem', borderRadius: '20px' }} onClick={onLoginClick}>Sign Up</button>
+              </div>
             )}
           </div>
         </nav>
       );
     };
+
+    const LandingPage = ({ onLoginClick }) => (
+      <div className="container hero" style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)', padding: '6px 16px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
+          <i data-lucide="sparkles" style={{ width: 14, height: 14 }}></i> AI Infrastructure for Schemes
+        </div>
+        <h1 className="animate-fade-in stagger-2" style={{ fontSize: '3.5rem', maxWidth: '900px', lineHeight: '1.2' }}>
+          Welcome to Sahāy AI.<br/>
+          <span className="text-gradient">Discover schemes tailored for you in minutes.</span>
+        </h1>
+        <p className="animate-fade-in stagger-3" style={{ fontSize: '1.2rem', maxWidth: '700px', marginTop: '24px', marginBottom: '40px' }}>
+          Deploy adaptive AI agents that learn your business needs and instantly match you with perfect financial assistance and government support programs.
+        </p>
+        <div className="flex gap-4 animate-fade-in stagger-3 justify-center flex-wrap">
+          <button className="btn btn-primary" onClick={onLoginClick} style={{ padding: '12px 32px', fontSize: '1.1rem', borderRadius: '30px' }}>
+            Start for Free
+          </button>
+          <button className="btn btn-outline" onClick={onLoginClick} style={{ padding: '12px 32px', fontSize: '1.1rem', borderRadius: '30px', background: 'transparent' }}>
+            See it in action
+          </button>
+        </div>
+        <div className="flex mt-6 animate-fade-in" style={{ display: 'flex', gap: '32px', marginTop: '80px', flexWrap: 'wrap', justifyContent: 'center', width: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+            <i data-lucide="zap" style={{ width: 16, height: 16, color: 'var(--primary)' }}></i> Central & State Schemes
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+            <i data-lucide="file-check-2" style={{ width: 16, height: 16, color: 'var(--secondary)' }}></i> Zero Manual Forms
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+            <i data-lucide="clock" style={{ width: 16, height: 16, color: 'var(--accent)' }}></i> Instant AI Matching
+          </div>
+        </div>
+      </div>
+    );
 
     const Home = ({ setView }) => (
       <div className="container hero">
@@ -1425,7 +1473,7 @@ out center 15;`;
           <MouseTrail />
           <Navbar currentView={currentView} setView={handleProtectedView} session={session} onLoginClick={() => setShowAuthModal(true)} formData={formData} />
           <main>
-            {currentView === 'home' && <Home setView={handleProtectedView} />}
+            {currentView === 'home' && (!session ? <LandingPage onLoginClick={() => setShowAuthModal(true)} /> : <Home setView={handleProtectedView} />)}
             {currentView === 'wizard' && <Wizard setView={handleProtectedView} formData={formData} setFormData={setFormData} session={session} />}
             {currentView === 'schemes' && <Schemes setView={handleProtectedView} formData={formData} session={session} />}
             {currentView === 'calculator' && <LoanCalculator />}
