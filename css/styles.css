@@ -1,8 +1,8 @@
 :root {
   /* Color Palette - Gov India Light Theme */
   --bg-dark: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
+  --bg-card: #f4f7fa; /* Subtle cool tint instead of pure white */
+  --bg-card-hover: #eef2f6;
 
   --primary: #000080;
   /* Ashoka Chakra Navy Blue */
@@ -28,6 +28,10 @@
   --border-radius: 8px;
   /* Less rounded for more official govt look */
   --transition: all 0.2s ease-in-out;
+
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-card-bg: rgba(255, 255, 255, 0.95);
+  --glass-card-hover-bg: #ffffff;
 }
 
 * {
@@ -66,7 +70,7 @@ body {
 
 /* Glassmorphism Utilities */
 .glass {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: var(--glass-border);
@@ -75,7 +79,7 @@ body {
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--glass-card-bg);
   backdrop-filter: blur(12px);
   border: var(--glass-border);
   border-top: 3px solid var(--secondary);
@@ -86,10 +90,10 @@ body {
 }
 
 .glass-card:hover {
-  background: #ffffff;
+  background: var(--glass-card-hover-bg);
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  border-color: #cbd5e1;
+  border-color: var(--border);
 }
 
 /* Typography */
@@ -167,7 +171,7 @@ h6 {
   z-index: 100;
   padding: 16px 0;
   border-bottom: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
@@ -185,19 +189,106 @@ h6 {
   z-index: -1;
 }
 
-.navbar-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.navbar {
+  width: 100%;
+  padding: 12px 32px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+}
+
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  flex: 0 0 auto !important;
+  gap: 12px !important;
+  min-width: 0 !important;
+}
+
+.auth-buttons-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.auth-btn {
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  padding: 8px 18px !important;
+  font-size: 0.95rem !important;
+  border-radius: 20px !important;
+}
+
+.nav-logout-btn {
+  padding: 8px 16px !important;
+  font-size: 0.9rem !important;
+  border-radius: 20px !important;
+  white-space: nowrap !important;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  letter-spacing: -0.5px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  text-decoration: none !important;
+}
+
+.logo svg {
+  width: 44px !important;
+  height: 44px !important;
+  flex-shrink: 0 !important;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+}
+
+.logo-text-container {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+.logo-title {
+  font-size: 1.75rem !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  color: var(--text-main) !important;
+  letter-spacing: -0.5px !important;
+  white-space: nowrap !important;
+  display: block !important;
+}
+
+.logo-title span {
+  font-weight: 400 !important;
+  color: var(--text-muted) !important;
+}
+
+.logo-credit {
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  margin-top: 3px !important;
+  white-space: nowrap !important;
+  display: block !important;
 }
 
 .nav-links {
@@ -358,8 +449,8 @@ h6 {
 
 .chat-input {
   flex: 1;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   padding: 14px 20px;
   border-radius: 8px;
   color: var(--text-main);
@@ -373,7 +464,17 @@ h6 {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(0, 0, 128, 0.15);
-  background: #f8fafc;
+  background: var(--bg-dark);
+}
+
+/* Fix browser autofill styling causing white background in dark mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--bg-dark) inset !important;
+    -webkit-text-fill-color: var(--text-main) !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 select.chat-input {
@@ -401,6 +502,10 @@ select.chat-input option {
 
 .grid-cols-3 {
   grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
 }
 
 /* Badges */
@@ -638,7 +743,7 @@ select.chat-input option {
     justify-content: flex-start !important;
     align-items: stretch !important;
     padding: 24px 16px !important;
-    background: rgba(255, 255, 255, 0.98) !important;
+    background: var(--bg-card) !important;
     backdrop-filter: blur(16px) !important;
     border-radius: 0 !important;
     border-left: var(--glass-border) !important;
@@ -833,7 +938,7 @@ select.chat-input option {
       justify-content: flex-start !important;
       align-items: stretch !important;
       padding: 24px 16px !important;
-      background: rgba(255, 255, 255, 0.98) !important;
+      background: var(--bg-card) !important;
       backdrop-filter: blur(16px) !important;
       border-radius: 0 !important;
       border-left: var(--glass-border) !important;
@@ -958,6 +1063,7 @@ select.chat-input option {
     div[style*="grid-template-columns"],
     .grid-cols-2,
     .grid-cols-3,
+    .grid-cols-4,
     .hero .flex.gap-4 {
       grid-template-columns: 1fr !important;
       gap: 16px !important;
@@ -981,11 +1087,65 @@ select.chat-input option {
     }
   }
 
-  @media (max-width: 480px) {
-    .logo {
-      justify-content: flex-start;
-      width: auto;
+  @media (max-width: 640px) {
+    .navbar {
+      padding: 10px 14px !important;
       gap: 8px !important;
+    }
+
+    .nav-left {
+      gap: 8px !important;
+    }
+
+    .logo {
+      gap: 8px !important;
+    }
+
+    .logo svg {
+      width: 34px !important;
+      height: 34px !important;
+    }
+
+    .logo-title {
+      font-size: 1.3rem !important;
+    }
+
+    .logo-credit {
+      font-size: 0.52rem !important;
+      letter-spacing: 1.2px !important;
+      margin-top: 1px !important;
+    }
+
+    .nav-right {
+      gap: 6px !important;
+    }
+
+    .auth-buttons-group {
+      gap: 6px !important;
+    }
+
+    .auth-btn {
+      padding: 6px 12px !important;
+      font-size: 0.8rem !important;
+      min-height: 34px !important;
+      height: 34px !important;
+      border-radius: 16px !important;
+      line-height: 1 !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .navbar {
+      padding: 8px 10px !important;
+      gap: 4px !important;
+    }
+
+    .nav-left {
+      gap: 6px !important;
+    }
+
+    .hamburger-btn {
+      padding: 4px !important;
     }
 
     .logo svg {
@@ -993,47 +1153,33 @@ select.chat-input option {
       height: 28px !important;
     }
 
-    /* Main Title */
-    .logo-text-container>span:first-child {
-      font-size: 1.5rem !important;
+    .logo-title {
+      font-size: 1.15rem !important;
     }
 
-    /* Organize Hero buttons into 2x2 grid on tablets */
-    .hero .flex.gap-4 {
-      display: grid !important;
-      grid-template-columns: repeat(2, 1fr);
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
+    .logo-credit {
+      font-size: 0.46rem !important;
+      letter-spacing: 0.8px !important;
     }
 
-    .hero .flex.gap-4 .btn {
-      width: 100% !important;
-      min-height: 54px;
+    .auth-buttons-group {
+      gap: 4px !important;
     }
 
-    .hero .flex.gap-4 .btn i {
-      flex-shrink: 0;
-    }
-
-    /* Tiny Subtitle */
-    .logo-text-container>span:last-child {
-      font-size: 0.55rem !important;
-      display: block !important;
-      letter-spacing: 0.5px !important;
-      line-height: 1;
-    }
-
-    .navbar {
-      padding: 10px 8px !important;
+    .auth-btn {
+      padding: 5px 10px !important;
+      font-size: 0.75rem !important;
+      min-height: 30px !important;
+      height: 30px !important;
+      border-radius: 14px !important;
     }
 
     .hero h1 {
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       line-height: 1.05;
       word-spacing: normal;
       letter-spacing: -1px;
-      padding: 0 16px;
+      padding: 0 12px;
     }
   }
 
@@ -1046,4 +1192,30 @@ select.chat-input option {
   .spin {
     animation: spin 1s linear infinite;
   }
+}
+
+.dark-theme {
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+
+  --primary: #818cf8;
+  --primary-glow: rgba(129, 140, 248, 0.2);
+  --secondary: #fb923c;
+  --accent: #4ade80;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+
+  --success: #4ade80;
+  --warning: #fb923c;
+  --error: #f87171;
+
+  --border: #334155;
+  --glass-border: 1px solid #334155;
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+
+  --glass-bg: rgba(30, 41, 59, 0.85);
+  --glass-card-bg: rgba(30, 41, 59, 0.95);
+  --glass-card-hover-bg: #334155;
 }
