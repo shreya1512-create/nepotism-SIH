@@ -1,7 +1,8 @@
 :root {
   /* Color Palette - Gov India Light Theme */
   --bg-dark: #f8fafc;
-  --bg-card: #f4f7fa; /* Subtle cool tint instead of pure white */
+  --bg-card: #f4f7fa;
+  /* Subtle cool tint instead of pure white */
   --bg-card-hover: #eef2f6;
 
   --primary: #000080;
@@ -56,6 +57,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   max-width: 100%;
+  padding-top: 76px; /* Offset for fixed navbar */
   background-image:
     radial-gradient(circle at 0% 0%, rgba(255, 153, 51, 0.15) 0%, transparent 50%),
     radial-gradient(circle at 100% 100%, rgba(19, 136, 8, 0.15) 0%, transparent 50%),
@@ -166,9 +168,11 @@ h6 {
 
 /* Navbar */
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   padding: 16px 0;
   border-bottom: 1px solid var(--border);
   background: var(--glass-bg);
@@ -195,7 +199,6 @@ h6 {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  position: relative;
   box-sizing: border-box;
 }
 
@@ -469,12 +472,12 @@ h6 {
 
 /* Fix browser autofill styling causing white background in dark mode */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px var(--bg-dark) inset !important;
-    -webkit-text-fill-color: var(--text-main) !important;
-    transition: background-color 5000s ease-in-out 0s;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--bg-dark) inset !important;
+  -webkit-text-fill-color: var(--text-main) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 select.chat-input {
