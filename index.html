@@ -3177,7 +3177,7 @@
           <div className="ai-chat-box">
             {/* Unified Sleek Header */}
             <div className="ai-chat-header">
-              <div className="ai-chat-header-left">
+              <div className="ai-chat-header-left ai-chat-header-main">
                 <div className="ai-avatar-pulse">
                   <AppIcon name="bot" size={22} />
                 </div>
@@ -3185,10 +3185,6 @@
                   <div className="ai-chat-title-row">
                     <h2 className="ai-chat-title">Sahāy Smart Assistant</h2>
                     <span className="ai-badge-live">AI Advisor</span>
-                    <span className="ai-schemes-count">
-                      <span className="ai-dot-pulse"></span>
-                      {(schemesDb.length > 0 ? schemesDb.length : (vaultSchemes.length || 24))} Schemes Connected
-                    </span>
                   </div>
                   <div className="ai-chat-subtitle">
                     Instant guidance on Central & State government schemes, interest rates & partner routing
@@ -3196,18 +3192,24 @@
                 </div>
               </div>
 
-              <div className="ai-chat-header-right">
-                <span className="ai-voice-badge">
-                  <AppIcon name="volume-2" size={12} />
-                  <span>{femaleIndianVoice ? femaleIndianVoice.name.split('-')[0].trim() : 'Female Indian Voice'}</span>
+              <div className="ai-chat-header-right ai-chat-header-toolbar">
+                <span className="ai-schemes-count">
+                  <span className="ai-dot-pulse"></span>
+                  {(schemesDb.length > 0 ? schemesDb.length : (vaultSchemes.length || 24))} Schemes Connected
                 </span>
-                <button 
-                  className="ai-clear-action-btn" 
-                  onClick={handleClearChat} 
-                  title="Clear conversation history">
-                  <AppIcon name="trash-2" size={13} />
-                  <span>Clear Chat</span>
-                </button>
+                <div className="ai-chat-header-actions">
+                  <span className="ai-voice-badge">
+                    <AppIcon name="volume-2" size={12} />
+                    <span>{femaleIndianVoice ? femaleIndianVoice.name.split('-')[0].trim() : 'Female Indian Voice'}</span>
+                  </span>
+                  <button 
+                    className="ai-clear-action-btn" 
+                    onClick={handleClearChat} 
+                    title="Clear conversation history">
+                    <AppIcon name="trash-2" size={13} />
+                    <span>Clear Chat</span>
+                  </button>
+                </div>
               </div>
             </div>
 
