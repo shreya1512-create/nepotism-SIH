@@ -184,6 +184,79 @@
               <path d="M9 13v2" />
             </svg>
           );
+        case 'mic':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+              <line x1="12" x2="12" y1="19" y2="22" />
+            </svg>
+          );
+        case 'mic-off':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="2" x2="22" y1="2" y2="22" />
+              <path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2" />
+              <path d="M5 10v2a7 7 0 0 0 12 5" />
+              <path d="M15 9.34V5a3 3 0 0 0-5.68-1.33" />
+              <path d="M9 9v3a3 3 0 0 0 5.12 2.12" />
+              <line x1="12" x2="12" y1="19" y2="22" />
+            </svg>
+          );
+        case 'volume-2':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+            </svg>
+          );
+        case 'volume-x':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <line x1="22" x2="16" y1="9" y2="15" />
+              <line x1="16" x2="22" y1="9" y2="15" />
+            </svg>
+          );
+        case 'send':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="22" x2="11" y1="2" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
+          );
+        case 'trash-2':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 6h18" />
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+              <line x1="10" x2="10" y1="11" y2="17" />
+              <line x1="14" x2="14" y1="11" y2="17" />
+            </svg>
+          );
+        case 'copy':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+            </svg>
+          );
+        case 'check':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          );
+        case 'external-link':
+          return (
+            <svg style={s} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" x2="21" y1="14" y2="3" />
+            </svg>
+          );
         default:
           return <i data-lucide={name} style={s} className={className}></i>;
       }
@@ -282,6 +355,9 @@
                 <a key="nav-faqs" href="#faqs" onClick={() => setIsMobileMenuOpen(false)} className="nav-item">
                   <AppIcon name="help-circle" size={16} /> FAQs
                 </a>
+                <a key="nav-ai-mentor-out" className={`nav-item ${currentView === 'ai-mentor' ? 'active' : ''}`} onClick={() => handleNavClick('ai-mentor')}>
+                  <AppIcon name="bot" size={16} /> AI Mentor
+                </a>
                 <a key="nav-contact" href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="nav-item">
                   <AppIcon name="mail" size={16} /> Contact
                 </a>
@@ -302,6 +378,9 @@
                 </a>
                 <a key="nav-locator" className={`nav-item ${currentView === 'locator' ? 'active' : ''}`} onClick={() => handleNavClick('locator')}>
                   <AppIcon name="map-pin" size={16} /> Connect
+                </a>
+                <a key="nav-ai-mentor" className={`nav-item ${currentView === 'ai-mentor' ? 'active' : ''}`} onClick={() => handleNavClick('ai-mentor')}>
+                  <AppIcon name="bot" size={16} /> AI Mentor
                 </a>
               </React.Fragment>
             )}
@@ -1205,10 +1284,10 @@
       );
     };
 
-    const Schemes = ({ setView, formData, session }) => {
-      const [allSchemes, setAllSchemes] = useState([]);
+    const Schemes = ({ setView, formData, session, vaultSchemes = [] }) => {
+      const [allSchemes, setAllSchemes] = useState(() => (vaultSchemes && vaultSchemes.length > 0 ? vaultSchemes : []));
       const [eligibleSchemes, setEligibleSchemes] = useState([]);
-      const [loading, setLoading] = useState(true);
+      const [loading, setLoading] = useState(() => !(vaultSchemes && vaultSchemes.length > 0));
       const [selectedScheme, setSelectedScheme] = useState(null);
 
       useEffect(() => {
@@ -1762,130 +1841,1508 @@
       );
     };
 
-    const AiMentor = ({ setView }) => {
+    const AiMentor = ({ setView, formData = {}, session, vaultSchemes = [] }) => {
+      const DEFAULT_SCHEMES = [
+        {
+          code: 'NSFDC-TL',
+          name: 'NSFDC Term Loan Scheme',
+          category: 'SC',
+          maxCost: 5000000,
+          rate: 6.0,
+          subsidy: 0,
+          moratorium: 6,
+          tenure: 60,
+          criteria: 'SC Category with annual family income up to ₹3.00 Lakhs (or ₹5.00 Lakhs in select categories).',
+          benefits: 'Term loans up to ₹50 Lakhs for industrial, agricultural, or service sector ventures at 6%–8% p.a.',
+          docs: 'Aadhaar, Caste Certificate, Income Certificate, Detailed Project Report (DPR), 6 months Bank Statement.',
+          link: 'https://nsfdc.nic.in'
+        },
+        {
+          code: 'NSFDC-MCS',
+          name: 'NSFDC Micro Credit Scheme',
+          category: 'SC',
+          maxCost: 140000,
+          rate: 5.0,
+          subsidy: 0,
+          moratorium: 6,
+          tenure: 36,
+          criteria: 'SC entrepreneurs and Self-Help Groups (SHGs) with annual income up to ₹3.00 Lakhs.',
+          benefits: 'Small business micro-loans up to ₹1,40,000 per beneficiary at 5% p.a. Zero collateral.',
+          docs: 'Aadhaar, Caste Certificate, Income Certificate, Basic Business Plan.',
+          link: 'https://nsfdc.nic.in'
+        },
+        {
+          code: 'NSFDC-MSY',
+          name: 'Mahila Samriddhi Yojana (NSFDC / NBCFDC)',
+          category: 'SC / OBC Female',
+          maxCost: 140000,
+          rate: 4.0,
+          subsidy: 0,
+          moratorium: 6,
+          tenure: 48,
+          criteria: 'SC or OBC Women entrepreneurs. Family income up to ₹3.00 Lakhs.',
+          benefits: 'Concessional finance up to ₹1,40,000 at heavily subsidized 4% p.a. for micro-enterprises and women SHGs.',
+          docs: 'Aadhaar Card, Caste Certificate, Income Proof, Bank Account details.',
+          link: 'https://nsfdc.nic.in'
+        },
+        {
+          code: 'NSTFDC-AMSY',
+          name: 'Adivasi Mahila Sashaktikaran Yojana (AMSY)',
+          category: 'ST Female',
+          maxCost: 200000,
+          rate: 4.0,
+          subsidy: 0,
+          moratorium: 6,
+          tenure: 48,
+          criteria: 'ST Women with annual family income up to ₹3.00 Lakhs.',
+          benefits: 'Loans up to ₹2 Lakhs at 4% p.a. specifically structured for tribal women entrepreneurs.',
+          docs: 'Aadhaar, Tribe Certificate, Income Certificate, Project Proposal.',
+          link: 'https://nstfdc.tribal.gov.in'
+        },
+        {
+          code: 'NSTFDC-TL',
+          name: 'NSTFDC Term Loan',
+          category: 'ST',
+          maxCost: 5000000,
+          rate: 8.0,
+          subsidy: 0,
+          moratorium: 6,
+          tenure: 60,
+          criteria: 'ST Category with annual family income up to ₹3.00 Lakhs.',
+          benefits: 'Loans up to ₹50 Lakhs for industrial, agricultural, and service sector ventures.',
+          docs: 'Aadhaar, Tribe Certificate, Income Certificate, Detailed Project Report.',
+          link: 'https://nstfdc.tribal.gov.in'
+        },
+        {
+          code: 'NSTFDC-ASRY',
+          name: 'Adivasi Shiksha Rinn Yojana',
+          category: 'ST',
+          maxCost: 500000,
+          rate: 6.0,
+          subsidy: 0,
+          moratorium: 12,
+          tenure: 60,
+          criteria: 'ST Category students pursuing professional or technical higher education.',
+          benefits: 'Education loan up to ₹5 Lakhs at 6% p.a. with 12 months moratorium after course completion.',
+          docs: 'Aadhaar, Tribe Certificate, Admission Offer Letter, Fee Structure.',
+          link: 'https://nstfdc.tribal.gov.in'
+        },
+        {
+          code: 'NSFDC-ELS',
+          name: 'NSFDC Educational Loan Scheme',
+          category: 'SC Students',
+          maxCost: 2000000,
+          rate: 4.0,
+          subsidy: 0,
+          moratorium: 12,
+          tenure: 120,
+          criteria: 'SC students pursuing full-time professional or technical courses in India or abroad.',
+          benefits: 'Education loans up to ₹20 Lakhs in India and ₹30 Lakhs abroad at subsidized 4% p.a. (3.5% for girl students). Repayment begins 1 year after course completion.',
+          docs: 'Aadhaar, Caste Certificate, College Admission Offer Letter, Institution Fee Schedule, 10th/12th Marksheets.',
+          link: 'https://nsfdc.nic.in'
+        },
+        {
+          code: 'CSIS-EDU',
+          name: 'Central Sector Interest Subsidy (CSIS)',
+          category: 'ALL (EWS / Annual Family Income < ₹4.5L)',
+          maxCost: 1000000,
+          rate: 0.0,
+          subsidy: 100,
+          moratorium: 12,
+          tenure: 180,
+          criteria: 'Students from Economically Weaker Sections with family income under ₹4.50 Lakhs pursuing professional degrees.',
+          benefits: '100% full government interest waiver/subsidy during the entire moratorium period (Course Duration + 1 Year). Zero collateral up to ₹7.5 Lakhs.',
+          docs: 'Aadhaar, Income Certificate (< ₹4.5L), Bonafide Student Certificate, Bank Education Loan sanction letter.',
+          link: 'https://www.education.gov.in'
+        },
+        {
+          code: 'NBCFDC-NSS',
+          name: 'New Swarnima Scheme for Women',
+          category: 'OBC Female',
+          maxCost: 200000,
+          rate: 5.0,
+          subsidy: 0,
+          moratorium: 6,
+          tenure: 60,
+          criteria: 'Women belonging to backward classes with family income under ₹3.00 Lakhs.',
+          benefits: 'Term loan up to ₹2,00,000 at 5% p.a. for self-employment ventures.',
+          docs: 'Aadhaar, OBC Certificate (Non-Creamy Layer), Income Certificate, Project Summary.',
+          link: 'https://nbcfdc.gov.in'
+        },
+        {
+          code: 'NBCFDC-TUC',
+          name: 'Technology Upgradation of Clusters (TUC)',
+          category: 'OBC',
+          maxCost: 1500000,
+          rate: 8.0,
+          subsidy: 0,
+          moratorium: 6,
+          tenure: 96,
+          criteria: 'OBC entrepreneurs operating in traditional manufacturing and artisan clusters.',
+          benefits: 'Financing up to ₹15 Lakhs for modern machinery, tools, and industrial tech upgrades.',
+          docs: 'Aadhaar, OBC Certificate, DPR, Equipment quotation from verified vendor.',
+          link: 'https://nbcfdc.gov.in'
+        },
+        {
+          code: 'NSKFDC-SUY',
+          name: 'Swachhta Udyami Yojana (SUY)',
+          category: 'Safai Karamchari',
+          maxCost: 5000000,
+          rate: 4.0,
+          subsidy: 500000,
+          moratorium: 6,
+          tenure: 84,
+          criteria: 'Safai Karamcharis, manual scavengers, and their dependents.',
+          benefits: 'Financing mechanized cleaning and sanitation equipment up to ₹50 Lakhs at 4%–6% with ₹5 Lakh capital subsidy.',
+          docs: 'Aadhaar, Dependent/Worker ID, Sanitation Authority Certificate, Vehicle/Machinery Quotation.',
+          link: 'https://nskfdc.nic.in'
+        },
+        {
+          code: 'PMMY-MUDRA',
+          name: 'Pradhan Mantri MUDRA Yojana (PMMY)',
+          category: 'ALL (SC/ST/OBC/Women/Gen)',
+          maxCost: 1000000,
+          rate: 9.0,
+          subsidy: 0,
+          moratorium: 6,
+          tenure: 60,
+          criteria: 'Non-farm micro and small enterprises in manufacturing, trading, or service sectors.',
+          benefits: 'Shishu (up to ₹50,000), Kishore (₹50k–₹5L), Tarun (₹5L–₹10L). 100% Collateral-Free.',
+          docs: 'Aadhaar, PAN Card, Business Address Proof, Quotations for machinery/stock.',
+          link: 'https://www.mudra.org.in'
+        },
+        {
+          code: 'STAND-UP-INDIA',
+          name: 'Stand-Up India Scheme',
+          category: 'SC / ST / Women',
+          maxCost: 10000000,
+          rate: 8.5,
+          subsidy: 0,
+          moratorium: 18,
+          tenure: 84,
+          criteria: 'SC, ST or Woman entrepreneur establishing a greenfield (new) enterprise.',
+          benefits: 'Bank loans between ₹10 Lakhs and ₹1 Crore for manufacturing, services, or trading.',
+          docs: 'Aadhaar, PAN, Caste Certificate, Comprehensive DPR, Lease/Land documents.',
+          link: 'https://www.standupmitra.in'
+        },
+        {
+          code: 'PMEGP',
+          name: "Prime Minister's Employment Generation Programme (PMEGP)",
+          category: 'ALL (Special subsidy for SC/ST/OBC/Women)',
+          maxCost: 5000000,
+          rate: 10.0,
+          subsidy: 35,
+          moratorium: 6,
+          tenure: 84,
+          criteria: 'Individuals above 18 years for setting up new micro-enterprises.',
+          benefits: 'Up to ₹50 Lakhs for manufacturing, ₹20 Lakhs for service. 25% (urban) to 35% (rural) margin money subsidy for SC/ST/OBC/Women.',
+          docs: 'Aadhaar, Caste Certificate, EDP Training Certificate, Detailed Project Report (DPR).',
+          link: 'https://www.kviconline.gov.in/pmegpeportal'
+        },
+        {
+          code: 'PM-VISHWAKARMA',
+          name: 'PM Vishwakarma Scheme',
+          category: 'Artisans & Craftspeople (18 Trades)',
+          maxCost: 300000,
+          rate: 5.0,
+          subsidy: 15000,
+          moratorium: 6,
+          tenure: 36,
+          criteria: 'Artisans and craftspeople working with hands and tools in 18 specified traditional trades.',
+          benefits: 'Collateral-free credit up to ₹1 Lakh (1st tranche) & ₹2 Lakhs (2nd tranche) at 5% interest + ₹15,000 toolkit grant + ₹500/day skill stipend.',
+          docs: 'Aadhaar Card, Active Mobile Number, Bank Passbook, Artisan Trade Verification.',
+          link: 'https://pmvishwakarma.gov.in'
+        }
+      ];
+
       const [chatHistory, setChatHistory] = useState([
-        { role: 'model', text: 'Hello! I am your Sahāy Smart Assistant. I have access to our entire database of government schemes. Tell me about your background and business goals, and I will find the perfect match for you!' }
+        {
+          role: 'model',
+          text: 'Namaste! 🙏 I am your Sahāy Smart Assistant.\n\nI have complete access to India\'s concessional loan schemes (NSFDC, NSTFDC, NBCFDC, Stand-Up India, Mudra, PMEGP, PM Vishwakarma) and verified channel partners. How can I help you today?',
+          actions: [
+            { label: '🔍 How to find schemes?', prompt: 'How to find schemes?' },
+            { label: '🌟 Top Schemes for SC/ST', prompt: 'What are the best loan schemes for SC and ST entrepreneurs?' },
+            { label: '👩 Women Business Loans', prompt: 'Tell me about schemes for women entrepreneurs with low interest' },
+            { label: '📋 Documents Required', prompt: 'What documents are required to apply for a concessional loan?' }
+          ]
+        }
       ]);
       const [input, setInput] = useState('');
       const [isLoading, setIsLoading] = useState(false);
-      const [schemesDb, setSchemesDb] = useState([]);
+      const [isRecording, setIsRecording] = useState(false);
+      const [speakingIndex, setSpeakingIndex] = useState(null);
+      const [femaleIndianVoice, setFemaleIndianVoice] = useState(null);
+      const [partnersDb, setPartnersDb] = useState([]);
+      const [copiedIdx, setCopiedIdx] = useState(null);
       const chatEndRef = useRef(null);
+      const recognitionRef = useRef(null);
 
+      // Discover and lock the best Female Indian (Hindi/English) Voice Model
       useEffect(() => {
-        supabase.from('schemes').select('*').then(({ data }) => setSchemesDb(data || []));
+        if (!window.speechSynthesis) return;
+
+        const pickFemaleIndianVoice = () => {
+          const voices = window.speechSynthesis.getVoices();
+          if (!voices || voices.length === 0) return;
+
+          // Priority 1: High quality Neural/Online Indian Female Voices (e.g., Neerja, Swara, Heera, Kalpana, Veena)
+          const targetKeywords = ['neerja', 'heera', 'swara', 'kalpana', 'veena', 'aditi', 'geeta', 'ananya', 'lekha', 'priya', 'shruti', 'sunita'];
+          let matchedVoice = voices.find(v => targetKeywords.some(kw => v.name.toLowerCase().includes(kw)));
+
+          // Priority 2: Any English/Hindi Indian voice with explicit female marker
+          if (!matchedVoice) {
+            matchedVoice = voices.find(v => {
+              const name = v.name.toLowerCase();
+              const lang = (v.lang || '').toLowerCase().replace('_', '-');
+              const isIndian = lang.includes('en-in') || lang.includes('hi-in') || name.includes('india') || name.includes('hindi');
+              return isIndian && (name.includes('female') || name.includes('girl') || name.includes('woman'));
+            });
+          }
+
+          // Priority 3: Any English (India) voice (en-IN)
+          if (!matchedVoice) {
+            matchedVoice = voices.find(v => {
+              const lang = (v.lang || '').toLowerCase().replace('_', '-');
+              return lang === 'en-in' || lang.startsWith('en-in') || v.name.toLowerCase().includes('english (india)');
+            });
+          }
+
+          // Priority 4: Google हिन्दी or Hindi voice (Chrome default Hindi voice is a high-clarity female TTS model)
+          if (!matchedVoice) {
+            matchedVoice = voices.find(v => {
+              const name = v.name.toLowerCase();
+              const lang = (v.lang || '').toLowerCase().replace('_', '-');
+              return lang.startsWith('hi') || name.includes('hindi') || name.includes('हिन्दी');
+            });
+          }
+
+          // Priority 5: Any Indian accent voice
+          if (!matchedVoice) {
+            matchedVoice = voices.find(v => {
+              const name = v.name.toLowerCase();
+              const lang = (v.lang || '').toLowerCase().replace('_', '-');
+              return lang.includes('in') || name.includes('india');
+            });
+          }
+
+          // Priority 6: Pleasant female voice fallback (e.g. Zira, Samantha, Google UK English Female)
+          if (!matchedVoice) {
+            matchedVoice = voices.find(v => {
+              const name = v.name.toLowerCase();
+              return name.includes('zira') || name.includes('female') || name.includes('samantha') || name.includes('victoria');
+            });
+          }
+
+          if (matchedVoice) {
+            setFemaleIndianVoice(matchedVoice);
+          }
+        };
+
+        pickFemaleIndianVoice();
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+          window.speechSynthesis.onvoiceschanged = pickFemaleIndianVoice;
+        }
+
+        return () => {
+          if (window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = null;
+          }
+        };
       }, []);
 
-      const handleSend = () => {
-        if (!input.trim()) return;
+      // Helper to map DB records to standard schema format
+      const mapSchemeRecord = (d) => ({
+        id: d.id,
+        code: d.scheme_code || 'NSFDC',
+        name: d.scheme_name,
+        category: d.category || 'ALL',
+        maxCost: Number(d.max_project_cost) || 1000000,
+        minCost: Number(d.min_project_cost) || 0,
+        rate: Number(d.interest_rate_pa) || 6.0,
+        subsidy: Number(d.max_subsidy_percentage) || 0,
+        moratorium: Number(d.moratorium_months) || 6,
+        tenure: Number(d.max_tenure_months) || 60,
+        criteria: d.eligibility_criteria || '',
+        benefits: d.benefits_summary || '',
+        docs: d.required_documents || 'Aadhaar, Caste Certificate, Income Certificate',
+        link: d.apply_link || 'https://nsfdc.nic.in'
+      });
 
-        const userMsg = input;
+      // Initialize schemesDb from vaultSchemes prop if available, otherwise start clean
+      const [schemesDb, setSchemesDb] = useState(() => {
+        if (vaultSchemes && vaultSchemes.length > 0) {
+          return vaultSchemes.map(mapSchemeRecord);
+        }
+        return [];
+      });
+
+      // Synchronize with incoming vaultSchemes prop from Scheme Vault
+      useEffect(() => {
+        if (vaultSchemes && vaultSchemes.length > 0) {
+          setSchemesDb(vaultSchemes.map(mapSchemeRecord));
+        }
+      }, [vaultSchemes]);
+
+      // Load live schemes and channel partners directly synchronized with Scheme Vault
+      useEffect(() => {
+        const fetchLiveSchemes = async () => {
+          const { data, error } = await supabase.from('nsfdc_schemes').select('*');
+          if (!error && data && data.length > 0) {
+            setSchemesDb(data.map(mapSchemeRecord));
+          } else if (schemesDb.length === 0 && DEFAULT_SCHEMES && DEFAULT_SCHEMES.length > 0) {
+            setSchemesDb(DEFAULT_SCHEMES);
+          }
+        };
+
+        fetchLiveSchemes();
+
+        // Realtime subscription ensuring AI Mentor stays 100% in sync with Scheme Vault changes
+        const subscription = supabase
+          .channel('schema-db-changes-mentor')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'nsfdc_schemes' }, () => {
+            fetchLiveSchemes();
+          })
+          .subscribe();
+
+        supabase.from('channel_partners').select('*').then(({ data, error }) => {
+          if (!error && data) {
+            setPartnersDb(data);
+          }
+        });
+
+        return () => {
+          supabase.removeChannel(subscription);
+        };
+      }, []);
+
+      // Clean speech synthesis on unmount
+      useEffect(() => {
+        return () => {
+          if (window.speechSynthesis) window.speechSynthesis.cancel();
+          if (recognitionRef.current) {
+            try { recognitionRef.current.stop(); } catch (e) {}
+          }
+        };
+      }, []);
+
+      useEffect(() => {
+        chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, [chatHistory, isLoading]);
+
+      // Calculate EMI Helper
+      const calculateEmi = (principal, annualRate, tenureMonths) => {
+        const monthlyRate = (annualRate / 12) / 100;
+        if (monthlyRate === 0) return principal / tenureMonths;
+        const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, tenureMonths)) / (Math.pow(1 + monthlyRate, tenureMonths) - 1);
+        return Math.round(emi);
+      };
+
+      // Intelligent NLP and Knowledge Engine
+      const generateAiResponse = (userMsg) => {
+        const lower = userMsg.toLowerCase().trim();
+        const words = lower.match(/\b\w+\b/g) || [];
+
+        // 1. POLITENESS, CHITCHAT & ACKNOWLEDGEMENTS
+        if (/^(thank\s*you|thanks|thx|dhanyawad|shukriya|many\s*thanks|great\s*job|awesome|nice|well\s*done|excellent|kudos)\b/i.test(lower)) {
+          return {
+            text: `You're very welcome! 🙏\n\nI am always here to help you navigate India's concessional entrepreneurship schemes. Whenever you're ready, feel free to:\n• Check your exact eligibility using the **AI Match Wizard**\n• Calculate monthly repayment in **FinCalc**\n• Locate the nearest **Channel Partner / SCA branch** on our map!`,
+            actions: [
+              { label: '✨ Check My Eligibility', view: 'wizard' },
+              { label: '🧮 Open FinCalc', view: 'calculator' },
+              { label: '📍 Find Nearby Partner', view: 'locator' }
+            ]
+          };
+        }
+
+        if (/^(bye|goodbye|alvida|see\s*you|take\s*care|cya|tata)\b/i.test(lower)) {
+          return {
+            text: `Goodbye! Wishing you immense success with your business venture. 🚀\n\nRemember that government concessional schemes (NSFDC, NSTFDC, NBCFDC, MUDRA, PMEGP) are available to support you with 4%–8% subsidized credit whenever you are ready!`,
+            actions: [
+              { label: '📚 Explore Scheme Vault', view: 'schemes' },
+              { label: '✨ Start Application Wizard', view: 'wizard' }
+            ]
+          };
+        }
+
+        if (/^(ok|okay|theek\s*hai|understood|got\s*it|fine|sure|alright|cool|k|done)\b/i.test(lower) && words.length <= 3) {
+          return {
+            text: `Great! Glad that helps. Would you like to check your eligibility, calculate EMI, or locate your nearest government channel partner?`,
+            actions: [
+              { label: '✨ Launch AI Match Wizard', view: 'wizard' },
+              { label: '🧮 Compute EMI in FinCalc', view: 'calculator' },
+              { label: '📍 Open Partner Locator', view: 'locator' }
+            ]
+          };
+        }
+
+        // 2. GREETINGS
+        if (/^(hi|hello|hey|namaste|pranam|greetings|start|hola|kem\s*cho|kemon\s*acho|good\s*(morning|afternoon|evening))\b/i.test(lower) && words.length <= 4) {
+          const nameGreeting = session?.user?.user_metadata?.full_name ? `, ${session.user.user_metadata.full_name}` : '';
+          return {
+            text: `Namaste${nameGreeting}! Welcome to Sahāy AI. 🙏\n\nI am your dedicated government scheme advisor. I can assist you with:\n• **Subsidized Loans:** Schemes with 4%–8% interest and up to 35% capital subsidy\n• **Eligibility Check:** Real-time matching for SC, ST, OBC, Women, Artisans & General\n• **Financial Planning:** EMI calculations with 6–12 months moratorium grace periods\n• **Application Support:** Documents required, DPR guidance, and verified partner branches\n\nWhat would you like to explore today?`,
+            actions: [
+              { label: '🔍 How to find schemes?', prompt: 'How to find schemes?' },
+              { label: '📝 How to apply?', prompt: 'How to apply for a loan?' },
+              { label: '🎯 Who is eligible?', prompt: 'Who is eligible for concessional loans?' },
+              { label: '👩 Women Business Loans', prompt: 'Tell me about schemes for women entrepreneurs' }
+            ]
+          };
+        }
+
+        // 3. EDUCATIONAL LOANS & STUDENT FINANCIAL AID (High-Priority Specific Topic)
+        const isEducationLoan = 
+          /\b(education\s*loans?|educational\s*loans?|student\s*loans?|study\s*loans?|studies\s*loans?|college\s*loans?|higher\s*education|vidya\s*lakshmi|vidyalakshmi|csis|padho\s*pardesh|btech\s*loan|mba\s*loan|mbbs\s*loan|abroad\s*study|study\s*abroad)\b/i.test(lower) ||
+          /^(educational?\s*loans?|student\s*loans?|study\s*loans?|higher\s*education|college\s*fees?)/i.test(lower) ||
+          (/\b(education|educational|student|study|studies|college|degree|btech|mba|mbbs)\b/i.test(lower) && /\b(loan|loans|assistance|funding|subsidy|scheme|schemes|finance|help|guidance|scholarship)\b/i.test(lower));
+
+        if (isEducationLoan) {
+          return {
+            text: `### 🎓 Concessional Educational Loans & Central Subsidies:\n\nIf you or your child are seeking financial assistance for professional, technical, or higher education in India or abroad, the government provides highly subsidized student loan schemes and full interest waiver programs:\n\n1. **NSFDC Educational Loan Scheme (EL-NSFDC for SC Students):**\n   • **Loan Amount:** Up to **₹20 Lakhs** for study in India; up to **₹30 Lakhs** for study abroad.\n   • **Subsidized Interest Rate:** Just **4.0% p.a.** for male students, and **3.5% p.a. for female students**!\n   • **Moratorium:** Entire course duration + 1 year (or 6 months after securing employment).\n\n2. **NSTFDC Adivasi Shiksha Rinn Yojana (ASRY for ST Students):**\n   • Concessional credit up to **₹10 Lakhs** for professional & technical higher education (Engineering, Medical, Management) at **6.0% p.a.** (Special rebate for girl students).\n\n3. **NBCFDC Education Loan Scheme (for OBC Students):**\n   • Up to **₹15 Lakhs** (India) / **₹20 Lakhs** (Abroad) at **4.0% p.a.** (Women receive a special **3.5% p.a.** rate).\n\n4. **Central Sector Interest Subsidy (CSIS Scheme):**\n   • **100% Full Interest Subsidy** during the moratorium period (Course Period + 1 Year) on education loans for students whose annual family income is up to ₹4.50 Lakhs.\n\n5. **Collateral & Application Process:**\n   • **Zero Collateral:** Loans up to **₹7.5 Lakhs** require no property mortgage or third-party guarantee under the Credit Guarantee Fund (CGFSEL).\n   • **Single Window Portal:** Apply directly online at the Central Government's **Vidya Lakshmi Portal** (vidyalakshmi.co.in) or via your district State Channelizing Agency (SCA).`,
+            actions: [
+              { label: '🧮 Calculate Student Loan EMI', prompt: 'Calculate EMI for 500000 at 4% for 10 years' },
+              { label: '📋 Required Documents for Student Loan', prompt: 'What documents are required for an educational loan?' },
+              { label: '📍 Find Nearest Channel Partner / Bank', view: 'locator' }
+            ]
+          };
+        }
+
+        // 4. DOCUMENTS REQUIRED (High-Priority Specific Topic)
+        if (/\b(documents?|paper\s*work|papers?|checklist|dastavej|kya\s*chahiye|proofs?|certificate|certificates)\b/i.test(lower)) {
+          let extraTip = '';
+          if (lower.includes('mudra') || lower.includes('pmmy')) {
+            extraTip = `\n\n💡 **Special Note for MUDRA Loan:**\n• **Shishu (up to ₹50,000):** Only Aadhaar, PAN, and proforma quotation for machinery/stock. Zero collateral, no balance sheet required!\n• **Kishore & Tarun:** Last 6 months bank statement, Udyam registration, and quotation. Zero collateral guarantee under CGFMU.`;
+          } else if (lower.includes('education') || lower.includes('student') || lower.includes('study') || lower.includes('college')) {
+            extraTip = `\n\n💡 **Special Note for Educational Loans:**\n• **Admission Proof:** Official admission offer letter from UGC/AICTE approved college or university\n• **Fee Schedule:** Detailed semester/annual fee structure on institution letterhead\n• **Academic Records:** 10th, 12th, and Degree mark sheets / entrance exam scorecard (JEE, NEET, CAT, etc.)\n• **Income & Category:** Income Certificate (essential for CSIS full interest subsidy) & Caste Certificate (for 3.5%–4% concessional rates under NSFDC/NBCFDC/NSTFDC)!`;
+          } else if (lower.includes('pmegp') || lower.includes('kvic')) {
+            extraTip = `\n\n💡 **Special Note for PMEGP (35% Subsidy):**\n• Detailed Project Report (DPR) is mandatory\n• EDP Training Certificate (can be completed online after in-principle sanction)\n• Rural Area Certificate (from Gram Panchayat / BDO) to claim the full **35% margin money subsidy**!`;
+          } else if (lower.includes('vishwakarma')) {
+            extraTip = `\n\n💡 **Special Note for PM Vishwakarma:**\n• Active mobile-linked Aadhaar\n• Verification by Gram Panchayat or Urban Local Body (ULB) confirming practice of 1 of the 18 traditional trades\n• Bank passbook copy for ₹15,000 tool voucher and ₹500/day training stipend!`;
+          } else if (lower.includes('standup') || lower.includes('stand-up')) {
+            extraTip = `\n\n💡 **Special Note for Stand-Up India (₹10L to ₹1Cr):**\n• Greenfield enterprise declaration (first-time venture in manufacturing, services, or trading)\n• DPR with project cost breakdown\n• If non-individual enterprise, at least 51% shareholding held by SC/ST or Woman entrepreneur.`;
+          }
+
+          return {
+            text: `### 📋 Universal Document Checklist for Concessional Schemes:\n\n1. **Proof of Identity & Address:**\n   • Aadhaar Card (mandatory, mobile-linked)\n   • PAN Card or Form 60\n   • Voter ID / Domicile Certificate / Ration Card\n\n2. **Category / Affirmative Proof:**\n   • Valid Caste Certificate (SC/ST/OBC) issued by SDO / Tehsildar / Competent Authority\n   • For Safai Karamcharis: Occupation ID or Local Municipality Certification\n\n3. **Financial & Income Proof:**\n   • Annual Family Income Certificate (typically under ₹3 Lakhs or ₹5 Lakhs p.a. for NSFDC/NBCFDC; *no income ceiling for Mudra & PMEGP*)\n   • Last 6 months bank statement of personal/business account\n\n4. **Business & Setup Documents:**\n   • **Detailed Project Report (DPR):** Brief outline of business, machinery cost & revenue estimate\n   • Proforma Invoice / Quotations from certified machinery or stock vendor\n   • **Udyam Registration:** Free MSME registration certificate from udyamregistration.gov.in${extraTip}`,
+            actions: [
+              { label: '📝 Fill Guided Wizard Form', view: 'wizard' },
+              { label: '📑 Learn About DPR Format', prompt: 'What is a Detailed Project Report (DPR)?' },
+              { label: '📍 Connect with Partner for Help', view: 'locator' }
+            ]
+          };
+        }
+
+        // 4. DETAILED PROJECT REPORT (DPR)
+        if (/\b(dpr|detailed\s*project\s*report|project\s*report|business\s*proposal|business\s*plan)\b/i.test(lower)) {
+          return {
+            text: `### 📑 What is a Detailed Project Report (DPR)?\n\nA **DPR** is a 2 to 3-page summary document outlining your business plan so the loan agency can assess feasibility:\n\n### Essential Components of a DPR:\n1. **Personal Background:** Name, age, educational qualifications, trade experience, and caste category.\n2. **Business Description:** Product or service (e.g., Kirana store, dairy farming, tailoring, pickup transport).\n3. **Total Project Cost Breakdown:**\n   • Fixed Capital: Cost of machinery, tools, electrical fittings, shop furniture.\n   • Working Capital: Initial raw material purchase, stock inventory, 1 month operating buffer.\n4. **Financing Plan:** 5%–15% own contribution + 85%–95% bank loan.\n5. **Monthly Revenue & Profit Projection:** Estimated sales, expenses (rent, electricity, stock), and net monthly income demonstrating your ability to pay the EMI.\n\n*Note:* For small loans under ₹5 Lakhs, most SCAs and Banks provide standard pre-printed DPR forms!`,
+            actions: [
+              { label: '📋 View Universal Document Checklist', prompt: 'What documents are required for government business loans?' },
+              { label: '🧮 Compute Project EMI', view: 'calculator' }
+            ]
+          };
+        }
+
+        // 5. INTEREST RATES
+        const isInterestRate = 
+          /\b(interest\s*rate|rate\s*of\s*interest|byaaj|byaj)\b/i.test(lower) ||
+          /^(interest\s*rate|rate\s*of\s*interest|byaaj\s*dar|what\s*is\s*interest)/i.test(lower);
+
+        if (isInterestRate && !/\d+/.test(lower)) {
+          return {
+            text: `### 📉 Concessional Interest Rates Breakdown:\n\nGovernment affirmative-action schemes offer interest rates that are a fraction of commercial bank rates (which typically charge 14% to 24% p.a.):\n\n• **4.0% p.a. (Deeply Subsidized):**\n  - Mahila Samriddhi Yojana (NSFDC / NBCFDC)\n  - Adivasi Mahila Sashaktikaran Yojana (AMSY for ST Women)\n  - Swachhta Udyami Yojana (for Sanitation Workers)\n\n• **5.0% p.a.:**\n  - PM Vishwakarma Scheme (Govt pays 8% interest subvention)\n  - New Swarnima Scheme for Backward Classes Women\n  - NSFDC Micro Credit Scheme\n\n• **6.0% to 8.0% p.a.:**\n  - NSFDC Term Loans & NSTFDC Term Loans\n  - NBCFDC General Loan & Technology Upgradation\n  - Green Business Scheme & Educational Loans\n\n• **8.5% to 11.5% p.a.:**\n  - Stand-Up India, MUDRA, and PMEGP (Standard bank rates offset by capital subsidies).`,
+            actions: [
+              { label: '🧮 Test in EMI Calculator', view: 'calculator' },
+              { label: '📚 View Schemes in Vault', view: 'schemes' }
+            ]
+          };
+        }
+
+        // 6. SUBSIDY GUIDANCE
+        if (/\b(subsidy|subsidies|subsidy\s*details|grant|free\s*money|margin\s*money)\b/i.test(lower)) {
+          return {
+            text: `### 🎁 Understanding Government Loan Subsidies:\n\nA **Subsidy** is a non-repayable financial grant provided by the government to reduce your total debt burden:\n\n• **How it works:** If you take a ₹10 Lakh loan under a scheme with 35% subsidy, the government pays **₹3,50,000**, meaning you only repay **₹6,50,000** plus interest!\n\n• **Major Subsidy Highlights:**\n  - **PMEGP Margin Money Subsidy:**\n    • **35% Subsidy in Rural Areas** for SC, ST, OBC, Women, and PwD.\n    • **25% Subsidy in Urban Areas** for special categories.\n    • Applicant own contribution is just **5%**!\n  - **PM Vishwakarma:** **₹15,000 flat grant** as an e-voucher for modern tools.\n  - **NSKFDC Swachhta Udyami:** Up to **₹5,00,000 capital subsidy** on mechanized sanitation vehicles.\n  - **Concessional Interest Schemes:** Instead of upfront cash, the government covers the interest difference, saving you lakhs over the loan tenure.`,
+            actions: [
+              { label: '🏭 Learn More About PMEGP', prompt: 'Tell me more about PMEGP 35% subsidy' },
+              { label: '🛠️ Learn About PM Vishwakarma', prompt: 'Tell me about PM Vishwakarma scheme' }
+            ]
+          };
+        }
+
+        // 7. COLLATERAL & SECURITY
+        if (/\b(collateral|security|guarantee|girvi|mortgage|without\s*security|zero\s*collateral|unsecured)\b/i.test(lower)) {
+          return {
+            text: `### 🛡️ Collateral-Free Loans Guarantee:\n\n**Good news!** Under Reserve Bank of India (RBI) guidelines and Central Government directives:\n\n1. **Loans up to ₹10 Lakhs** under **Pradhan Mantri MUDRA Yojana (PMMY)** and **Credit Guarantee Fund for Micro Units (CGFMU)** require **ZERO collateral** and no third-party guarantee.\n2. **NSFDC & NSTFDC Micro Credit Schemes (up to ₹1,40,000)** require **no immovable property collateral**.\n3. **Stand-Up India & CGSSC:** Loans up to ₹5 Crores for SC entrepreneurs are backed by the **Credit Guarantee Scheme for Scheduled Castes (CGSSC)**, where the government guarantees up to 85% of the loan amount.\n\nYou only need a viable business plan, Aadhaar, and relevant category proof!`,
+            actions: [
+              { label: '💰 Check Mudra & Micro Schemes', prompt: 'Tell me more about Mudra loan without collateral' },
+              { label: '📝 Start Application', view: 'wizard' }
+            ]
+          };
+        }
+
+        // 8. MORATORIUM PERIOD
+        if (/\b(moratorium|grace\s*period|repayment\s*holiday|chhoot)\b/i.test(lower)) {
+          return {
+            text: `### ⏳ What is a Moratorium Period?\n\nA **Moratorium Period** is a repayment holiday granted before your principal loan installments begin.\n\n• **Duration:** In government concessional schemes (NSFDC, NBCFDC, NSTFDC), it ranges from **6 to 12 months** (up to 3 years for educational or tree-crop farming loans).\n• **Why it helps:** You do not have to pay full EMI during business setup, construction, or initial inventory rollout.\n• **During Moratorium:** Only simple nominal interest is serviced, protecting your initial cash flows.\n\nUse our **FinCalc** to simulate how a 6-month moratorium saves your working capital!`,
+            actions: [
+              { label: '🧮 Test in FinCalc', view: 'calculator' },
+              { label: '🔍 Browse Schemes', view: 'schemes' }
+            ]
+          };
+        }
+
+        // 9. CIBIL & CREDIT SCORE
+        if (/\b(cibil|credit\s*score|bad\s*credit|low\s*score|defaulter|cibil\s*issue)\b/i.test(lower)) {
+          return {
+            text: `### 📈 Applying with Low or No CIBIL Score:\n\n• **First-Time Borrowers (NTC - New To Credit):** You are eligible! Schemes like **Mudra Shishu (up to ₹50,000)** and **NSFDC Micro Credit** are designed specifically for first-time unbanked entrepreneurs.\n• **Self-Help Group (SHG) Route:** You can apply through an SHG or Joint Liability Group (JLG) where the community guarantee replaces individual CIBIL checks.\n• **State Channelizing Agency (SCA):** State SC/ST Corporations evaluate your project feasibility and community standing rather than strict commercial credit scores.\n• **Tip to Build Score:** Start with a micro-loan (e.g. ₹50,000), repay the monthly ₹1,500 EMI on time, and your CIBIL score will cross 750 within 12 months!`,
+            actions: [
+              { label: '👩 Check Micro-Credit Schemes', prompt: 'Tell me about micro credit schemes for small businesses' },
+              { label: '📍 Find Nearest SCA Branch', view: 'locator' }
+            ]
+          };
+        }
+
+        // 10. ELIGIBILITY / WHO IS ELIGIBLE
+        const isEligibility = 
+          /\b(who\s*is\s*eligible|am\s*i\s*eligible|can\s*i\s*apply|who\s*can\s*apply|eligibility\s*criteria|eligibility\s*requirements?)\b/i.test(lower) ||
+          /\b(eligible|eligibility|qualify|qualification)\b/i.test(lower) ||
+          /^(eligibility|who\s+is\s+eligible|am\s+i\s+eligible|eligibility\s+criteria|who\s+can\s+apply)/i.test(lower);
+
+        if (isEligibility) {
+          return {
+            text: `### 🎯 Who is Eligible for Government Concessional Schemes?\n\nEligibility is determined across four primary criteria:\n\n1. **Target Group & Affirmative Action:**\n   • Members of Scheduled Castes (SC), Scheduled Tribes (ST), Other Backward Classes (OBC - Non-Creamy Layer), Women, Safai Karamcharis, or Traditional Artisans.\n   • General category applicants are eligible for **MUDRA**, **Stand-Up India (women)**, and **PMEGP**.\n\n2. **Age Limit:**\n   • Minimum **18 years** up to **50 or 60 years**.\n\n3. **Annual Family Income Ceiling:**\n   • For NSFDC, NSTFDC, and NBCFDC concessional loans: Annual family income up to **₹3.00 Lakhs** (or ₹5.00 Lakhs for select categories).\n   • **Mudra, Stand-Up India, and PMEGP have NO family income ceiling!**\n\n4. **Business Viability:**\n   • A realistic plan for retail, transport, agriculture, manufacturing, or service activities.\n\nTell me your **Category, Age, and desired Loan Amount**, and I will verify your eligibility right now!`,
+            actions: [
+              { label: '📝 Fill Guided Eligibility Wizard', view: 'wizard' },
+              { label: '📋 View Required Documents', prompt: 'What documents are required for government business loans?' }
+            ]
+          };
+        }
+
+        // 11. AGE LIMIT
+        if (/\b(age\s*limit|minimum\s*age|maximum\s*age|how\s*old|age\s*criteria|umar|\d+\s*year\s*old\s*apply)\b/i.test(lower)) {
+          return {
+            text: `### 🎂 Age Limit Criteria for Concessional Schemes:\n\n• **Minimum Age:** Must be at least **18 years old** at the time of application for all schemes.\n• **Maximum Age:**\n  - **NSFDC / NSTFDC / NBCFDC Schemes:** Up to **50 to 55 years**.\n  - **PMEGP:** No upper age limit (minimum 18 years).\n  - **MUDRA (PMMY):** Up to **65 years**.\n  - **Stand-Up India:** Minimum 18 years, no strict upper age cap.\n  - **Educational Loans (ASRY):** Generally up to **30 to 35 years** for students.\n\nAs long as you are 18+ and have a viable business proposal, you are eligible to apply!`,
+            actions: [
+              { label: '✨ Check Eligible Schemes for Your Age', view: 'wizard' },
+              { label: '📚 Open Scheme Vault', view: 'schemes' }
+            ]
+          };
+        }
+
+        // 12. INCOME LIMIT / CEILING
+        if (/\b(income\s*limit|income\s*ceiling|family\s*income|annual\s*income|salary\s*limit|aay\s*seema)\b/i.test(lower)) {
+          return {
+            text: `### 💵 Annual Family Income Ceiling Guidelines:\n\n1. **NSFDC (SC), NSTFDC (ST), NBCFDC (OBC) Schemes:**\n   • Concessional Micro & Term Loans require annual family income up to **₹3.00 Lakhs** (or ₹5.00 Lakhs for select higher-limit industrial categories).\n\n2. **Schemes with ZERO Income Ceiling (Open to all income brackets):**\n   • **Pradhan Mantri MUDRA Yojana (PMMY):** No family income limit! Open to any micro-entrepreneur.\n   • **PMEGP (KVIC):** No family income ceiling! Any individual above 18 can establish a micro-enterprise.\n   • **Stand-Up India:** No family income cap for SC/ST or Women greenfield ventures.\n   • **PM Vishwakarma:** No income ceiling for verified traditional craftspeople.\n\nIf your family income exceeds ₹3 Lakhs, MUDRA and PMEGP remain ideal choices!`,
+            actions: [
+              { label: '✨ Run AI Match with Your Income', view: 'wizard' },
+              { label: '🏦 Learn About MUDRA Loan', prompt: 'Tell me about Mudra loan' }
+            ]
+          };
+        }
+
+        // 13. PROCESSING TIME / APPROVAL DURATION
+        if (/\b(how\s*long|processing\s*time|approval\s*time|how\s*many\s*days|when\s*will\s*i\s*get|disbursement\s*time|approval\s*take|kitne\s*din)\b/i.test(lower)) {
+          return {
+            text: `### ⏱️ Loan Processing & Disbursement Timeline:\n\n1. **Online/Physical Submission:** Immediate acknowledgment with a unique application reference number.\n2. **Document & Caste Verification (SCA / Bank):** **7 to 14 working days**.\n3. **Field / Unit Inspection (for loans > ₹2 Lakhs):** **5 to 7 working days** by the local bank field officer.\n4. **Sanction Letter Issuance:** Usually within **15 to 30 days** of complete paperwork.\n5. **Disbursement:** Directly transferred via DBT (Direct Benefit Transfer) into your Aadhaar-linked bank account.\n\n*Pro-Tip:* Ensure your Aadhaar is linked to your active mobile number and bank account to avoid DBT delays!`,
+            actions: [
+              { label: '📋 View Document Checklist', prompt: 'What documents are required for government business loans?' },
+              { label: '📍 Find Verified Channel Partner', view: 'locator' }
+            ]
+          };
+        }
+
+        // 14. HOW MUCH LOAN CAN I GET / LOAN LIMIT
+        const isLoanLimit = 
+          /\b(how\s*much\s*loan|max(imum)?\s*loan|min(imum)?\s*loan|loan\s*limit|loan\s*ceiling|loan\s*amount\s*limit|kitna\s*loan)\b/i.test(lower) ||
+          (/\b(how\s*much|maximum|minimum|limit|ceiling)\b/i.test(lower) && /\b(loan|loans|funds?)\b/i.test(lower) && !lower.includes('interest') && !lower.includes('subsidy'));
+
+        if (isLoanLimit) {
+          return {
+            text: `### 💰 How Much Loan Can You Get?\n\nGovernment schemes are structured across three budget tiers:\n\n• **1. Micro-Financing (₹10,000 to ₹1,40,000):**\n  - **MUDRA Shishu:** Up to **₹50,000** (Zero collateral, zero margin money).\n  - **NSFDC / NBCFDC Micro Credit:** Up to **₹1,40,000** at 4%–5% p.a.\n  - **PM Vishwakarma:** Up to **₹1,00,000** (Tranche 1) & **₹2,00,000** (Tranche 2) at 5% p.a.\n\n• **2. Small Business Financing (₹1.5 Lakhs to ₹10 Lakhs):**\n  - **MUDRA Kishore:** Loans from **₹50,000 to ₹5,00,000**.\n  - **MUDRA Tarun:** Loans from **₹5,00,000 to ₹10,00,000** (100% Collateral-Free).\n  - **New Swarnima & AMSY:** Up to **₹2,00,000** at 4%–5% for women entrepreneurs.\n\n• **3. Medium & Capital Ventures (₹10 Lakhs to ₹1 Crore+):**\n  - **NSFDC & NSTFDC Term Loans:** Up to **₹50,00,000** at 6%–8% p.a.\n  - **PMEGP:** Up to **₹50,00,000** (Manufacturing) / **₹20,00,000** (Service) with up to **35% capital subsidy**.\n  - **Stand-Up India:** From **₹10 Lakhs to ₹1.00 Crore** for greenfield projects.\n  - **Credit Guarantee Scheme for SC:** Up to **₹5.00 Crores** with govt guarantee.`,
+            actions: [
+              { label: '🧮 Calculate Monthly EMI in FinCalc', view: 'calculator' },
+              { label: '✨ Check Eligible Schemes', view: 'wizard' }
+            ]
+          };
+        }
+
+        // 15. HOW TO APPLY / APPLICATION PROCESS
+        const isHowToApply = 
+          /\b(how\s*to\s*apply|how\s*can\s*i\s*apply|application\s*process|steps?\s*to\s*apply|where\s*to\s*apply|apply\s*process|how\s*do\s*i\s*apply|can\s*i\s*apply\s*online|how\s*to\s*get\s*a?\s*loan|what\s*is\s*the\s*process\s*to\s*apply|application\s*procedure)\b/i.test(lower) ||
+          lower.includes('apply kaise kare') || lower.includes('kaise apply kare') || lower.includes('form kaise bhare');
+
+        if (isHowToApply) {
+          return {
+            text: `### 📝 Step-by-Step Application Process for Concessional Schemes:\n\n1. **Step 1: Check Eligibility & Match Scheme**\n   Use our **AI Match Wizard** to identify the exact scheme matching your profile (e.g. NSFDC Term Loan, Mahila Samriddhi, or Mudra).\n\n2. **Step 2: Assemble Essential Documents**\n   Prepare your Aadhaar Card, PAN Card, Caste Certificate (SC/ST/OBC), Income Certificate (< ₹3 Lakhs p.a.), and 6 months bank statement.\n\n3. **Step 3: Prepare a Brief Project Report (DPR)**\n   Write a simple 2-page outline describing your business, machinery cost, and projected monthly profit.\n\n4. **Step 4: Submit Application**\n   • **Online:** Apply through central portals like **JanSamarth.in**, **Standupmitra.in**, or direct agency portals (e.g. nsfdc.nic.in).\n   • **Offline:** Visit your district **State Channelizing Agency (SCA)**, local Public Sector Bank branch, or Common Service Centre (CSC).\n\n5. **Step 5: Inspection & Direct Bank Disbursement**\n   Once approved, loan funds are disbursed directly into your bank account with concessional interest rates!`,
+            actions: [
+              { label: '📝 Start Application Wizard', view: 'wizard' },
+              { label: '📍 Find Nearest Channel Partner', view: 'locator' },
+              { label: '📋 View Required Documents', prompt: 'What documents are required for government business loans?' }
+            ]
+          };
+        }
+
+        // 16. HOW TO FIND / SEARCH / DISCOVER SCHEMES (Strictly Navigational Discovery)
+        const isHowToFind = 
+          /\b(how\s*(do\s*i|can\s*i|to)?\s*(find|search|discover|choose|select)\s*(schemes?|loans?|yojana)?)\b/i.test(lower) ||
+          /\b(where\s*(can\s*i|to)\s*(find|search|browse|see|get)\s*(schemes?|loans?))\b/i.test(lower) ||
+          /\b(which\s*scheme\s*is\s*best|how\s*to\s*choose\s*a?\s*scheme|help\s*me\s*choose\s*a?\s*scheme)\b/i.test(lower) ||
+          lower === 'how to find schemes' || lower === 'how to find schemes?' || lower === 'find schemes' || lower === 'how to search' || lower === 'schemes finder';
+
+        if (isHowToFind) {
+          return {
+            text: `### 🔍 How to Find the Right Government Scheme on Sahāy AI:\n\nYou have **3 simple and convenient ways** to discover eligible schemes:\n\n1. **✨ Smart AI Match Wizard (Recommended):**\n   Click **AI Match** in the navigation bar above. Answer 4 quick questions (Age, Affirmative Category, Gender, and Project Budget). Our rule-based matching engine will evaluate criteria across 24+ schemes and show your exact eligibility percentage with direct links.\n\n2. **📚 Scheme Vault:**\n   Click **Scheme Vault** in the menu to browse our complete database of NSFDC, NSTFDC, NBCFDC, Mudra, and PMEGP schemes. You can filter by loan ceiling, interest rate, and target community.\n\n3. **💬 Ask Me Directly in Chat:**\n   Just tell me your details right here! For example:\n   • *"I am an SC woman with 2 lakh budget for a tailoring shop"*\n   • *"Schemes for dairy farming with 5 lakh loan"*\n   • *"What loans are available with zero collateral?"*\n   and I will immediately pull the matching scheme!`,
+            actions: [
+              { label: '✨ Launch AI Match Wizard', view: 'wizard' },
+              { label: '📚 Open Scheme Vault', view: 'schemes' },
+              { label: '🧮 Open FinCalc', view: 'calculator' }
+            ]
+          };
+        }
+
+        // 17. WHAT SCHEMES ARE AVAILABLE / SHOW ALL SCHEMES
+        const isListSchemes = 
+          /\b(show|list)\s*(me\s*)?(all\s*)?(available\s*)?(schemes?|loans?|yojana)\b/i.test(lower) ||
+          /\b(what|which)\s*(all\s*)?(schemes?|loans?)\s*(are\s*)?(available|there|exist)\b/i.test(lower) ||
+          /^(all\s+schemes|list\s+schemes|show\s+schemes|available\s+schemes|all\s+loans|what\s+schemes\s+are\s+there)/i.test(lower);
+
+        if (isListSchemes) {
+          return {
+            text: `### 🏛️ Complete Catalog of Supported Government Schemes:\n\nSahāy AI covers 24+ Central and State concessional schemes organized by category:\n\n• **For Scheduled Castes (SC):**\n  - NSFDC Term Loan (up to ₹50 Lakhs at 6%–8%)\n  - NSFDC Micro Credit Scheme (up to ₹1.4 Lakhs at 5%)\n  - NSFDC Green Business Scheme (e-rickshaws & solar units)\n  - Credit Guarantee Scheme for SC (up to ₹5 Crores)\n\n• **For Scheduled Tribes (ST):**\n  - NSTFDC Term Loan (up to ₹50 Lakhs at 8%)\n  - Adivasi Mahila Sashaktikaran Yojana (AMSY, up to ₹2 Lakhs at 4%)\n  - Tribal Forest Dwellers Scheme & Higher Education Loans\n\n• **For Backward Classes (OBC):**\n  - NBCFDC General Term Loan (up to ₹15 Lakhs at 7%–8%)\n  - New Swarnima Scheme for Women (up to ₹2 Lakhs at 5%)\n  - Technology Upgradation of Clusters (TUC, up to ₹15 Lakhs)\n\n• **For Women (All Communities):**\n  - Stand-Up India (₹10 Lakhs to ₹1 Crore for greenfield)\n  - Mahila Samriddhi Yojana (at 4% p.a.)\n  - PMEGP (35% rural margin money subsidy)\n\n• **For Traditional Artisans & Craftspeople:**\n  - PM Vishwakarma Scheme (18 trades, ₹15,000 tool grant + 5% loan)\n\n• **For All Micro-Enterprises:**\n  - PM MUDRA Yojana (Shishu up to ₹50k, Kishore up to ₹5L, Tarun up to ₹10L — 100% Collateral-Free)`,
+            actions: [
+              { label: '📚 Open Scheme Vault', view: 'schemes' },
+              { label: '✨ Check My Eligibility', view: 'wizard' }
+            ]
+          };
+        }
+
+        // 18. CHANNEL PARTNERS / SCAS / PHYSICAL APPLICATION
+        if (/\b(channel\s*partners?|sca|scas|csc|kiosk|where\s*to\s*go|branch|branches|nearest\s*bank|bank\s*near\s*me|locator)\b/i.test(lower)) {
+          return {
+            text: `### 🏛️ Where and How to Apply Through Channel Partners:\n\nCentral government apex corporations (NSFDC, NSTFDC, NBCFDC) do not maintain thousands of street-level branches. Instead, they operate through 4 types of **Channel Partners**:\n\n1. **State Channelizing Agencies (SCAs):** State SC/ST/OBC Corporations (e.g., WBSCSTDFCL in West Bengal) that accept physical applications, verify caste certificates, and disburse concessional loans.\n2. **Public Sector Commercial Banks & RRBs:** State Bank of India, Punjab National Bank, Bangiya Gramin Vikash Bank, etc.\n3. **Accredited NBFC-MFIs:** Microfinance institutions (Arohan, Annapurna, Uttrayan, Bandhan) authorized to disburse micro-credit up to ₹1.4 Lakhs.\n4. **Common Service Centres (CSCs):** Village kiosks assisting with digital portal uploads.\n\nUse our **Partner Locator** map to find verified partner branches near you!`,
+            actions: [
+              { label: '📍 Launch Partner Locator', view: 'locator' },
+              { label: '📝 Start Eligibility Wizard', view: 'wizard' }
+            ]
+          };
+        }
+
+        // 19. HELPLINES & TOLL-FREE NUMBERS
+        if (/\b(helpline|customer\s*care|toll\s*free|contact\s*number|phone\s*number|support\s*number|call)\b/i.test(lower)) {
+          return {
+            text: `### 📞 Official National Helplines & Contact Numbers:\n\n• **NSFDC (Scheduled Castes):** Toll-Free: \`1800-11-0398\` | Landline: \`011-22165076\`\n• **NSTFDC (Scheduled Tribes):** Toll-Free: \`1800-11-7773\`\n• **NBCFDC (Backward Classes):** Toll-Free: \`1800-102-3399\`\n• **PMMY MUDRA Mission:** National Toll-Free: \`1800-180-1111\` / \`1800-11-0001\`\n• **Stand-Up Mitra Portal:** Helpline: \`1800-180-1111\`\n• **PM Vishwakarma Helpline:** \`1800-267-7777\` / \`17923\`\n\nYou can also locate your district branch directly using our **Partner Locator**!`,
+            actions: [
+              { label: '📍 Find Local District Branch', view: 'locator' },
+              { label: '✨ Check Eligible Schemes', view: 'wizard' }
+            ]
+          };
+        }
+
+        // 20. REGISTRATION & ACCOUNT
+        if (/\b(register|registration|sign\s*up|create\s*account|login|sign\s*in|password)\b/i.test(lower)) {
+          return {
+            text: `### 🔐 Registration & Account Access on Sahāy AI:\n\n• **How to Log In or Sign Up:** Click the **Login / Sign Up** button in the top navigation bar.\n• **Features Unlocked When Logged In:**\n  - Save eligible schemes to your personal dashboard\n  - Track application submissions and DPR drafts\n  - Save custom loan calculations and EMI schedules\n• **Guest Access:** You can browse the Scheme Vault, use FinCalc, and chat with AI Mentor freely even without logging in!`,
+            actions: [
+              { label: '✨ Start Scheme Wizard', view: 'wizard' },
+              { label: '📚 Open Scheme Vault', view: 'schemes' }
+            ]
+          };
+        }
+
+        // 21. PLATFORM OVERVIEW / HOW TO USE WEBSITE
+        if (/\b(how\s*to\s*use\s*this|what\s*does\s*this\s*website|what\s*is\s*sahay|about\s*sahay|who\s*made\s*this|team\s*nepotism|who\s*are\s*you|features)\b/i.test(lower)) {
+          return {
+            text: `**Sahāy AI** is an affirmative-action financial inclusion platform created by **Team Nepotism** for the **Smart India Hackathon (SIH 26092 Prototype)**.\n\n### Core Pillars:\n1. **Smart Scheme Recommender:** Matches your income, age, category, and business plan to government schemes.\n2. **Financial Calculator (FinCalc):** Real-time EMI, moratorium (6–12 months grace period), and interest rate breakdowns (4%–10%).\n3. **Geo-Spatial Partner Locator:** Haversine routing to find active SCAs (State Channelizing Agencies), Banks, NBFCs, and CSCs.\n4. **AI Scheme Mentor:** Conversational advice to resolve paperwork, DPR, and subsidy queries.\n\nWould you like to try the automated matching wizard?`,
+            actions: [
+              { label: '✨ Launch AI Match Wizard', view: 'wizard' },
+              { label: '🧮 Open FinCalc', view: 'calculator' },
+              { label: '📍 Open Partner Locator', view: 'locator' }
+            ]
+          };
+        }
+
+        // 22. GENERAL CATEGORY & LACK OF CASTE CERTIFICATE
+        if (/\b(general\s*category|no\s*caste|without\s*caste|open\s*category|general\s*caste)\b/i.test(lower)) {
+          return {
+            text: `### 🌟 Options for General Category & Those Without Caste Certificates:\n\nIf you belong to the General category or have not yet received your Caste Certificate, you are still eligible for major government funding schemes:\n\n1. **Pradhan Mantri MUDRA Yojana (PMMY):**\n   • Open to **ALL Indian citizens** regardless of caste.\n   • Shishu (up to ₹50,000), Kishore (up to ₹5,00,000), Tarun (up to ₹10,00,000).\n   • **100% Collateral-Free!** Requires only Aadhaar, PAN, and business address proof.\n\n2. **Stand-Up India (For Women):**\n   • Open to **ALL women entrepreneurs** (including General category women) for greenfield projects between ₹10 Lakhs and ₹1 Crore.\n\n3. **PMEGP:**\n   • Open to General category (15% urban / 25% rural margin money subsidy).\n\n*Tip:* If you belong to SC/ST/OBC, you can apply for your official certificate through your state's online portal while starting your business setup!`,
+            actions: [
+              { label: '🏦 Learn About Mudra Loan', prompt: 'Explain Pradhan Mantri Mudra Yojana Shishu, Kishore and Tarun' },
+              { label: '👩 Stand-Up India for Women', prompt: 'Tell me about Stand-Up India for women entrepreneurs' }
+            ]
+          };
+        }
+
+        // 23. STUDENTS & EDUCATION LOANS
+        if (/\b(students?|education\s*loan|study\s*loan|college|higher\s*education|padhai)\b/i.test(lower)) {
+          return {
+            text: `### 🎓 Concessional Education Loans for Higher Studies:\n\nGovernment apex corporations provide highly subsidized education loans to support professional and technical courses:\n\n1. **NSTFDC Adivasi Shiksha Rinn Yojana (for ST Students):**\n   • Up to **₹5.00 Lakhs** at **6.0% p.a.** interest.\n   • Moratorium: Course duration + 1 year (or 6 months after getting a job).\n\n2. **NSFDC Educational Loan Scheme (for SC Students):**\n   • Up to **₹10 Lakhs** for studies in India, up to **₹20 Lakhs** for abroad.\n   • Interest Rate: **4.0% p.a.** (3.5% p.a. for female students)!\n\n3. **NBCFDC Education Loan (for OBC Students):**\n   • Up to **₹15 Lakhs** (India) / **₹20 Lakhs** (Abroad) at **4.0% p.a.**\n\nApply through your district State Channelizing Agency with your college admission letter!`,
+            actions: [
+              { label: '📚 View Schemes in Vault', view: 'schemes' },
+              { label: '📍 Find Nearest SCA', view: 'locator' }
+            ]
+          };
+        }
+
+        // 24. PERSONS WITH DISABILITIES (PwD / DIVYANGJAN)
+        if (/\b(disabled|handicap|pwd|divyang|divyangjan|disability)\b/i.test(lower)) {
+          return {
+            text: `### ♿ Financial Schemes for Persons with Disabilities (PwD):\n\n1. **National Handicapped Finance and Development Corporation (NHFDC):**\n   • Self-employment loans up to **₹25 Lakhs** at **5% to 8% p.a.**\n   • **Special 2% interest rebate** for women with disabilities.\n\n2. **PMEGP Special Category Status:**\n   • Divyang entrepreneurs receive special classification:\n   • **35% capital subsidy** in rural areas / **25% in urban areas**.\n   • Own contribution is just **5%** of the project cost.\n\n3. **MUDRA Collateral-Free Credit:** Loans up to ₹10 Lakhs with priority processing at all bank branches.`,
+            actions: [
+              { label: '🏭 Learn More About PMEGP', prompt: 'Tell me about PMEGP 35% subsidy' },
+              { label: '✨ Check Eligibility', view: 'wizard' }
+            ]
+          };
+        }
+
+        // 25. FARMERS & AGRICULTURE ALLIED
+        if (/\b(farmers?|agriculture|kisan|kheti|tractor|allied\s*agri)\b/i.test(lower)) {
+          return {
+            text: `### 🌾 Concessional Loans for Agriculture & Allied Ventures:\n\n• **NSFDC & NSTFDC Agri-Allied Term Loans:**\n  - Financing up to **₹50 Lakhs** at **6%–8% p.a.** for dairy farming, poultry, goat rearing, fisheries, and agro-processing.\n• **PM-KUSUM Scheme:**\n  - Up to **60% subsidy** for installing solar agricultural water pumps.\n• **Kisan Credit Card (KCC) Allied Loans:**\n  - Working capital up to ₹2 Lakhs for animal husbandry at 4% effective interest (with prompt repayment subvention).\n• **Tractor & Farm Mechanization:** Subsidized term loans through state SC/ST corporations.`,
+            actions: [
+              { label: '🐄 Dairy Farming Loan Guide', prompt: 'Tell me about dairy farming loan' },
+              { label: '📚 Open Scheme Vault', view: 'schemes' }
+            ]
+          };
+        }
+
+        // 26. EXISTING BUSINESS VS GREENFIELD (NEW)
+        if (/\b(existing\s*business|expand|expansion|old\s*business|greenfield)\b/i.test(lower)) {
+          return {
+            text: `### 🔄 Loans for New vs Existing Businesses:\n\n• **For Setting Up a New Business (Greenfield):**\n  - **Stand-Up India:** Strictly requires a greenfield enterprise (first-time business) from SC, ST, or Women entrepreneurs (₹10L to ₹1Cr).\n  - **PMEGP:** For setting up new manufacturing or service micro-enterprises with 15%–35% subsidy.\n  - **PM Vishwakarma:** For taking traditional artisan craftwork to modern markets.\n\n• **For Expanding an Existing Business:**\n  - **MUDRA (Kishore & Tarun):** Ideal for purchasing additional machinery, upgrading store stock, or opening a second outlet.\n  - **NBCFDC Technology Upgradation (TUC):** Up to ₹15 Lakhs specifically to modernize equipment in existing artisan/industrial clusters.\n  - **NSFDC & NSTFDC Term Loans:** Available for both new units and the expansion/modernization of running businesses!`,
+            actions: [
+              { label: '📚 View Schemes in Vault', view: 'schemes' },
+              { label: '🧮 Calculate Expansion EMI', view: 'calculator' }
+            ]
+          };
+        }
+
+        // 27. IS THIS FREE / CHARGES / FRAUD WARNING
+        if (/\b(is\s*this|free|charge|fees?|paise|price|payment)\b/i.test(lower) && (lower.includes('free') || lower.includes('fee') || lower.includes('charge') || lower.includes('cost') || lower.includes('pay') || lower.includes('paise'))) {
+          return {
+            text: `### 🆓 100% Free Public Initiative:\n\n**Yes, Sahāy AI is completely free!**\n\n• **No Application Fees:** Our scheme matching, financial calculator, and partner locator tools are completely free to use.\n• **Zero Middlemen / No Agents:** Official government welfare corporations (NSFDC, NSTFDC, NBCFDC, KVIC) do **NOT** charge any commission to process concessional loans.\n• **Beware of Fraud:** Never pay money to unauthorized agents promising guaranteed loan approvals. Always apply directly through designated Channel Partners (State Corporations, Public Sector Banks, or registered CSCs).`,
+            actions: [
+              { label: '✨ Check Schemes for Free', view: 'wizard' },
+              { label: '📍 Find Official Channel Partners', view: 'locator' }
+            ]
+          };
+        }
+
+        // 28. MATHEMATICAL IN-CHAT EMI & LOAN CALCULATION
+        const hasEmiKeywords = lower.includes('emi') || lower.includes('calculate') || lower.includes('monthly payment') || lower.includes('installment');
+        const hasNumbers = /\d+/.test(lower);
+
+        if (hasEmiKeywords && hasNumbers) {
+          let principal = 200000;
+          const lakhMatch = lower.match(/(\d+(\.\d+)?)\s*(lakh|lac|l)/);
+          const rawNumMatch = lower.match(/\b(\d{4,8})\b/);
+
+          if (lakhMatch) {
+            principal = parseFloat(lakhMatch[1]) * 100000;
+          } else if (rawNumMatch) {
+            principal = parseInt(rawNumMatch[1]);
+          }
+
+          let rate = 6.0;
+          const rateMatch = lower.match(/(\d+(\.\d+)?)\s*(%|percent)/);
+          if (rateMatch) rate = parseFloat(rateMatch[1]);
+
+          let tenureMonths = 60;
+          const yearMatch = lower.match(/(\d+)\s*(year|yr|saal)/);
+          const monthMatch = lower.match(/(\d+)\s*(month|mahine)/);
+          if (yearMatch) tenureMonths = parseInt(yearMatch[1]) * 12;
+          else if (monthMatch) tenureMonths = parseInt(monthMatch[1]);
+
+          const emi = calculateEmi(principal, rate, tenureMonths);
+          const totalPayable = emi * tenureMonths;
+          const totalInterest = totalPayable - principal;
+
+          return {
+            text: `### 📊 Instant EMI Breakdown for ₹${principal.toLocaleString('en-IN')}:\n\n` +
+              `• **Loan Amount (Principal):** ₹${principal.toLocaleString('en-IN')}\n` +
+              `• **Concessional Interest Rate:** ${rate}% p.a.\n` +
+              `• **Repayment Tenure:** ${tenureMonths / 12} Years (${tenureMonths} Months)\n` +
+              `• **Estimated Monthly EMI:** **₹${emi.toLocaleString('en-IN')}/month**\n` +
+              `• **Total Interest Payable:** ₹${totalInterest.toLocaleString('en-IN')}\n` +
+              `• **Total Amount Payable:** ₹${totalPayable.toLocaleString('en-IN')}\n\n` +
+              `💡 *Bonus:* Most NSFDC/NSTFDC schemes grant a **6 to 12 month Moratorium Period** during which you only pay minor interest while your business sets up!`,
+            actions: [
+              { label: '🧮 Open Advanced FinCalc', view: 'calculator' },
+              { label: '📚 View Eligible Schemes', view: 'schemes' }
+            ]
+          };
+        }
+
+        // 29. SPECIFIC SCHEME: MUDRA
+        if (/\b(mudra|pmmy|shishu|kishore|tarun)\b/i.test(lower)) {
+          return {
+            text: `### 🏦 Pradhan Mantri MUDRA Yojana (PMMY):\n\nDesigned for micro and small enterprises across manufacturing, trading, service, and allied agriculture.\n\n• **Shishu:** Loans up to **₹50,000** (Zero margin money, ideal for street vendors, small shops).\n• **Kishore:** Loans above **₹50,000 up to ₹5,00,000** (Ideal for equipment, inventory, light machinery).\n• **Tarun:** Loans above **₹5,00,000 up to ₹10,00,000** (For expanding established ventures).\n\n• **Interest Rate:** 8.5% – 12% p.a.\n• **Security:** **Zero collateral required** (covered under CGFMU).\n• **Where to apply:** Any Commercial Bank, Regional Rural Bank (RRB), NBFC, or through the JanSamarth portal.`,
+            actions: [
+              { label: '🧮 Calculate Mudra EMI', prompt: 'Calculate EMI for 500000 at 9% for 5 years' },
+              { label: '🔍 View NSFDC Alternatives', view: 'schemes' }
+            ]
+          };
+        }
+
+        // 30. SPECIFIC SCHEME: STAND-UP INDIA
+        if (/\b(stand\s*up|standup)\b/i.test(lower)) {
+          return {
+            text: `### 🚀 Stand-Up India Scheme:\n\n• **Target Beneficiaries:** Scheduled Caste (SC), Scheduled Tribe (ST), and Women entrepreneurs (above 18 years).\n• **Mandate:** Every commercial bank branch must finance at least one SC/ST and at least one Woman borrower.\n• **Loan Amount:** **₹10 Lakhs to ₹1.00 Crore**.\n• **Nature of Project:** **Greenfield Enterprise** (first-time business venture) in manufacturing, services, agri-allied, or trading.\n• **Margin Money:** Up to 15% (can be supplemented with state subsidies).\n• **Repayment:** Up to 7 years with an 18-month moratorium period.\n\nApply via www.standupmitra.in or your nearest scheduled commercial bank branch!`,
+            actions: [
+              { label: '🧮 Simulate Loan in FinCalc', view: 'calculator' },
+              { label: '📍 Find Bank Partners', view: 'locator' }
+            ]
+          };
+        }
+
+        // 31. SPECIFIC SCHEME: PMEGP (KVIC)
+        if (/\b(pmegp|kvic|margin\s*money\s*subsidy)\b/i.test(lower)) {
+          return {
+            text: `### 🏭 Prime Minister's Employment Generation Programme (PMEGP):\n\nA credit-linked capital subsidy scheme administered by KVIC and MSME Ministry.\n\n• **Maximum Project Cost:**\n  - Manufacturing Sector: Up to **₹50 Lakhs**\n  - Service Sector: Up to **₹20 Lakhs**\n\n• **Government Subsidy Rates (Margin Money):**\n  - **Special Category (SC, ST, OBC, Women, Rural, Ex-Servicemen, PwD):**\n    • **35% Subsidy in Rural Areas!**\n    • **25% Subsidy in Urban Areas!**\n  - Applicant Own Contribution: Only **5%** of project cost!\n\n• **Interest Rate:** Standard bank rates, but your effective loan is reduced by the 35% subsidy grant!`,
+            actions: [
+              { label: '🧮 Compute EMI on Net Cost', view: 'calculator' },
+              { label: '📋 Documents for PMEGP', prompt: 'What documents are required for PMEGP loan?' }
+            ]
+          };
+        }
+
+        // 32. SPECIFIC SCHEME: PM VISHWAKARMA
+        if (/\b(vishwakarma|artisan|carpenter|potter|blacksmith|cobbler|mason|sculptor)\b/i.test(lower)) {
+          return {
+            text: `### 🛠️ PM Vishwakarma Scheme:\n\nDedicated support for traditional craftspeople and artisans in 18 recognized trades (Carpenters, Blacksmiths, Potters, Sculptors, Cobblers, Masons, Basket makers, Tailors, Barbers, Washermen, etc.).\n\n### Benefits:\n1. **Official PM Vishwakarma Certificate & ID Card**\n2. **Skill Training:** 5–7 days basic training with a **₹500/day stipend**\n3. **Toolkit Incentive:** **₹15,000 e-voucher grant** for modern digital/physical tools\n4. **Collateral-Free Loan:**\n   - 1st Tranche: **₹1,00,000** (18 months tenure)\n   - 2nd Tranche: **₹2,00,000** (30 months tenure)\n   - Subsidized Interest Rate: **Only 5% p.a.** (Govt absorbs 8% interest subvention)!\n\nApply via Common Service Centres (CSCs) or pmvishwakarma.gov.in.`,
+            actions: [
+              { label: '📍 Find Nearby CSC Center', view: 'locator' },
+              { label: '🔍 View Artisans Schemes in Vault', view: 'schemes' }
+            ]
+          };
+        }
+
+        // 33. WOMEN ENTREPRENEURS / MAHILA SCHEMES
+        if (/\b(woman|women|mahila|female|girl|aurat)\b/i.test(lower)) {
+          return {
+            text: `### 🌸 High-Priority Schemes for Women Entrepreneurs:\n\n1. **NBCFDC / NSFDC Mahila Samriddhi Yojana (MSY):**\n   • Loan: Up to **₹1,40,000** at just **4.0% p.a.** for micro-ventures.\n\n2. **New Swarnima Scheme (for Backward Classes Women):**\n   • Term loan up to **₹2,00,000** at **5.0% p.a.** No collateral required.\n\n3. **Adivasi Mahila Sashaktikaran Yojana (AMSY):**\n   • For ST Women: Loans up to **₹2,00,000** at **4.0% p.a.** with a 6-month moratorium.\n\n4. **Stand-Up India for Women:**\n   • Greenfield manufacturing, services, or trading loans from **₹10 Lakhs to ₹1 Crore**.\n\n5. **PMEGP Special Tier:**\n   • **35% government capital subsidy** in rural locations with only 5% own margin contribution.`,
+            actions: [
+              { label: '📚 View Schemes in Vault', view: 'schemes' },
+              { label: '📝 Start Eligibility Check', view: 'wizard' },
+              { label: '🧮 Calculate 4% Interest EMI', prompt: 'Calculate EMI for 140000 at 4% for 4 years' }
+            ]
+          };
+        }
+
+        // 34. SC CATEGORY SPECIFIC SCHEMES
+        if (/\b(sc|scheduled\s*caste|dalit)\b/i.test(lower)) {
+          return {
+            text: `### 🏛️ Top Concessional Schemes for Scheduled Caste (SC) Entrepreneurs:\n\n1. **NSFDC Term Loan Scheme:**\n   • Up to **₹50 Lakhs** at **6%–8% p.a.** for industrial and commercial ventures.\n2. **NSFDC Micro Credit Scheme:**\n   • Up to **₹1,40,000** at **5.0% p.a.** for individual micro-businesses and SHGs.\n3. **NSFDC Green Business Scheme:**\n   • Up to **₹30 Lakhs** for eco-friendly businesses (e-rickshaws, solar units, waste recycling) at **6% p.a.**\n4. **Credit Guarantee Scheme for SC (CGSSC):**\n   • Provides 100% guarantee cover for bank loans between **₹15 Lakhs and ₹5 Crores**.\n5. **PMEGP:** Up to **35% capital subsidy** in rural areas.\n\nEligibility: Annual family income up to ₹3.00 Lakhs (or ₹5.00 Lakhs for higher limit categories).`,
+            actions: [
+              { label: '🔍 Open Scheme Vault', view: 'schemes' },
+              { label: '📝 Fill SC Eligibility Profile', view: 'wizard' }
+            ]
+          };
+        }
+
+        // 35. ST CATEGORY SPECIFIC SCHEMES
+        if (/\b(st|scheduled\s*tribe|adivasi|tribal)\b/i.test(lower)) {
+          return {
+            text: `### 🏹 Top Concessional Schemes for Scheduled Tribe (ST) Entrepreneurs:\n\n1. **NSTFDC Term Loan Scheme:**\n   • Up to **₹50 Lakhs** at **8.0% p.a.** for industrial, transport, and trade projects.\n2. **Adivasi Mahila Sashaktikaran Yojana (AMSY):**\n   • Up to **₹2,00,000** at **4.0% p.a.** exclusively for ST women.\n3. **Tribal Forest Dwellers Empowerment Scheme (TFDES):**\n   • Up to **₹10 Lakhs** at **6.0% p.a.** for processing minor forest produce (MFP) and agro-forestry.\n4. **Adivasi Shiksha Rinn Yojana:**\n   • Up to **₹5 Lakhs** at **6.0% p.a.** for technical and professional higher education.\n5. **Stand-Up India:** Greenfield loans from **₹10 Lakhs to ₹1 Crore**.`,
+            actions: [
+              { label: '🔍 Explore ST Schemes in Vault', view: 'schemes' },
+              { label: '📍 Find Local Tribal Agency', view: 'locator' }
+            ]
+          };
+        }
+
+        // 36. OBC CATEGORY SPECIFIC SCHEMES
+        if (/\b(obc|backward\s*class|other\s*backward)\b/i.test(lower)) {
+          return {
+            text: `### 🏭 Top Concessional Schemes for OBC Entrepreneurs (NBCFDC):\n\n1. **NBCFDC General Term Loan:**\n   • Up to **₹15 Lakhs** at **7%–8% p.a.** for manufacturing, trading, and services.\n2. **New Swarnima Scheme for Women:**\n   • Up to **₹2,00,000** at **5.0% p.a.** for women small business owners.\n3. **Technology Upgradation of Clusters (TUC):**\n   • Up to **₹15 Lakhs** at **8.0% p.a.** for modernizing tools and factory machinery.\n4. **NBCFDC Micro Finance:**\n   • Micro-loans up to **₹1,25,000** through SHGs at **5% p.a.**\n\nEligibility: OBC category (Non-Creamy Layer) with annual family income up to ₹3.00 Lakhs.`,
+            actions: [
+              { label: '🔍 View OBC Schemes', view: 'schemes' },
+              { label: '🧮 Check EMI Calculator', view: 'calculator' }
+            ]
+          };
+        }
+
+        // 37. BUSINESS SECTOR GUIDANCE
+        if (/\b(dairy|cow|buffalo|goat|poultry|animal\s*husbandry)\b/i.test(lower)) {
+          return {
+            text: `### 🐄 Dairy & Animal Husbandry Business Roadmap:\n\n• **Estimated Setup Cost:** ₹1.5 Lakhs to ₹8 Lakhs (for 2 to 6 milch cows/buffaloes, shed, and milking tools).\n• **Best Matching Schemes:**\n  - **NSFDC / NSTFDC Agri-Allied Term Loan:** 6% to 8% interest with 6-month moratorium.\n  - **MUDRA Kishore Loan:** Up to ₹5 Lakhs for cattle purchase and feed stock.\n  - **NABARD DEDS / AHIDF:** Up to 25%–33% capital subsidy for dairy sheds and cold chilling units.\n• **Required:** Land/shed proof, veterinary health certificate, vendor cattle quotation.`,
+            actions: [
+              { label: '🧮 Calculate Dairy Loan EMI', prompt: 'Calculate EMI for 300000 at 6% for 5 years' },
+              { label: '📝 Start Application', view: 'wizard' }
+            ]
+          };
+        }
+
+        if (/\b(grocery|kirana|retail|dukaan|supermarket|provision\s*store)\b/i.test(lower)) {
+          return {
+            text: `### 🏪 Grocery / Kirana Store Roadmap:\n\n• **Estimated Setup Cost:** ₹1.00 Lakh to ₹5.00 Lakhs (Shelving racks, initial inventory, POS billing machine, refrigerator).\n• **Best Matching Schemes:**\n  - **MUDRA (Shishu / Kishore):** Loans from ₹50,000 to ₹5,00,000 with **Zero Collateral**.\n  - **NSFDC / NBCFDC Micro Credit:** Up to ₹1,40,000 at 5% p.a.\n  - **Mahila Samriddhi:** Up to ₹1,40,000 at 4% p.a. for women shopkeepers.\n• **Required Documents:** Shop rental agreement/ownership, wholesale supplier quotation, Aadhaar, PAN.`,
+            actions: [
+              { label: '🧮 Calculate Kirana Loan EMI', prompt: 'Calculate EMI for 200000 at 6% for 4 years' },
+              { label: '📍 Find Nearby Bank Branch', view: 'locator' }
+            ]
+          };
+        }
+
+        if (/\b(boutique|tailor|tailoring|garments?|clothing|silai)\b/i.test(lower)) {
+          return {
+            text: `### 👗 Boutique & Tailoring Center Roadmap:\n\n• **Estimated Setup Cost:** ₹75,000 to ₹3,00,000 (Industrial sewing machines, overlock machines, fabric stock, display mannequins).\n• **Best Matching Schemes:**\n  - **Mahila Samriddhi Yojana (MSY):** Up to ₹1,40,000 at just **4.0% p.a.**\n  - **New Swarnima Scheme:** Up to ₹2,00,000 at **5.0% p.a.** for OBC women.\n  - **PM Vishwakarma (Tailor / Darzi):** ₹15,000 toolkit voucher + ₹1–₹2 Lakhs loan at **5% p.a.**\n• **Required Documents:** Trade skill certificate (if any), sewing machine quotation, Aadhaar, Caste proof.`,
+            actions: [
+              { label: '🧮 Check EMI for Boutique', prompt: 'Calculate EMI for 150000 at 4% for 3 years' },
+              { label: '🔍 View Scheme Details', view: 'schemes' }
+            ]
+          };
+        }
+
+        if (/\b(transport|auto|rickshaw|e-rickshaw|erickshaw|taxi|vehicle|gadi)\b/i.test(lower)) {
+          return {
+            text: `### 🛺 Commercial Transport & E-Rickshaw Roadmap:\n\n• **Estimated Setup Cost:** ₹1.80 Lakhs to ₹6.00 Lakhs (E-Rickshaw with lithium battery or light commercial vehicle).\n• **Best Matching Schemes:**\n  - **NSFDC Green Business Scheme:** Financing battery-operated e-rickshaws up to ₹3.5 Lakhs at **6.0% p.a.**\n  - **NSFDC Transport Vehicle Scheme:** Up to ₹15 Lakhs at 7% p.a. for commercial light vehicles.\n  - **Mudra Kishore:** Up to ₹5 Lakhs for commercial transport vehicles.\n• **Required Documents:** Valid Commercial Driving License, RTO Badge, Vehicle dealer proforma invoice.`,
+            actions: [
+              { label: '🧮 Calculate Vehicle EMI', prompt: 'Calculate EMI for 200000 at 6% for 5 years' },
+              { label: '📍 Find Nearest Channel Partner', view: 'locator' }
+            ]
+          };
+        }
+
+        // 38. HINDI / HINGLISH QUERIES
+        if (lower.includes('kaise') || lower.includes('milega') || lower.includes('karna') || lower.includes('chahiye') || lower.includes('shuru')) {
+          return {
+            text: `### 🙏 Namaste! Sarkari Loan aur Scheme lene ka aasan tarika:\n\n1. **Apni Eligibility Check Karein:** Hamare **AI Match Wizard** me apni category (SC/ST/OBC/Women), umar, aur project cost daalein.\n2. **Subsidized Byaaj Dar:** Concessional sarkari schemes me byaaj dar sirf **4% se 8% saalana** hoti hai (commercial banks ke 14% ke mukable).\n3. **Moratorium (Chhoot):** Shuru ke **6 se 12 mahine** EMI nahi bharni hoti, taaki business stable ho sake.\n4. **Zaroori Kagaz (Documents):**\n   • Aadhaar Card aur PAN Card\n   • Jati Praman Patra (Caste Certificate)\n   • Aay Praman Patra (Income Certificate < ₹3 Lakhs)\n   • Bank passbook (6 mahine ka statement)\n   • Quotation / Project Report\n\nNeeche diye button par click karke turant shuru karein:`,
+            actions: [
+              { label: '📝 Application Form Shuru Karein', view: 'wizard' },
+              { label: '🧮 EMI Calculator Dekhein', view: 'calculator' },
+              { label: '📍 Nazdeeki Bank / SCA Dhoondhein', view: 'locator' }
+            ]
+          };
+        }
+
+        // 39. HIGH-CONFIDENCE SCHEME MATCHING (Strict Stopwords & High Threshold)
+        // Comprehensive stopwords to prevent general English words from triggering false scheme matches!
+        const GENERIC_STOPWORDS = new Set([
+          'a', 'about', 'above', 'after', 'again', 'against', 'all', 'almost', 'also', 'am', 'an', 'and', 'any', 'anyone', 'anything',
+          'app', 'application', 'apply', 'are', 'around', 'as', 'ask', 'asking', 'assistance', 'at', 'available', 'back', 'bank', 'banks',
+          'be', 'because', 'been', 'before', 'being', 'below', 'best', 'better', 'between', 'both', 'browse', 'business', 'but', 'by',
+          'can', 'card', 'center', 'central', 'check', 'choose', 'clear', 'cost', 'could', 'criteria', 'custom', 'day', 'days', 'detail',
+          'details', 'did', 'do', 'does', 'doing', 'done', 'down', 'during', 'each', 'eligible', 'eligibility', 'enterprise', 'entrepreneur',
+          'every', 'explain', 'family', 'fee', 'fees', 'few', 'finance', 'financial', 'find', 'first', 'for', 'form', 'free', 'from',
+          'further', 'get', 'give', 'go', 'good', 'govt', 'government', 'grant', 'had', 'has', 'have', 'having', 'he', 'help', 'her',
+          'here', 'hers', 'him', 'his', 'how', 'i', 'if', 'in', 'india', 'indian', 'info', 'information', 'into', 'is', 'it', 'its',
+          'just', 'kind', 'know', 'lakh', 'lakhs', 'like', 'list', 'loan', 'loans', 'look', 'make', 'many', 'may', 'me', 'might',
+          'money', 'month', 'months', 'more', 'most', 'much', 'must', 'my', 'myself', 'name', 'need', 'new', 'no', 'not', 'now',
+          'of', 'off', 'office', 'old', 'on', 'once', 'one', 'only', 'open', 'or', 'other', 'our', 'out', 'over', 'own', 'page',
+          'paper', 'papers', 'pay', 'payment', 'people', 'person', 'please', 'portal', 'project', 'provide', 'provides', 'provided',
+          'qualification', 'qualify', 'question', 'questions', 'rate', 'repay', 'repayment', 'requirement', 'requirements', 'required',
+          'right', 'rs', 'rupee', 'rupees', 'same', 'say', 'scheme', 'schemes', 'search', 'sector', 'see', 'select', 'service',
+          'shall', 'she', 'should', 'show', 'sir', 'site', 'so', 'some', 'someone', 'something', 'start', 'starting', 'state', 'step',
+          'steps', 'such', 'suit', 'suitable', 'support', 'system', 'take', 'tell', 'term', 'terms', 'than', 'that', 'the', 'their',
+          'them', 'then', 'there', 'these', 'they', 'this', 'those', 'through', 'time', 'to', 'too', 'top', 'type', 'under', 'unit',
+          'until', 'up', 'use', 'using', 'very', 'view', 'want', 'was', 'way', 'we', 'well', 'were', 'what', 'when', 'where', 'which',
+          'while', 'who', 'whom', 'why', 'will', 'with', 'work', 'working', 'would', 'year', 'years', 'yes', 'yojana', 'yojna', 'you', 'your'
+        ]);
+
+        const specificKeywords = words.filter(w => !GENERIC_STOPWORDS.has(w) && w.length > 2);
+
+        // Explicit known domain identifiers that justify a specific scheme card
+        const KNOWN_ENTITIES = [
+          'mudra', 'pmmy', 'shishu', 'kishore', 'tarun', 'standup', 'stand-up', 'pmegp', 'kvic', 'vishwakarma',
+          'nsfdc', 'nstfdc', 'nbcfdc', 'nskfdc', 'msy', 'amsy', 'swarnima', 'cgssc', 'green business',
+          'education', 'educational', 'student', 'vidyalakshmi', 'csis', 'aakanksha', 'shiksha',
+          'poultry', 'fisheries', 'pottery', 'blacksmith', 'carpenter', 'cobbler', 'safai', 'sanitation'
+        ];
+
+        const hasKnownEntity = KNOWN_ENTITIES.some(entity => lower.includes(entity));
+
+        // Only search scheme cards if an explicit entity was named OR user gave high-signal specific keywords
+        if (hasKnownEntity || specificKeywords.length >= 2) {
+          const matchScores = schemesDb.map(s => {
+            let score = 0;
+            const fullText = `${s.name} ${s.code} ${s.category} ${s.criteria} ${s.benefits}`.toLowerCase();
+
+            specificKeywords.forEach(kw => {
+              if (s.code.toLowerCase().includes(kw)) score += 10;
+              if (s.name.toLowerCase().includes(kw)) score += 8;
+              if (fullText.includes(kw)) score += 3;
+            });
+
+            return { scheme: s, score };
+          }).filter(item => item.score >= 8).sort((a, b) => b.score - a.score);
+
+          if (matchScores.length > 0) {
+            const topScheme = matchScores[0].scheme;
+            const secondScheme = matchScores.length > 1 ? matchScores[1].scheme : null;
+
+            let responseText = `### 🎯 Best Matched Scheme for Your Query: **${topScheme.name}**\n\n` +
+              `• **Scheme Code:** \`${topScheme.code}\`\n` +
+              `• **Target Beneficiary:** ${topScheme.category}\n` +
+              `• **Interest Rate:** **${topScheme.rate}% p.a.** (Moratorium: ${topScheme.moratorium} Months)\n` +
+              `• **Max Project Cost:** Up to ₹${topScheme.maxCost.toLocaleString('en-IN')}\n` +
+              `• **Key Benefits:** ${topScheme.benefits}\n` +
+              `• **Eligibility Criteria:** ${topScheme.criteria}\n` +
+              `• **Required Documents:** ${topScheme.docs}\n\n`;
+
+            if (secondScheme) {
+              responseText += `💡 *Another Strong Alternative:* **${secondScheme.name}** (${secondScheme.rate}% p.a. up to ₹${secondScheme.maxCost.toLocaleString('en-IN')}).\n\n`;
+            }
+
+            responseText += `Would you like to calculate your monthly EMI or locate the nearest branch to submit your application?`;
+
+            return {
+              text: responseText,
+              actions: [
+                { label: '📚 Open in Scheme Vault', view: 'schemes' },
+                { label: '🧮 Calculate EMI for this Scheme', view: 'calculator' },
+                { label: '📍 Find Nearby Partner Branch', view: 'locator' }
+              ]
+            };
+          }
+        }
+
+        // 40. SMART COMPREHENSIVE ADVISOR FALLBACK (Helpful Guidance, Never False Scheme Matches!)
+        return {
+          text: `Thank you for your question! Here is how to navigate India's concessional entrepreneurship schemes on Sahāy AI:\n\n` +
+            `1. **Explore Schemes:** Government initiatives through NSFDC, NSTFDC, NBCFDC, and MUDRA provide loans ranging from **₹50,000 to ₹50 Lakhs** at subsidized interest rates between **4% and 8% p.a.**\n` +
+            `2. **Moratorium Relief:** You get a **6 to 12-month repayment grace period** before paying principal EMIs.\n` +
+            `3. **Collateral Free:** Loans up to ₹10 Lakhs do not require property mortgage or third-party guarantee.\n` +
+            `4. **Application:** Supported online through JanSamarth or physically via your district State Channelizing Agency (SCA) and Regional Rural Banks.\n\n` +
+            `Select one of the quick options below or tell me your affirmative category (SC/ST/OBC/Women) and business idea to find exact schemes!`,
+          actions: [
+            { label: '🔍 How to find schemes?', prompt: 'How to find schemes?' },
+            { label: '📝 How to apply?', prompt: 'How to apply for a loan?' },
+            { label: '🌟 Schemes for SC/ST', prompt: 'Tell me about schemes for SC and ST' },
+            { label: '👩 Women Business Loans', prompt: 'Tell me about schemes for women entrepreneurs' }
+          ]
+        };
+      };
+
+      // Voice Input (Speech Recognition)
+      const toggleVoiceInput = () => {
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          alert('Speech Recognition is not supported in this browser. Please use Chrome, Edge, or Safari.');
+          return;
+        }
+
+        if (isRecording) {
+          recognitionRef.current?.stop();
+          setIsRecording(false);
+          return;
+        }
+
+        try {
+          const rec = new SpeechRec();
+          rec.continuous = false;
+          rec.interimResults = false;
+          rec.lang = 'en-IN';
+
+          rec.onstart = () => setIsRecording(true);
+          rec.onend = () => setIsRecording(false);
+          rec.onerror = () => setIsRecording(false);
+
+          rec.onresult = (event) => {
+            const spokenText = event.results[0][0].transcript;
+            setInput(spokenText);
+            sendMessage(spokenText);
+          };
+
+          recognitionRef.current = rec;
+          rec.start();
+        } catch (err) {
+          console.error('Speech recognition error:', err);
+          setIsRecording(false);
+        }
+      };
+
+      // Text to Speech using Female Indian (Hindi / English) Voice Model
+      const toggleSpeak = (idx, text) => {
+        if (!window.speechSynthesis) return;
+
+        if (speakingIndex === idx) {
+          window.speechSynthesis.cancel();
+          setSpeakingIndex(null);
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        // Polish text for natural Indian English / Hindi voice synthesis (completely skipping and ignoring emojis)
+        const cleanText = text
+          // 1. Remove all emojis, pictographs, symbols, flags, and dingbats
+          .replace(/\p{Extended_Pictographic}/gu, '')
+          .replace(/[\u{1F300}-\u{1F5FF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{2300}-\u{23FF}\u{FE00}-\u{FE0F}\u{1F1E6}-\u{1F1FF}]/gu, '')
+          .replace(/[\u200D\uFE0E\uFE0F]/g, '')
+          // 2. Remove markdown formatting characters
+          .replace(/[*#_`~]/g, '')
+          // 3. Remove URLs
+          .replace(/https?:\/\/\S+/g, '')
+          // 4. Pronounce currency properly
+          .replace(/₹\s*(\d[\d,]*)/g, 'Rupees $1')
+          // 5. Expand abbreviations
+          .replace(/\bp\.a\.\b/gi, 'per annum')
+          .replace(/\bp\.a\b/gi, 'per annum')
+          // 6. Sentence pauses for bullets and newlines
+          .replace(/•\s*/g, '. ')
+          .replace(/\n+/g, '. ')
+          .replace(/\s+/g, ' ')
+          .replace(/\.\s*\./g, '.')
+          .trim();
+
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+
+        // Find or use loaded Female Indian Voice
+        let voice = femaleIndianVoice;
+        if (!voice && window.speechSynthesis.getVoices) {
+          const currentVoices = window.speechSynthesis.getVoices();
+          const targetKeywords = ['neerja', 'heera', 'swara', 'kalpana', 'veena', 'aditi', 'geeta', 'ananya', 'lekha', 'priya', 'shruti', 'sunita'];
+          voice = currentVoices.find(v => targetKeywords.some(kw => v.name.toLowerCase().includes(kw)))
+            || currentVoices.find(v => {
+              const lang = (v.lang || '').toLowerCase().replace('_', '-');
+              return (lang.includes('en-in') || lang.includes('hi-in')) && v.name.toLowerCase().includes('female');
+            })
+            || currentVoices.find(v => (v.lang || '').toLowerCase().replace('_', '-').startsWith('en-in'))
+            || currentVoices.find(v => (v.lang || '').toLowerCase().replace('_', '-').startsWith('hi') || v.name.includes('हिन्दी'))
+            || currentVoices.find(v => v.name.toLowerCase().includes('india'))
+            || currentVoices.find(v => v.name.toLowerCase().includes('zira') || v.name.toLowerCase().includes('female'))
+            || currentVoices[0];
+        }
+
+        if (voice) {
+          utterance.voice = voice;
+          utterance.lang = voice.lang || 'en-IN';
+        } else {
+          utterance.lang = 'en-IN';
+        }
+
+        // Tuned for polite, natural female Indian pronunciation
+        utterance.rate = 0.95;   // Gentle, clear conversational pace
+        utterance.pitch = 1.15;  // Warm feminine pitch tuning
+        utterance.volume = 1.0;
+
+        utterance.onend = () => setSpeakingIndex(null);
+        utterance.onerror = (e) => {
+          console.warn('Speech synthesis notice:', e);
+          setSpeakingIndex(null);
+        };
+
+        setSpeakingIndex(idx);
+        window.speechSynthesis.speak(utterance);
+      };
+
+      // Copy text to clipboard
+      const handleCopy = (idx, text) => {
+        navigator.clipboard?.writeText(text);
+        setCopiedIdx(idx);
+        setTimeout(() => setCopiedIdx(null), 2000);
+      };
+
+      // Send Message handler
+      const sendMessage = (msgText) => {
+        const textToSend = (msgText || input).trim();
+        if (!textToSend || isLoading) return;
+
         setInput('');
-        setChatHistory(prev => [...prev, { role: 'user', text: userMsg }]);
+        setChatHistory(prev => [...prev, { role: 'user', text: textToSend }]);
         setIsLoading(true);
 
         setTimeout(() => {
-          let aiResponse = "I'm not quite sure I understand. Could you provide more details like your category (e.g., SC/ST/OBC/Women), your project cost, or the type of business you want to start?";
-          const lowerInput = userMsg.toLowerCase();
-
-          if (/^(hi|hello|hey|greetings|start)/.test(lowerInput) && lowerInput.length < 15) {
-            aiResponse = "Hello there! Tell me a bit about your background (e.g., SC, ST, OBC, Women) and what kind of financial assistance or loan you are looking for.";
-          } else {
-            const words = lowerInput.match(/\b(\w+)\b/g) || [];
-            const stopWords = ['a', 'an', 'the', 'and', 'or', 'is', 'for', 'to', 'of', 'in', 'i', 'want', 'need', 'looking', 'scheme', 'loan', 'business', 'start', 'help', 'me', 'my', 'can', 'you', 'tell', 'about', 'what', 'how', 'do', 'get', 'any'];
-            const keywords = words.filter(w => !stopWords.includes(w) && w.length > 2);
-
-            if (keywords.length > 0 && schemesDb.length > 0) {
-              const scored = schemesDb.map(s => {
-                let score = 0;
-                const textToSearch = `${s.name} ${s.description} ${s.tags?.join(' ')} ${s.target_category} ${s.loan_type} ${s.criteria}`.toLowerCase();
-                keywords.forEach(kw => {
-                  if (textToSearch.includes(kw)) score += 2;
-                  // Partial match
-                  else if (textToSearch.indexOf(kw) !== -1) score += 1;
-                });
-                return { scheme: s, score };
-              }).filter(s => s.score > 0).sort((a, b) => b.score - a.score);
-
-              if (scored.length > 0) {
-                const top = scored[0].scheme;
-
-                if (lowerInput.includes('benefit') || lowerInput.includes('interest') || lowerInput.includes('rate')) {
-                  aiResponse = `For the **${top.name}**, here are the financial benefits:\n\n${top.benefits || 'Standard concessional rates apply based on the agency guidelines.'}`;
-                } else if (lowerInput.includes('document') || lowerInput.includes('paper') || lowerInput.includes('apply')) {
-                  aiResponse = `To apply for **${top.name}**, you typically need:\n- Aadhaar & PAN Card\n- Valid Caste/Income Certificate\n- Detailed Project Report (DPR)\n- 6 months Bank Statements\n\nYou can click the 'Schemes' tab above to find this scheme and apply directly on the official portal!`;
-                } else {
-                  aiResponse = `Based on your query, the **${top.name}** looks like a great match!\n\n**Overview:** ${top.description}\n**Eligibility:** ${top.criteria || top.target_category}\n\nWould you like to know more about its interest rates or required documents?`;
-                }
-              } else if (lowerInput.includes('woman') || lowerInput.includes('women') || lowerInput.includes('mahila')) {
-                aiResponse = "For women entrepreneurs, I highly recommend looking into the **Stand-Up India Scheme** for new ventures or the **NBCFDC Mahila Samriddhi Yojana** for micro-loans. Are you looking to start a new business from scratch (greenfield)?";
-              } else {
-                aiResponse = "Sorry, your criteria doesn't match any required eligibility for the schemes in our database. Please try adjusting your details or asking about something else.";
-              }
-            } else {
-              aiResponse = "Sorry, your criteria doesn't match any required eligibility for the schemes in our database. Please try adjusting your details or asking about something else.";
-            }
-          }
-
-          setChatHistory(prev => [...prev, { role: 'model', text: aiResponse }]);
+          const reply = generateAiResponse(textToSend);
+          setChatHistory(prev => [...prev, {
+            role: 'model',
+            text: reply.text,
+            actions: reply.actions || []
+          }]);
           setIsLoading(false);
-        }, 800 + Math.random() * 800);
+        }, 500 + Math.random() * 400);
       };
 
-      useEffect(() => {
-        if (window.lucide) window.lucide.createIcons();
-        chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, [chatHistory]);
+      const handleClearChat = () => {
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        setSpeakingIndex(null);
+        setChatHistory([
+          {
+            role: 'model',
+            text: 'Chat history cleared. How can I assist you with government schemes, loan calculations, or partner routing today?',
+            actions: [
+              { label: '🔍 How to find schemes?', prompt: 'How to find schemes?' },
+              { label: '🌟 Top Schemes for SC/ST', prompt: 'What are the best loan schemes for SC and ST entrepreneurs?' },
+              { label: '👩 Women Business Loans', prompt: 'Tell me about schemes for women entrepreneurs with low interest' },
+              { label: '📋 Documents Required', prompt: 'What documents are required to apply for a concessional loan?' }
+            ]
+          }
+        ]);
+      };
+
+      // Suggested quick chips
+      const SUGGESTED_CHIPS = [
+        { label: '🔍 How to Find Schemes?', prompt: 'How to find schemes?' },
+        { label: '📝 How to Apply?', prompt: 'What is the step by step process to apply for a scheme?' },
+        { label: '🌟 SC/ST Schemes', prompt: 'What are the best loan schemes for SC and ST entrepreneurs?' },
+        { label: '🌸 Women Loans (4%)', prompt: 'Tell me about Mahila Samriddhi and women business loans at 4% interest' },
+        { label: '🎓 Educational Loans', prompt: 'Tell me about educational loans and student interest subsidies' },
+        { label: '📋 Required Documents', prompt: 'What documents are required for government business loans?' },
+        { label: '🛡️ Zero Collateral Loans', prompt: 'How can I get a loan without any property collateral or security?' },
+        { label: '🏦 Mudra PMMY Details', prompt: 'Explain Pradhan Mantri Mudra Yojana Shishu, Kishore and Tarun' },
+        { label: '🏭 PMEGP 35% Subsidy', prompt: 'How does PMEGP 35% margin money subsidy work?' },
+        { label: '🛠️ PM Vishwakarma', prompt: 'Explain PM Vishwakarma scheme for artisans and toolkits' },
+        { label: '🧮 Calculate 2 Lakh EMI', prompt: 'Calculate EMI for 200000 at 6% for 5 years' },
+        { label: '⏳ What is Moratorium?', prompt: 'What is a moratorium period and how does it help new businesses?' },
+        { label: '📍 Find Local Partners', prompt: 'Where can I apply and find partners in my district?' }
+      ];
+
+      // Markdown-like message formatter for rich AI responses
+      const renderFormattedMessage = (text) => {
+        if (!text) return null;
+        const lines = text.split('\n');
+
+        const parseInline = (str) => {
+          const parts = str.split(/(\*\*[^*]+\*\*|`[^`]+`|https?:\/\/[^\s]+)/g);
+          return parts.map((part, pIdx) => {
+            if (part.startsWith('**') && part.endsWith('**') && part.length >= 4) {
+              return <strong key={pIdx} className="ai-bold-text">{part.slice(2, -2)}</strong>;
+            }
+            if (part.startsWith('`') && part.endsWith('`') && part.length >= 2) {
+              return <code key={pIdx}>{part.slice(1, -1)}</code>;
+            }
+            if (part.startsWith('http://') || part.startsWith('https://')) {
+              return (
+                <a key={pIdx} href={part} target="_blank" rel="noopener noreferrer" className="ai-chat-link">
+                  {part}
+                </a>
+              );
+            }
+            return part;
+          });
+        };
+
+        return (
+          <div className="ai-formatted-content">
+            {lines.map((line, lIdx) => {
+              const trimmed = line.trim();
+              if (!trimmed) {
+                return <div key={lIdx} style={{ height: '6px' }} />;
+              }
+
+              // ### Heading
+              if (trimmed.startsWith('### ')) {
+                return (
+                  <div key={lIdx} className="ai-message-heading">
+                    <AppIcon name="sparkles" size={16} style={{ color: '#ff7722', flexShrink: 0 }} />
+                    <span>{parseInline(trimmed.replace(/^###\s*/, ''))}</span>
+                  </div>
+                );
+              }
+
+              // ## or # Heading
+              if (trimmed.startsWith('## ') || trimmed.startsWith('# ')) {
+                return (
+                  <div key={lIdx} className="ai-message-heading">
+                    <AppIcon name="info" size={16} style={{ color: '#ff7722', flexShrink: 0 }} />
+                    <span>{parseInline(trimmed.replace(/^#+\s*/, ''))}</span>
+                  </div>
+                );
+              }
+
+              // Bullet item • or - or *
+              if (/^[•\-\*]\s+/.test(trimmed)) {
+                const bulletText = trimmed.replace(/^[•\-\*]\s+/, '');
+                return (
+                  <div key={lIdx} className="ai-bullet-item">
+                    <span className="ai-bullet-dot"></span>
+                    <div className="ai-bullet-content">{parseInline(bulletText)}</div>
+                  </div>
+                );
+              }
+
+              // Numbered item 1. 2. etc.
+              const numMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+              if (numMatch) {
+                return (
+                  <div key={lIdx} className="ai-numbered-item">
+                    <span className="ai-num-badge">{numMatch[1]}</span>
+                    <div className="ai-num-content">{parseInline(numMatch[2])}</div>
+                  </div>
+                );
+              }
+
+              // Standard text paragraph
+              return (
+                <p key={lIdx} className="ai-message-p">
+                  {parseInline(trimmed)}
+                </p>
+              );
+            })}
+          </div>
+        );
+      };
 
       return (
-        <div className="container animate-fade-in" style={{ paddingTop: '40px', paddingBottom: '40px', maxWidth: '800px' }}>
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <h2 className="flex items-center gap-2 m-0"><i data-lucide="bot" style={{ color: '#f59e0b', width: 28, height: 28 }}></i> Sahāy Smart Assistant</h2>
-              <p style={{ color: 'var(--text-muted)' }}>Get personalized, instant advice based on our live scheme database.</p>
+        <div className="container animate-fade-in ai-mentor-container">
+          {/* Main Chat Box */}
+          <div className="ai-chat-box">
+            {/* Unified Sleek Header */}
+            <div className="ai-chat-header">
+              <div className="ai-chat-header-left">
+                <div className="ai-avatar-pulse">
+                  <AppIcon name="bot" size={22} />
+                </div>
+                <div className="ai-chat-header-text">
+                  <div className="ai-chat-title-row">
+                    <h2 className="ai-chat-title">Sahāy Smart Assistant</h2>
+                    <span className="ai-badge-live">AI Advisor</span>
+                    <span className="ai-schemes-count">
+                      <span className="ai-dot-pulse"></span>
+                      {(schemesDb.length > 0 ? schemesDb.length : (vaultSchemes.length || 24))} Schemes Connected
+                    </span>
+                  </div>
+                  <div className="ai-chat-subtitle">
+                    Instant guidance on Central & State government schemes, interest rates & partner routing
+                  </div>
+                </div>
+              </div>
+
+              <div className="ai-chat-header-right">
+                <span className="ai-voice-badge">
+                  <AppIcon name="volume-2" size={12} />
+                  <span>{femaleIndianVoice ? femaleIndianVoice.name.split('-')[0].trim() : 'Female Indian Voice'}</span>
+                </span>
+                <button 
+                  className="ai-clear-action-btn" 
+                  onClick={handleClearChat} 
+                  title="Clear conversation history">
+                  <AppIcon name="trash-2" size={13} />
+                  <span>Clear Chat</span>
+                </button>
+              </div>
             </div>
-          </div>
 
-
-
-          <div className="glass-card" style={{ height: '500px', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {/* Messages Scroll Area */}
+            <div className="ai-chat-messages">
               {chatHistory.map((msg, idx) => (
-                <div key={idx} style={{
-                  alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                  background: msg.role === 'user' ? 'var(--primary)' : 'rgba(245, 158, 11, 0.1)',
-                  color: msg.role === 'user' ? '#fff' : 'var(--text-main)',
-                  padding: '12px 16px',
-                  borderRadius: '12px',
-                  border: msg.role === 'model' ? '1px solid rgba(245, 158, 11, 0.3)' : 'none',
-                  maxWidth: '80%',
-                  lineHeight: '1.5',
-                  whiteSpace: 'pre-wrap'
-                }}>
-                  {msg.text}
+                <div
+                  key={idx}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                    gap: '4px',
+                    width: '100%'
+                  }}>
+                  <div className={msg.role === 'user' ? 'chat-bubble-user animate-fade-in' : 'chat-bubble-ai animate-fade-in'}>
+                    {msg.role === 'user' ? (
+                      <div>{msg.text}</div>
+                    ) : (
+                      renderFormattedMessage(msg.text)
+                    )}
+
+                    {/* Action Buttons inside Bot Message */}
+                    {msg.actions && msg.actions.length > 0 && (
+                      <div className="chat-actions-container">
+                        <div className="chat-actions-label">
+                          <AppIcon name="sparkles" size={13} style={{ color: '#ff7722' }} />
+                          <span>Recommended Quick Actions</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {msg.actions.map((act, aIdx) => (
+                            <button
+                              key={aIdx}
+                              className="chat-action-btn"
+                              onClick={() => {
+                                if (act.view) setView(act.view);
+                                else if (act.prompt) sendMessage(act.prompt);
+                              }}>
+                              <span>{act.label}</span>
+                              <AppIcon name="external-link" size={12} />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Meta tools for AI messages (Speech & Copy) */}
+                  {msg.role === 'model' && (
+                    <div className="message-meta-toolbar">
+                      <button
+                        className={`meta-tool-btn ${speakingIndex === idx ? 'active-speaking' : ''}`}
+                        onClick={() => toggleSpeak(idx, msg.text)}
+                        title={speakingIndex === idx ? 'Stop Voice Narration' : `Listen in Female Indian Voice (${femaleIndianVoice ? femaleIndianVoice.name.split('-')[0].trim() : 'Hindi / English'})`}>
+                        <AppIcon name={speakingIndex === idx ? 'volume-x' : 'volume-2'} size={13} />
+                        <span>{speakingIndex === idx ? 'Stop Audio' : 'Listen'}</span>
+                      </button>
+                      <button
+                        className="meta-tool-btn"
+                        onClick={() => handleCopy(idx, msg.text)}
+                        title="Copy to Clipboard">
+                        <AppIcon name={copiedIdx === idx ? 'check' : 'copy'} size={13} />
+                        <span>{copiedIdx === idx ? 'Copied!' : 'Copy'}</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
+
+              {/* Typing indicator */}
               {isLoading && (
-                <div style={{ alignSelf: 'flex-start', color: '#f59e0b', padding: '12px' }}>
-                  <span style={{ animation: 'blink 1s infinite' }}>Assistant is typing...</span>
+                <div className="ai-typing-indicator animate-fade-in">
+                  <AppIcon name="bot" size={16} className="ai-typing-icon" />
+                  <span className="ai-typing-text">Sahāy AI is searching criteria & guidelines</span>
+                  <div style={{ display: 'flex', alignItems: 'center', marginLeft: '4px' }}>
+                    <span className="typing-dot"></span>
+                    <span className="typing-dot"></span>
+                    <span className="typing-dot"></span>
+                  </div>
                 </div>
               )}
               <div ref={chatEndRef} />
             </div>
 
-            <div style={{ padding: '16px', borderTop: '1px solid var(--border)', display: 'flex', gap: '12px' }}>
-              <input
-                type="text"
-                className="chat-input"
-                style={{ flex: 1, margin: 0 }}
-                placeholder="Ask about scheme criteria, business ideas..."
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && handleSend()}
-                disabled={isLoading}
-              />
-              <button className="btn btn-primary" onClick={handleSend} disabled={isLoading}>
-                <i data-lucide="send" style={{ width: 18, height: 18 }}></i>
-              </button>
+            {/* Quick Suggestion Chips Carousel */}
+            <div className="prompt-chips-wrapper">
+              {SUGGESTED_CHIPS.map((chip, cIdx) => (
+                <button
+                  key={cIdx}
+                  className="prompt-chip"
+                  onClick={() => sendMessage(chip.prompt)}
+                  disabled={isLoading}>
+                  {chip.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Input Bar */}
+            <div className="ai-chat-input-bar">
+              <div className="chat-input-capsule">
+                {/* Voice Input Mic Button */}
+                <button
+                  type="button"
+                  className={`mic-btn-inline ${isRecording ? 'mic-recording' : ''}`}
+                  onClick={toggleVoiceInput}
+                  title={isRecording ? 'Listening... Click to stop' : 'Speak your question (Voice Input)'}>
+                  <AppIcon name={isRecording ? 'mic-off' : 'mic'} size={18} />
+                </button>
+
+                {/* Text Input */}
+                <input
+                  type="text"
+                  className="chat-input-field"
+                  placeholder={isRecording ? '🎙️ Listening to your voice... Speak now!' : 'Ask about finding schemes, how to apply, loan EMI, documents...'}
+                  value={input}
+                  onChange={e => setInput(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && sendMessage()}
+                  disabled={isLoading}
+                />
+
+                {/* Send Button */}
+                <button
+                  className="chat-send-btn"
+                  onClick={() => sendMessage()}
+                  disabled={isLoading || !input.trim()}>
+                  <AppIcon name="send" size={15} />
+                  <span className="hidden-mobile">Send</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Disclaimer Footer */}
+            <div className="chat-disclaimer-text">
+              <AppIcon name="info" size={13} style={{ color: '#22c55e' }} />
+              <span>Government Concessional Finance Assistant • Unbiased Scheme Discovery • Verified Channel Routing</span>
             </div>
           </div>
         </div>
@@ -2113,6 +3570,12 @@
       };
 
       const getInitialState = (key, defaultValue) => {
+        if (key === 'sahay_currentView') {
+          const hash = window.location.hash.replace('#', '').trim();
+          if (['home', 'wizard', 'schemes', 'calculator', 'locator', 'ai-mentor'].includes(hash)) {
+            return hash;
+          }
+        }
         const saved = localStorage.getItem(key);
         if (saved) {
           try {
@@ -2171,8 +3634,25 @@
         }
       }, [currentView, formData, showAuthModal, session]);
 
+      const [vaultSchemes, setVaultSchemes] = useState([]);
+
+      useEffect(() => {
+        const fetchGlobalVault = async () => {
+          const { data, error } = await supabase.from('nsfdc_schemes').select('*');
+          if (!error && data) {
+            setVaultSchemes(data);
+          }
+        };
+        fetchGlobalVault();
+        const sub = supabase
+          .channel('app-global-vault-sync')
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'nsfdc_schemes' }, fetchGlobalVault)
+          .subscribe();
+        return () => supabase.removeChannel(sub);
+      }, []);
+
       const handleProtectedView = (viewName) => {
-        if (!session && viewName !== 'home') {
+        if (!session && viewName !== 'home' && viewName !== 'ai-mentor') {
           setIsSignUpMode(false);
           setShowAuthModal(true);
         } else {
@@ -2185,16 +3665,16 @@
           <MouseTrail />
           <Navbar currentView={currentView} setView={handleProtectedView} session={session} onAuthClick={(isSignUp) => { setIsSignUpMode(isSignUp); setShowAuthModal(true); }} formData={formData} theme={theme} toggleTheme={toggleTheme} />
           <main>
-            {!session ? (
+            {!session && currentView !== 'ai-mentor' ? (
               <LandingPage onAuthClick={(isSignUp) => { setIsSignUpMode(isSignUp); setShowAuthModal(true); }} setView={handleProtectedView} />
             ) : (
               <>
                 {currentView === 'home' && <Home setView={handleProtectedView} />}
                 {currentView === 'wizard' && <Wizard setView={handleProtectedView} formData={formData} setFormData={setFormData} session={session} />}
-                {currentView === 'schemes' && <Schemes setView={handleProtectedView} formData={formData} session={session} />}
+                {currentView === 'schemes' && <Schemes setView={handleProtectedView} formData={formData} session={session} vaultSchemes={vaultSchemes} />}
                 {currentView === 'calculator' && <LoanCalculator />}
                 {currentView === 'locator' && <PartnerLocator />}
-                {currentView === 'ai-mentor' && <AiMentor setView={handleProtectedView} />}
+                {currentView === 'ai-mentor' && <AiMentor setView={handleProtectedView} formData={formData} session={session} vaultSchemes={vaultSchemes} />}
                 {!['home', 'wizard', 'schemes', 'calculator', 'locator', 'ai-mentor'].includes(currentView) && <Home setView={handleProtectedView} />}
               </>
             )}

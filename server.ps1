@@ -7,8 +7,8 @@ while ($listener.IsListening) {
     $response = $context.Response
     $request = $context.Request
     
-    $localPath = "C:\Users\52264\OneDrive\Desktop\sih" + $request.Url.LocalPath.Replace('/', '\')
-    if ($localPath -eq "C:\Users\52264\OneDrive\Desktop\sih\") { $localPath = "C:\Users\52264\OneDrive\Desktop\sih\index.html" }
+    $localPath = $PSScriptRoot + $request.Url.LocalPath.Replace('/', '\')
+    if ($localPath -eq ($PSScriptRoot + "\")) { $localPath = $PSScriptRoot + "\index.html" }
     
     if (Test-Path $localPath -PathType Leaf) {
         $content = [System.IO.File]::ReadAllBytes($localPath)
@@ -19,7 +19,8 @@ while ($listener.IsListening) {
         elseif ($localPath.EndsWith(".js") -or $localPath.EndsWith(".jsx")) { $response.ContentType = "application/javascript" }
         
         $response.OutputStream.Write($content, 0, $content.Length)
-    } else {
+    }
+    else {
         $response.StatusCode = 404
     }
     $response.Close()
